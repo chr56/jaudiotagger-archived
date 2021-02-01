@@ -289,6 +289,7 @@ public class AudioFileIO
 
         // Tag Readers
         readers.put(SupportedFileFormat.OGG.getFilesuffix(), new OggFileReader());
+        readers.put(SupportedFileFormat.OGA.getFilesuffix(), new OggFileReader());
         readers.put(SupportedFileFormat.FLAC.getFilesuffix(),new FlacFileReader());
         readers.put(SupportedFileFormat.MP3.getFilesuffix(), new MP3FileReader());
         readers.put(SupportedFileFormat.MP4.getFilesuffix(), new Mp4FileReader());
@@ -308,6 +309,7 @@ public class AudioFileIO
 
         // Tag Writers
         writers.put(SupportedFileFormat.OGG.getFilesuffix(), new OggFileWriter());
+        writers.put(SupportedFileFormat.OGA.getFilesuffix(), new OggFileWriter());
         writers.put(SupportedFileFormat.FLAC.getFilesuffix(), new FlacFileWriter());
         writers.put(SupportedFileFormat.MP3.getFilesuffix(), new MP3FileWriter());
         writers.put(SupportedFileFormat.MP4.getFilesuffix(), new Mp4FileWriter());

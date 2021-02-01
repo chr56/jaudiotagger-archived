@@ -307,6 +307,10 @@ public class AudioFile
         {
             return VorbisCommentTag.createNewTag();
         }
+        else if(SupportedFileFormat.OGA.getFilesuffix().equals(extension))
+        {
+            return VorbisCommentTag.createNewTag();
+        }
         else if(SupportedFileFormat.MP4.getFilesuffix().equals(extension))
         {
             return new Mp4Tag();
