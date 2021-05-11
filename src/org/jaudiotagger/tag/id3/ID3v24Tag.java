@@ -384,29 +384,18 @@ public class ID3v24Tag extends AbstractID3v2Tag
         if(frame instanceof ID3v22Frame && frame.getIdentifier().equals(ID3v22Frames.FRAME_ID_V2_IPLS))
         {
             frame = new ID3v23Frame(frame);
+            frames.add(frame);
         }
-
-        //This frame may need splitting and converting into two frames depending on its content
-        if(frame instanceof ID3v23Frame && frame.getIdentifier().equals(ID3v23Frames.FRAME_ID_V3_INVOLVED_PEOPLE))
+        //Convert from IPLS to TIPL
+        //Note we used to try and work out if should map to TIPL or TMCL but that logic was unsustainable
+        else if(frame instanceof ID3v23Frame && frame.getIdentifier().equals(ID3v23Frames.FRAME_ID_V3_INVOLVED_PEOPLE))
         {
             List<Pair> pairs= ((FrameBodyIPLS)frame.getBody()).getPairing().getMapping();
             List<Pair> pairsTipl = new ArrayList<>();
-            List<Pair> pairsTmcl = new ArrayList<>();
 
             for(Pair next:pairs)
             {
-                if(StandardIPLSKey.isKey(next.getKey()))
-                {
-                    pairsTipl.add(next);
-                }
-                else if(MusicianCredits.isKey(next.getKey()))
-                {
-                    pairsTmcl.add(next);
-                }
-                else
-                {
-                    pairsTipl.add(next);
-                }
+                pairsTipl.add(next);
             }
 
             if(pairsTipl.size()>0)
@@ -415,14 +404,6 @@ public class ID3v24Tag extends AbstractID3v2Tag
                 FrameBodyTIPL tiplBody = new FrameBodyTIPL(frame.getBody().getTextEncoding(), pairsTipl);
                 tipl.setBody(tiplBody);
                 frames.add(tipl);
-            }
-
-            if(pairsTmcl.size()>0)
-            {
-                AbstractID3v2Frame tmcl = new ID3v24Frame((ID3v23Frame) frame, ID3v24Frames.FRAME_ID_MUSICIAN_CREDITS);
-                FrameBodyTMCL tmclBody = new FrameBodyTMCL(frame.getBody().getTextEncoding(), pairsTmcl);
-                tmcl.setBody(tmclBody);
-                frames.add(tmcl);
             }
         }
         else

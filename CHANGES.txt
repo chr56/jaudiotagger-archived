@@ -131,6 +131,7 @@ Summarise Changes
 #336:Add support for Roon ROONALBUMTAG and ROONTRACKTAG fields.
 #337:Open MP4 channels in a try-with-resources block
 #340:Flac reader should check StreamInfo block is too small to read header details
+#343:Dont split ID3v23 IPLS frame into ID3v23 TIPL or TMCL based on content just convert to TIPL
 
 2.2.5
 #033:Added getAudioStartPos() and getAudioEndPos() methods to AudioHeader interface and implemented for most formats

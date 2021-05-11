@@ -71,7 +71,7 @@ public class Issue335aTest extends AbstractTestCase
         mp3File.setID3v2TagOnly(v24Tag);
 
         assertTrue(v24Tag.hasFrame("TIPL"));
-        assertTrue(v24Tag.hasFrame("TMCL"));
+        assertFalse(v24Tag.hasFrame("TMCL"));
     }
 
     /**
@@ -97,8 +97,8 @@ public class Issue335aTest extends AbstractTestCase
         ID3v24Tag v24Tag = new ID3v24Tag(mp3File.getID3v2TagAsv24());
         mp3File.setID3v2TagOnly(v24Tag);
 
-        assertFalse(v24Tag.hasFrame("TIPL"));
-        assertTrue(v24Tag.hasFrame("TMCL"));
+        assertTrue(v24Tag.hasFrame("TIPL"));
+        assertFalse(v24Tag.hasFrame("TMCL"));
     }
 
 
