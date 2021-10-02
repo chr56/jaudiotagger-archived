@@ -139,7 +139,7 @@ public class Mp4StemWriteTagTest extends TestCase {
             assertEquals(new Short("1"), ((Mp4TagTextNumberField) tag.get(Mp4FieldKey.TRACK).get(0)).getNumbers().get(2));
             assertEquals(new Short("0"), ((Mp4TagTextNumberField) tag.get(Mp4FieldKey.TRACK).get(0)).getNumbers().get(3));
 
-            List coverart = tag.get(Mp4FieldKey.ARTWORK);
+            List<?> coverart = tag.get(Mp4FieldKey.ARTWORK);
             //Should be one image
             assertEquals(1, coverart.size());
 

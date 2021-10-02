@@ -299,7 +299,7 @@ public class TreePath extends Object implements Serializable {
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
 
-        Vector      values = new Vector();
+		Vector<Object> values = new Vector<>();
         if(lastPathComponent != null &&
 	   (lastPathComponent instanceof Serializable)) {
             values.addElement("lastPathComponent");
@@ -312,7 +312,7 @@ public class TreePath extends Object implements Serializable {
         throws IOException, ClassNotFoundException {
         s.defaultReadObject();
 
-        Vector          values = (Vector)s.readObject();
+        Vector<?>          values = (Vector<?>)s.readObject();
         int             indexCounter = 0;
         int             maxCounter = values.size();
 

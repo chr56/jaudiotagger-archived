@@ -1328,8 +1328,8 @@ public class DefaultMutableTreeNode extends Object implements Cloneable,
 
     final class PostorderEnumeration implements Enumeration<TreeNode> {
 	protected TreeNode root;
-	protected Enumeration<TreeNode> children;
-	protected Enumeration<TreeNode> subtree;
+	protected Enumeration<? extends TreeNode> children;
+	protected Enumeration<? extends TreeNode> subtree;
 
 	public PostorderEnumeration(TreeNode rootNode) {
 	    super();
@@ -1368,7 +1368,7 @@ public class DefaultMutableTreeNode extends Object implements Cloneable,
 
 	public BreadthFirstEnumeration(TreeNode rootNode) {
 	    super();
-	    Vector v = new Vector(1);
+	    Vector<Object> v = new Vector<>(1);
 	    v.addElement(rootNode);	// PENDING: don't really need a vector
 	    queue = new Queue();
 	    queue.enqueue(v.elements());

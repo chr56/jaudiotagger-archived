@@ -104,8 +104,8 @@ public class ID3v22Tag extends AbstractID3v2Tag
      */
     public ID3v22Tag()
     {
-        frameMap = new LinkedHashMap();
-        encryptedFrameMap = new LinkedHashMap();
+        frameMap = new LinkedHashMap<>();
+        encryptedFrameMap = new LinkedHashMap<>();
     }
 
     /**
@@ -158,8 +158,8 @@ public class ID3v22Tag extends AbstractID3v2Tag
      */
     public ID3v22Tag(AbstractTag mp3tag)
     {
-        frameMap = new LinkedHashMap();
-        encryptedFrameMap = new LinkedHashMap();
+        frameMap = new LinkedHashMap<>();
+        encryptedFrameMap = new LinkedHashMap<>();
         logger.config("Creating tag from a tag of a different version");
         //Default Superclass constructor does nothing
         if (mp3tag != null)
@@ -400,8 +400,8 @@ public class ID3v22Tag extends AbstractID3v2Tag
     {
         //Now start looking for frames
         ID3v22Frame next;
-        frameMap = new LinkedHashMap();
-        encryptedFrameMap = new LinkedHashMap();
+        frameMap = new LinkedHashMap<>();
+        encryptedFrameMap = new LinkedHashMap<>();
 
         //Read the size from the Tag Header
         this.fileReadSize = size;

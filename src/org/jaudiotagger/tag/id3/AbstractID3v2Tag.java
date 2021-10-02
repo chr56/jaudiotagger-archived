@@ -656,7 +656,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      * @param existingFrame
      * @param frame
      */
-    private void addNewFrameToMap(List<TagField> list, HashMap frameMap, AbstractID3v2Frame existingFrame, AbstractID3v2Frame frame)
+    private void addNewFrameToMap(List<TagField> list, Map<String, Object> frameMap, AbstractID3v2Frame existingFrame, AbstractID3v2Frame frame)
     {
         if (list.size() == 0)
         {
@@ -679,7 +679,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      * @param existingFrame
      * @param frame
      */
-    private void addNewFrameOrAddField(List<TagField> list, HashMap frameMap, AbstractID3v2Frame existingFrame, AbstractID3v2Frame frame)
+    private void addNewFrameOrAddField(List<TagField> list, Map<String, Object> frameMap, AbstractID3v2Frame existingFrame, AbstractID3v2Frame frame)
     {
         ArrayList<TagField> mergedList = new ArrayList<TagField>();
         if (existingFrame != null)
@@ -914,10 +914,10 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      * @param identifier
      * @return an iterator of all the frames starting with a particular identifier
      */
-    public Iterator getFrameOfType(String identifier)
+    public Iterator<Object> getFrameOfType(String identifier)
     {
         Iterator<String> iterator = frameMap.keySet().iterator();
-        HashSet<Object> result = new HashSet<Object>();
+        Set<Object> result = new HashSet<>();
         String key;
         while (iterator.hasNext())
         {
@@ -927,7 +927,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
                 Object o = frameMap.get(key);
                 if (o instanceof List)
                 {
-                    for (Object next : (List) o)
+                    for (Object next : (List<?>) o)
                     {
                         result.add(next);
                     }
@@ -1012,7 +1012,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      */
     public void removeUnsupportedFrames()
     {
-        for (Iterator i = iterator(); i.hasNext(); )
+        for (Iterator<Object> i = iterator(); i.hasNext(); )
         {
             Object o = i.next();
             if (o instanceof AbstractID3v2Frame)
@@ -1372,7 +1372,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
             }
             else if (o instanceof List)
             {
-                List<AbstractID3v2Frame> list = (List) o;
+                List<TagField> list = (List<TagField>) o;
                 list.add(newFrame);
             }
             else
@@ -1425,15 +1425,15 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
             if (map.containsKey(frameId))
             {
                 Object o = map.get(frameId);
-                if (o instanceof ArrayList)
+                if (o instanceof List)
                 {
-                    ArrayList<AbstractID3v2Frame> multiValues = (ArrayList<AbstractID3v2Frame>) o;
+                	List<AbstractID3v2Frame> multiValues = (List<AbstractID3v2Frame>) o;
                     multiValues.add(next);
                     logger.finer("Adding Multi Frame(1)" + frameId);
                 }
                 else
                 {
-                    ArrayList<AbstractID3v2Frame> multiValues = new ArrayList<AbstractID3v2Frame>();
+                	List<AbstractID3v2Frame> multiValues = new ArrayList<>();
                     multiValues.add((AbstractID3v2Frame) o);
                     multiValues.add(next);
                     map.put(frameId, multiValues);
@@ -1475,7 +1475,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
     public int getSize()
     {
         int size = 0;
-        Iterator iterator = frameMap.values().iterator();
+        Iterator<Object> iterator = frameMap.values().iterator();
         AbstractID3v2Frame frame;
         while (iterator.hasNext())
         {
@@ -1495,7 +1495,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
             }
             else if (o instanceof List)
             {
-                ArrayList<AbstractID3v2Frame> multiFrames = (ArrayList<AbstractID3v2Frame>) o;
+            	List<AbstractID3v2Frame> multiFrames = (List<AbstractID3v2Frame>) o;
                 for (ListIterator<AbstractID3v2Frame> li = multiFrames.listIterator(); li.hasNext(); )
                 {
                     frame = li.next();
@@ -1530,7 +1530,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      * @param bodyBuffer
      * @throws IOException
      */
-    private void writeFramesToBufferStream(Map map, ByteArrayOutputStream bodyBuffer) throws IOException
+    private void writeFramesToBufferStream(Map<String, Object> map, ByteArrayOutputStream bodyBuffer) throws IOException
     {
         //Sort keys into Preferred Order
         TreeSet<String> sortedWriteOrder = new TreeSet<String>(getPreferredFrameOrderComparator());

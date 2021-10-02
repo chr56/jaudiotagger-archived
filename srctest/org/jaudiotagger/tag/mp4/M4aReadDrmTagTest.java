@@ -68,7 +68,7 @@ public class M4aReadDrmTagTest extends TestCase
             assertEquals("The King Of The Slums", mp4tag.getFirst(Mp4FieldKey.ARTIST));
             assertEquals("Barbarous English Fayre", mp4tag.getFirst(Mp4FieldKey.ALBUM));
             assertEquals("Simpering Blonde Bombshell", mp4tag.getFirst(Mp4FieldKey.TITLE));
-            List coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
+            List<?> coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
             //Should be one image
             assertEquals(1, coverart.size());
 

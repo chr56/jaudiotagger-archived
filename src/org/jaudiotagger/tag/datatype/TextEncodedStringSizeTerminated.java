@@ -390,8 +390,8 @@ public class TextEncodedStringSizeTerminated extends AbstractString
     public String getValueAtIndex(int index)
     {
         //Split String into separate components
-        List values = splitByNullSeperator((String) value);
-        return (String) values.get(index);
+        List<String> values = splitByNullSeperator((String) value);
+        return values.get(index);
     }
 
     /**
