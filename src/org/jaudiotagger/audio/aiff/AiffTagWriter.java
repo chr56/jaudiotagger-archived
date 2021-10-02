@@ -256,7 +256,6 @@ public class AiffTagWriter
                 fc.truncate(formFileLength);
                 fc.position(currentPos);
             }
-            fc.size();
             final AiffTag aiffTag = (AiffTag) tag;
             final ByteBuffer bb = convert(aiffTag, existingTag);
 
