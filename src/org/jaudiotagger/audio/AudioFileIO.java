@@ -320,7 +320,6 @@ public class AudioFileIO
         writers.put(SupportedFileFormat.AIFF.getFilesuffix(), new AiffFileWriter());
         writers.put(SupportedFileFormat.DSF.getFilesuffix(), new DsfFileWriter());
 
-        writers.values().iterator();
         for (AudioFileWriter curr : writers.values())
         {
             curr.setAudioFileModificationListener(this.modificationHandler);

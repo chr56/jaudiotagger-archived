@@ -77,7 +77,8 @@ public class CommentsChunk extends Chunk
         {
             final long timestamp  = Utils.u(chunkData.getInt());
             final Date jTimestamp = AiffUtil.timestampToDate(timestamp);
-            Utils.u(chunkData.getShort());
+            @SuppressWarnings("unused")
+			final int marker      = Utils.u(chunkData.getShort());
             final int count       = Utils.u(chunkData.getShort());
             // Append a timestamp to the comment
             final String text = Utils.getString(chunkData, 0, count, StandardCharsets.ISO_8859_1) + " " + AiffUtil.formatDate(jTimestamp);
