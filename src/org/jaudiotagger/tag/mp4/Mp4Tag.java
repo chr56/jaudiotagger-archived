@@ -259,7 +259,6 @@ public class Mp4Tag extends AbstractTag
         }
     }
 
-    
     protected boolean isAllowedEncoding(Charset enc)
     {
         return StandardCharsets.UTF_8.equals(enc);
