@@ -20,7 +20,6 @@ package org.jaudiotagger.audio.flac;
 
 import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.flac.metadatablock.MetadataBlockDataPicture;
-import org.jaudiotagger.audio.flac.metadatablock.MetadataBlockDataSeekTable;
 import org.jaudiotagger.audio.flac.metadatablock.MetadataBlockHeader;
 import org.jaudiotagger.logging.Hex;
 import org.jaudiotagger.tag.InvalidFrameException;
@@ -116,7 +115,6 @@ public class FlacTagReader
                             try
                             {
                                 long pos = fc.position();
-                                new MetadataBlockDataSeekTable(mbh, fc);
                                 fc.position(pos + mbh.getDataLength());
                             }
                             catch (IOException ioe)
