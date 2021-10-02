@@ -113,12 +113,14 @@ public class WavTagWriter
         final ChunkHeader chunkHeader = new ChunkHeader(ByteOrder.LITTLE_ENDIAN);
         chunkHeader.readHeader(fc);
         fc.position(fc.position() - ChunkHeader.CHUNK_HEADER_SIZE);
+
         if (!WavChunkType.LIST.getCode().equals(chunkHeader.getID()))
         {
             throw new CannotWriteException(loggingName +" Unable to find List chunk at original location has file been modified externally");
         }
         return chunkHeader;
     }
+
     /**
      * Seek in file to start of Id3 Metadata chunk
      *
@@ -535,6 +537,7 @@ public class WavTagWriter
     }
 
     /**
+     * Write new Info chunk and dont worry about the size of existing chunk just use size of new chunk
      *
      * @param fc
      * @param bb
@@ -822,6 +825,9 @@ public class WavTagWriter
     }
 
     /**
+     * Write Info chunk to current location which is last chunk of file
+     *
+     * @param fc
      * @param existingInfoTag
      * @param newTagBuffer
      * @throws CannotWriteException
@@ -967,6 +973,10 @@ public class WavTagWriter
     }
 
     /**
+     * Remove id3 and list chunk if exist
+     *
+     * TODO What about if file has multiple id3 or list chunks
+     *
      * @param fc
      * @param existingTag
      * @throws CannotWriteException
@@ -1019,6 +1029,7 @@ public class WavTagWriter
     /**
      * Find existing ID3 tag, remove and write new ID3 tag at end of file
      *
+     * @param fc
      * @param existingTag
      * @param infoTagBuffer
      * @throws CannotWriteException
@@ -1186,6 +1197,9 @@ public class WavTagWriter
     }
 
     /**
+     * Find existing ID3 tag, remove and write new ID3 tag at end of file
+     *
+     * @param fc
      * @param existingTag
      * @param id3TagBuffer
      * @throws CannotWriteException
