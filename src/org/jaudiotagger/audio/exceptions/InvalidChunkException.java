@@ -26,6 +26,11 @@ package org.jaudiotagger.audio.exceptions;
 public class InvalidChunkException extends Exception
 {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3020712878276167444L;
+
+	/**
      * Creates an instance.
      */
     public InvalidChunkException()

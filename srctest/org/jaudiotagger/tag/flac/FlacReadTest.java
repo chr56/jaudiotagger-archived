@@ -76,7 +76,7 @@ public class FlacReadTest extends TestCase
         try
         {
             File testFile = AbstractTestCase.copyAudioToTmp("testV1.mp3", new File("testV1noFlac.flac"));
-            AudioFile f = AudioFileIO.read(testFile);
+            AudioFileIO.read(testFile);
         }
         catch (Exception e)
         {

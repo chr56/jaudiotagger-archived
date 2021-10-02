@@ -161,8 +161,8 @@ public class ID3v23Tag extends AbstractID3v2Tag
      */
     public ID3v23Tag()
     {
-        frameMap = new LinkedHashMap();
-        encryptedFrameMap = new LinkedHashMap();
+        frameMap = new LinkedHashMap<>();
+        encryptedFrameMap = new LinkedHashMap<>();
     }
 
     /**
@@ -312,8 +312,8 @@ public class ID3v23Tag extends AbstractID3v2Tag
     public ID3v23Tag(AbstractTag mp3tag)
     {
         logger.config("Creating tag from a tag of a different version");
-        frameMap = new LinkedHashMap();
-        encryptedFrameMap = new LinkedHashMap();
+        frameMap = new LinkedHashMap<>();
+        encryptedFrameMap = new LinkedHashMap<>();
 
         if (mp3tag != null)
         {
@@ -604,8 +604,8 @@ public class ID3v23Tag extends AbstractID3v2Tag
     {
         //Now start looking for frames
         ID3v23Frame next;
-        frameMap = new LinkedHashMap();
-        encryptedFrameMap = new LinkedHashMap();
+        frameMap = new LinkedHashMap<>();
+        encryptedFrameMap = new LinkedHashMap<>();
 
 
         //Read the size from the Tag Header
@@ -963,7 +963,7 @@ public class ID3v23Tag extends AbstractID3v2Tag
      * @return comparator used to order frames in preferred order for writing to file
      *         so that most important frames are written first.
      */
-    public Comparator getPreferredFrameOrderComparator()
+    public Comparator<String> getPreferredFrameOrderComparator()
     {
         return ID3v23PreferredFrameOrderComparator.getInstanceof();
     }
@@ -1226,7 +1226,7 @@ public class ID3v23Tag extends AbstractID3v2Tag
         super.loadFrameIntoMap(frameId, next);
     }
 
-    protected void loadFrameIntoSpecifiedMap(HashMap map, String frameId, AbstractID3v2Frame frame)
+    protected void loadFrameIntoSpecifiedMap(Map<String, Object> map, String frameId, AbstractID3v2Frame frame)
     {
         if(!(frameId.equals(ID3v23Frames.FRAME_ID_V3_TYER)) && !(frameId.equals(ID3v23Frames.FRAME_ID_V3_TDAT)))
         {

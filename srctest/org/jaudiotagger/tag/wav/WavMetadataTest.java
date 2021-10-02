@@ -4,23 +4,18 @@ import org.jaudiotagger.AbstractTestCase;
 import org.jaudiotagger.FilePermissionsTest;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.exceptions.CannotWriteException;
-import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
-import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.audio.wav.WavCleaner;
 import org.jaudiotagger.audio.wav.WavOptions;
 import org.jaudiotagger.audio.wav.WavSaveOptions;
 import org.jaudiotagger.audio.wav.WavSaveOrder;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
-import org.jaudiotagger.tag.TagException;
 import org.jaudiotagger.tag.TagOptionSingleton;
 import org.jaudiotagger.tag.id3.AbstractID3v2Tag;
 import org.jaudiotagger.tag.id3.ID3v23Tag;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * User: paul
@@ -1498,7 +1493,6 @@ public class WavMetadataTest extends AbstractTestCase
         TagOptionSingleton.getInstance().setWavOptions(WavOptions.READ_ID3_UNLESS_ONLY_INFO);
         TagOptionSingleton.getInstance().setWavSaveOrder(WavSaveOrder.ID3_THEN_INFO);
 
-        Exception exceptionCaught = null;
         File testFile = AbstractTestCase.copyAudioToTmp("test504.wav", new File("test504clean.wav"));
         try
         {
@@ -1509,7 +1503,6 @@ public class WavMetadataTest extends AbstractTestCase
         catch (Exception e)
         {
             e.printStackTrace();
-            exceptionCaught = e;
         }
 
         Exception exceptionCaught2 = null;
@@ -1547,7 +1540,6 @@ public class WavMetadataTest extends AbstractTestCase
         TagOptionSingleton.getInstance().setWavOptions(WavOptions.READ_ID3_UNLESS_ONLY_INFO);
         TagOptionSingleton.getInstance().setWavSaveOrder(WavSaveOrder.ID3_THEN_INFO);
 
-        Exception exceptionCaught = null;
         try
         {
             File testFile = AbstractTestCase.copyAudioToTmp("test505.wav");
@@ -1562,7 +1554,6 @@ public class WavMetadataTest extends AbstractTestCase
         catch (Exception e)
         {
             e.printStackTrace();
-            exceptionCaught = e;
         }
     }
 
@@ -1628,7 +1619,6 @@ public class WavMetadataTest extends AbstractTestCase
         TagOptionSingleton.getInstance().setWavOptions(WavOptions.READ_ID3_UNLESS_ONLY_INFO);
         TagOptionSingleton.getInstance().setWavSaveOptions(WavSaveOptions.SAVE_EXISTING_AND_ACTIVE);
         TagOptionSingleton.getInstance().setWavSaveOrder(WavSaveOrder.INFO_THEN_ID3);
-        Exception exceptionCaught = null;
         try
         {
             File testFile = AbstractTestCase.copyAudioToTmp("GreenLight.wav");
@@ -1646,7 +1636,6 @@ public class WavMetadataTest extends AbstractTestCase
         catch (Exception e)
         {
             e.printStackTrace();
-            exceptionCaught = e;
         }
     }
 
@@ -1713,7 +1702,6 @@ public class WavMetadataTest extends AbstractTestCase
         //TagOptionSingleton.getInstance().setWavSaveOrder(WavSaveOrder.INFO_THEN_ID3);
         //TagOptionSingleton.getInstance().setWriteWavForTwonky(true);
 
-        Exception exceptionCaught = null;
         try
         {
             File testFile = AbstractTestCase.copyAudioToTmp("test162.wav");
@@ -1734,7 +1722,6 @@ public class WavMetadataTest extends AbstractTestCase
         catch (Exception e)
         {
             e.printStackTrace();
-            exceptionCaught = e;
         }
     }
 

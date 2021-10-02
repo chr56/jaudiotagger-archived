@@ -434,10 +434,9 @@ public class MP3AudioHeaderTest extends TestCase
     {
         Exception exceptionCaught = null;
         File testFile = AbstractTestCase.copyAudioToTmp("Issue79.mp3");
-        MP3AudioHeader mp3AudioHeader = null;
         try
         {
-            mp3AudioHeader = new MP3File(testFile).getMP3AudioHeader();
+            new MP3File(testFile).getMP3AudioHeader();
 
         }
         catch (Exception e)
@@ -456,10 +455,9 @@ public class MP3AudioHeaderTest extends TestCase
     {
         Exception exceptionCaught = null;
         File testFile = AbstractTestCase.copyAudioToTmp("Issue81.mp3");
-        MP3AudioHeader mp3AudioHeader = null;
         try
         {
-            mp3AudioHeader = new MP3File(testFile).getMP3AudioHeader();
+            new MP3File(testFile).getMP3AudioHeader();
 
         }
         catch (Exception e)
@@ -476,10 +474,9 @@ public class MP3AudioHeaderTest extends TestCase
     {
         Exception exceptionCaught = null;
         File testFile = AbstractTestCase.copyAudioToTmp("testV2L2.mp3");
-        MP3AudioHeader mp3AudioHeader = null;
         try
         {
-            mp3AudioHeader = new MP3File(testFile).getMP3AudioHeader();
+            new MP3File(testFile).getMP3AudioHeader();
 
         }
         catch (Exception e)
@@ -498,7 +495,6 @@ public class MP3AudioHeaderTest extends TestCase
     {
         Exception exceptionCaught = null;
 
-        int NO_SECONDS_IN_HOUR = 3600;
         SimpleDateFormat timeInFormat = new SimpleDateFormat("ss");
         SimpleDateFormat timeOutFormat = new SimpleDateFormat("mm:ss");
         SimpleDateFormat timeOutOverAnHourFormat = new SimpleDateFormat("kk:mm:ss");

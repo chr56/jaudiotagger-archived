@@ -21,7 +21,6 @@ public class Issue446Test extends AbstractTestCase
         boolean isMatchedPeak=false;
         boolean isMatchedGain=false;
 
-        Exception ex=null;
         File orig = new File("testdata", "test110.mp3");
         if (!orig.isFile())
         {

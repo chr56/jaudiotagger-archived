@@ -3,8 +3,6 @@ package org.jaudiotagger.tag.asf;
 import org.jaudiotagger.audio.asf.data.ContainerType;
 import org.jaudiotagger.audio.asf.data.ContentBranding;
 import org.jaudiotagger.audio.asf.data.ContentDescription;
-import org.jaudiotagger.tag.FieldKey;
-
 import java.util.HashMap;
 import java.util.Map;
 

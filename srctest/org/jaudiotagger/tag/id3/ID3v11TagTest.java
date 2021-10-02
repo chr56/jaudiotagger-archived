@@ -10,8 +10,6 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.KeyNotFoundException;
 import org.jaudiotagger.tag.TagOptionSingleton;
 import org.jaudiotagger.tag.TagTextField;
-import org.jaudiotagger.tag.reference.GenreTypes;
-
 import java.io.File;
 
 /**

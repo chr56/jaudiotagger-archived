@@ -763,7 +763,7 @@ public class ID3v22Tag extends AbstractID3v2Tag
      * @return comparator used to order frames in preffrred order for writing to file
      * so that most important frames are written first.
      */
-    public Comparator getPreferredFrameOrderComparator()
+    public Comparator<String> getPreferredFrameOrderComparator()
     {
         return ID3v22PreferredFrameOrderComparator.getInstanceof();
     }

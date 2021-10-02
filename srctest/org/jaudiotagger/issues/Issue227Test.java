@@ -75,7 +75,6 @@ public class Issue227Test extends AbstractTestCase
             return;
         }
 
-        Exception ex=null;
         try
         {
             File testFile = AbstractTestCase.copyAudioToTmp("test516.wav");
@@ -99,7 +98,6 @@ public class Issue227Test extends AbstractTestCase
         catch(Exception e)
         {
             e.printStackTrace();
-            ex=e;
         }
 //        assertNull(ex);
     }
@@ -342,7 +340,6 @@ public class Issue227Test extends AbstractTestCase
             return;
         }
 
-        Exception ex=null;
         try
         {
             File testFile = AbstractTestCase.copyAudioToTmp("test525.wav");
@@ -352,7 +349,6 @@ public class Issue227Test extends AbstractTestCase
         catch(Exception e)
         {
             e.printStackTrace();
-            ex=e;
         }
 //        assertNull(ex);
     }

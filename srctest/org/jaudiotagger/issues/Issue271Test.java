@@ -6,7 +6,6 @@ import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.mp3.MP3File;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.TagOptionSingleton;
-import org.jaudiotagger.tag.id3.AbstractID3v2Frame;
 import org.jaudiotagger.tag.id3.ID3v22Tag;
 import org.jaudiotagger.tag.id3.ID3v23Frames;
 import org.jaudiotagger.tag.id3.ID3v23Tag;
@@ -134,7 +133,7 @@ public class Issue271Test extends AbstractTestCase
             ID3v23Tag id3v23Tag = (ID3v23Tag) af.getTag();
             assertEquals(0, id3v23Tag.getPaddingSize());
 
-            AbstractID3v2Frame frame = (AbstractID3v2Frame) id3v23Tag.getFrame(ID3v23Frames.FRAME_ID_V3_ENCODEDBY);
+            id3v23Tag.getFrame(ID3v23Frames.FRAME_ID_V3_ENCODEDBY);
 
 
             af.getTag().setField(FieldKey.ALBUM,"FRED");

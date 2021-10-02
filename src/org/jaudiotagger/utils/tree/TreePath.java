@@ -40,7 +40,11 @@ import java.util.Vector;
  * @author Philip Milne
  */
 public class TreePath extends Object implements Serializable {
-    /** Path representing the parent, null if lastPathComponent represents
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5521484730448766444L;
+	/** Path representing the parent, null if lastPathComponent represents
      * the root. */
     private TreePath           parentPath;
     /** Last path component. */
@@ -296,9 +300,7 @@ public class TreePath extends Object implements Serializable {
         s.defaultWriteObject();
 
         Vector      values = new Vector();
-        boolean     writePath = true;
-
-	if(lastPathComponent != null &&
+        if(lastPathComponent != null &&
 	   (lastPathComponent instanceof Serializable)) {
             values.addElement("lastPathComponent");
             values.addElement(lastPathComponent);

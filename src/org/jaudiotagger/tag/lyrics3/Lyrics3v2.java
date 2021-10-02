@@ -94,20 +94,24 @@ public class Lyrics3v2 extends AbstractLyrics3
             else
             {
                 Lyrics3v2Field newField;
-                Iterator<AbstractID3v2Frame> iterator;
+                Iterator<Object> iterator;
                 iterator = (new ID3v24Tag(mp3tag)).iterator();
 
                 while (iterator.hasNext())
                 {
-                    try
-                    {
-                        newField = new Lyrics3v2Field(iterator.next());
+					try 
+					{
+						Object element = iterator.next();
+						if (element instanceof AbstractID3v2Frame) 
+						{
+							newField = new Lyrics3v2Field((AbstractID3v2Frame) element);
 
-                        if (newField != null)
-                        {
-                            fieldMap.put(newField.getIdentifier(), newField);
-                        }
-                    }
+							if (newField != null) 
+							{
+								fieldMap.put(newField.getIdentifier(), newField);
+							}
+						}
+					}
                     catch (TagException ex)
                     {
                         //invalid frame to createField lyrics3 field. ignore and keep going
@@ -241,7 +245,6 @@ public class Lyrics3v2 extends AbstractLyrics3
 
     public void read(ByteBuffer byteBuffer) throws TagException
     {
-        long filePointer;
         int lyricSize;
 
         if (seek(byteBuffer))
@@ -255,7 +258,7 @@ public class Lyrics3v2 extends AbstractLyrics3
 
         // reset file pointer to the beginning of the tag;
         seek(byteBuffer);
-        filePointer = byteBuffer.position();
+        byteBuffer.position();
 
         fieldMap = new HashMap<String, Lyrics3v2Field>();
 
@@ -397,10 +400,7 @@ public class Lyrics3v2 extends AbstractLyrics3
         String str;
         Lyrics3v2Field field;
         Iterator<Lyrics3v2Field> iterator;
-        ID3v1Tag id3v1tag;
         new ID3v1Tag();
-
-        id3v1tag = null;
 
         delete(file);
         file.seek(file.length());
@@ -471,11 +471,6 @@ public class Lyrics3v2 extends AbstractLyrics3
         offset += str.length();
 
         file.write(buffer, 0, offset);
-
-        if (id3v1tag != null)
-        {
-            id3v1tag.write(file);
-        }
     }
 
     /**

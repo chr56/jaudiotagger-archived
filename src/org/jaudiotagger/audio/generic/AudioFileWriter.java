@@ -62,7 +62,6 @@ public abstract class AudioFileWriter
     //If filename too long try recreating it with length no longer than 50 that should be safe on all operating
     //systems
     private static final String FILE_NAME_TOO_LONG = "File name too long";
-    private static final String FILE_NAME_TOO_LONG2 = "The filename, directory name, or volume label syntax is incorrect";
     private static final int FILE_NAME_TOO_LONG_SAFE_LIMIT = 50;
 
     /**
@@ -292,7 +291,8 @@ public abstract class AudioFileWriter
      */
     // TODO Creates temp file in same folder as the original file, this is safe
     // but would impose a performance overhead if the original file is on a networked drive
-    public void write(AudioFile af) throws CannotWriteException
+    @SuppressWarnings("unused")
+	public void write(AudioFile af) throws CannotWriteException
     {
         logger.config("Started writing tag data for file:" + af.getFile().getName());
 
@@ -591,8 +591,9 @@ public abstract class AudioFileWriter
     }
 
     private void transferNewFileContentToOriginalFile(final File newFile, final File originalFile, final RandomAccessFile raf, final FileChannel outChannel) throws CannotWriteException {
-        try (final FileChannel inChannel = new FileInputStream(newFile).getChannel())
+        try (final FileInputStream fileInputStream = new FileInputStream(newFile)) 
         {
+        	final FileChannel inChannel = fileInputStream.getChannel();
             // copy contents of newFile to originalFile,
             // overwriting the old content in that file
             final long size = inChannel.size();

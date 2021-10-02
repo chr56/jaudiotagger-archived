@@ -26,6 +26,11 @@ package org.jaudiotagger.audio.exceptions;
 public class CannotWriteException extends Exception
 {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4477951875399481164L;
+
+	/**
      * (overridden)
      *
      * @see Exception#Exception()

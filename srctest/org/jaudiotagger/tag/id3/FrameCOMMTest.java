@@ -21,7 +21,7 @@ public class FrameCOMMTest extends AbstractTestCase
         try
         {
             File testFile = AbstractTestCase.copyAudioToTmp("Issue77.id3", "testV1.mp3");
-            MP3File mp3File = new MP3File(testFile);
+            new MP3File(testFile);
         }
         catch (Exception ie)
         {
@@ -40,7 +40,7 @@ public class FrameCOMMTest extends AbstractTestCase
         try
         {
             File testFile = AbstractTestCase.copyAudioToTmp("Issue80.id3", "testV1.mp3");
-            MP3File mp3File = new MP3File(testFile);
+            new MP3File(testFile);
         }
         catch (Exception ie)
         {

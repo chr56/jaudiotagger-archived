@@ -33,6 +33,11 @@ public class ModifyVetoException extends Exception
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1235535875585831678L;
+
+	/**
      * (overridden)
      */
     public ModifyVetoException()

@@ -21,14 +21,11 @@ import org.jaudiotagger.audio.generic.Utils;
 import org.jaudiotagger.audio.mp3.MP3File;
 import org.jaudiotagger.logging.ErrorMessage;
 import org.jaudiotagger.logging.FileSystemMessage;
-import org.jaudiotagger.logging.Hex;
 import org.jaudiotagger.tag.*;
 import org.jaudiotagger.tag.datatype.DataTypes;
 import org.jaudiotagger.tag.datatype.Pair;
-import org.jaudiotagger.tag.datatype.PairedTextEncodedStringNullTerminated;
 import org.jaudiotagger.tag.id3.framebody.*;
 import org.jaudiotagger.tag.id3.valuepair.ID3NumberTotalFields;
-import org.jaudiotagger.tag.id3.valuepair.StandardIPLSKey;
 import org.jaudiotagger.tag.images.Artwork;
 import org.jaudiotagger.tag.reference.Languages;
 import org.jaudiotagger.tag.reference.PictureTypes;
@@ -265,11 +262,11 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
                 }
             }
             //MultiFrames
-            else if (o instanceof ArrayList)
+            else if (o instanceof List)
             {
-                for (AbstractID3v2Frame frame : (ArrayList<AbstractID3v2Frame>) o)
+                for (Object frame : (List<?>) o)
                 {
-                    addFrame(frame);
+                    addFrame((AbstractID3v2Frame)frame);
                 }
             }
         }
@@ -493,7 +490,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
         }
         if (object instanceof List)
         {
-            return ((List<AbstractID3v2Frame>) object).get(0);
+            return (AbstractID3v2Frame) ((List<?>) object).get(0);
         }
         else
         {
@@ -879,7 +876,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      * @param identifier
      * @param multiFrame
      */
-    public void setFrame(String identifier, List<AbstractID3v2Frame> multiFrame)
+    public void setFrame(String identifier, List<TagField> multiFrame)
     {
         logger.finest("Adding " + multiFrame.size() + " frames for " + identifier);
         frameMap.put(identifier, multiFrame);
@@ -992,7 +989,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      *
      * @return and iterator of the frmaes/list of multi value frames
      */
-    public Iterator iterator()
+    public Iterator<Object> iterator()
     {
         return frameMap.values().iterator();
     }
@@ -1418,7 +1415,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      * @param frameId
      * @param next
      */
-    protected void loadFrameIntoSpecifiedMap(HashMap map, String frameId, AbstractID3v2Frame next)
+    protected void loadFrameIntoSpecifiedMap(Map<String, Object> map, String frameId, AbstractID3v2Frame next)
     {
         if ((ID3v24Frames.getInstanceOf().isMultipleAllowed(frameId)) ||
                 (ID3v23Frames.getInstanceOf().isMultipleAllowed(frameId)) ||
@@ -1574,7 +1571,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      * @return comparator used to order frames in preferred order for writing to file
      * so that most important frames are written first.
      */
-    public abstract Comparator getPreferredFrameOrderComparator();
+    public abstract Comparator<String> getPreferredFrameOrderComparator();
 
     public void createStructure()
     {
@@ -1765,8 +1762,6 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
 
         return new Iterator<TagField>()
         {
-            Map.Entry<String, Object> latestEntry = null;
-
             //this iterates through frames through for a particular frameId
             private Iterator<TagField> fieldsIt;
 
@@ -1780,7 +1775,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
                 while (it.hasNext())
                 {
                     Map.Entry<String, Object> e = it.next();
-                    latestEntry = itHasNext.next();
+                    itHasNext.next();
                     if (e.getValue() instanceof List)
                     {
                         List<TagField> l = (List<TagField>) e.getValue();
@@ -1878,7 +1873,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
         {
             while (true)
             {
-                TagField next = it.next();
+                it.next();
                 count++;
             }
         }

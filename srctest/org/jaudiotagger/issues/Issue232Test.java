@@ -14,7 +14,7 @@ public class Issue232Test extends AbstractTestCase
         Exception exceptionCaught = null;
         try
         {
-            FrameBodyTDRC framebody = new FrameBodyTDRC((byte)0,"195666..4.1");
+            new FrameBodyTDRC((byte)0,"195666..4.1");
 
         }
         catch (Exception e)

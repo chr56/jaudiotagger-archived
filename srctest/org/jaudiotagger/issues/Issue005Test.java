@@ -19,7 +19,7 @@ public class Issue005Test extends AbstractTestCase
         try
         {
             File orig = new File("testdata", "testNonExistent.mp3");
-            MP3File f = (MP3File)AudioFileIO.read(orig);
+            AudioFileIO.read(orig);
         }
         catch(Exception ex)
         {
@@ -34,7 +34,7 @@ public class Issue005Test extends AbstractTestCase
         try
         {
             File orig = new File("testdata", "testNonExistent.mp3");
-            MP3File f = new MP3File(orig);
+            new MP3File(orig);
         }
         catch(Exception ex)
         {

@@ -36,7 +36,11 @@ import java.util.Vector;
  * @author Scott Violet
  */
 public class DefaultTreeModel implements Serializable, TreeModel {
-    /** Root of the tree. */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -267197228234880401L;
+	/** Root of the tree. */
     protected TreeNode root;
     /** Listeners. */
     protected EventListenerList listenerList = new EventListenerList();

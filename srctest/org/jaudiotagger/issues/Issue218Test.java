@@ -8,8 +8,6 @@ import org.jaudiotagger.audio.mp4.Mp4AtomTree;
 import org.jaudiotagger.tag.FieldKey;
 
 import java.io.File;
-import java.io.RandomAccessFile;
-import java.util.Random;
 
 /**
  * Test
@@ -51,7 +49,6 @@ public class Issue218Test extends AbstractTestCase
             return;
         }
 
-        Exception ex=null;
         try
         {
             Mp4AtomTree tree = new Mp4AtomTree(orig);
@@ -60,7 +57,6 @@ public class Issue218Test extends AbstractTestCase
         catch(Exception e)
         {
             e.printStackTrace();
-            ex=e;
         }
     }
 }

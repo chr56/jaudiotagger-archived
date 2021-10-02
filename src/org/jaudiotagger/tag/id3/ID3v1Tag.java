@@ -679,10 +679,10 @@ public class ID3v1Tag extends AbstractID3v1Tag implements Tag
             case YEAR:
                 setYear(field.toString());
                 break;
-
-            case COMMENT:
-                setComment(field.toString());
-                break;
+			case COMMENT:
+				setComment(field.toString());
+				break;
+			default:
         }
     }
 
@@ -859,6 +859,7 @@ public class ID3v1Tag extends AbstractID3v1Tag implements Tag
             case COMMENT:
                 setComment("");
                 break;
+            default:
         }
     }
 
@@ -908,7 +909,7 @@ public class ID3v1Tag extends AbstractID3v1Tag implements Tag
     /**
      * @return an iterator to iterate through the fields of the tag
      */
-    public Iterator iterator()
+    public Iterator<Object> iterator()
     {
         return new ID3v1Iterator(this);
     }

@@ -226,39 +226,6 @@ public class Mp4Tag extends AbstractTag
         tagFieldToMp4Field.put(FieldKey.WORK_TYPE, Mp4FieldKey.WORK_TYPE);
     }
 
-    /**
-     * Create genre field
-     *
-     * <p>If the content can be parsed to one of the known values use the genre field otherwise
-     * use the custom field.
-     *
-     * @param content
-     * @return
-     */
-    @SuppressWarnings({"JavaDoc"})
-    private TagField createGenreField(String content)
-    {
-        if (content == null)
-        {
-            throw new IllegalArgumentException(ErrorMessage.GENERAL_INVALID_NULL_ARGUMENT.getMsg());
-        }
-
-        //Always write as text
-        if(TagOptionSingleton.getInstance().isWriteMp4GenresAsText())
-        {
-            return new Mp4TagTextField(GENRE_CUSTOM.getFieldName(), content);
-        }
-
-        if (Mp4GenreField.isValidGenre(content))
-        {
-            return new Mp4GenreField(content);
-        }
-        else
-        {
-            return new Mp4TagTextField(GENRE_CUSTOM.getFieldName(), content);
-        }
-    }
-
     protected boolean isAllowedEncoding(Charset enc)
     {
         return StandardCharsets.UTF_8.equals(enc);

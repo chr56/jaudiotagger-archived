@@ -10,8 +10,6 @@ import org.jaudiotagger.tag.mp4.atom.Mp4ContentTypeValue;
 import org.jaudiotagger.tag.mp4.atom.Mp4RatingValue;
 import org.jaudiotagger.tag.mp4.field.*;
 import org.jaudiotagger.tag.reference.GenreTypes;
-import org.jaudiotagger.tag.vorbiscomment.VorbisCommentTagField;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -149,7 +147,7 @@ public class M4aWriteTagTest extends TestCase
             assertEquals(String.valueOf(Mp4RatingValue.EXPLICIT.getId()), mp4tag.getFirst(Mp4FieldKey.RATING));
             assertEquals(String.valueOf(Mp4ContentTypeValue.BOOKLET.getId()), mp4tag.getFirst(Mp4FieldKey.CONTENT_TYPE));
 
-            List coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
+            List<TagField> coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
             //Should be one image
             assertEquals(1, coverart.size());
 
@@ -284,7 +282,7 @@ public class M4aWriteTagTest extends TestCase
             assertEquals(String.valueOf(Mp4RatingValue.EXPLICIT.getId()), mp4tag.getFirst(Mp4FieldKey.RATING));
             assertEquals(String.valueOf(Mp4ContentTypeValue.BOOKLET.getId()), mp4tag.getFirst(Mp4FieldKey.CONTENT_TYPE));
 
-            List coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
+            List<TagField> coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
             //Should be one image
             assertEquals(1, coverart.size());
 
@@ -420,7 +418,7 @@ public class M4aWriteTagTest extends TestCase
             assertEquals(String.valueOf(Mp4RatingValue.EXPLICIT.getId()), mp4tag.getFirst(Mp4FieldKey.RATING));
             assertEquals(String.valueOf(Mp4ContentTypeValue.BOOKLET.getId()), mp4tag.getFirst(Mp4FieldKey.CONTENT_TYPE));
 
-            List coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
+            List<TagField> coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
             //Should be one image
             assertEquals(1, coverart.size());
 
@@ -561,7 +559,7 @@ public class M4aWriteTagTest extends TestCase
             assertEquals(String.valueOf(Mp4RatingValue.EXPLICIT.getId()), tag.getFirst(Mp4FieldKey.RATING));
             assertEquals(String.valueOf(Mp4ContentTypeValue.BOOKLET.getId()), tag.getFirst(Mp4FieldKey.CONTENT_TYPE));
 
-            List coverart = tag.get(Mp4FieldKey.ARTWORK);
+            List<TagField> coverart = tag.get(Mp4FieldKey.ARTWORK);
             //Should be one image
             assertEquals(2, coverart.size());
 
@@ -714,7 +712,7 @@ public class M4aWriteTagTest extends TestCase
             assertEquals(String.valueOf(Mp4RatingValue.EXPLICIT.getId()), tag.getFirst(Mp4FieldKey.RATING));
             assertEquals(String.valueOf(Mp4ContentTypeValue.BOOKLET.getId()), tag.getFirst(Mp4FieldKey.CONTENT_TYPE));
 
-            List coverart = tag.get(Mp4FieldKey.ARTWORK);
+            List<TagField> coverart = tag.get(Mp4FieldKey.ARTWORK);
             //Should be one image
             assertEquals(2, coverart.size());
 
@@ -908,7 +906,7 @@ public class M4aWriteTagTest extends TestCase
             assertEquals(String.valueOf(Mp4RatingValue.EXPLICIT.getId()), mp4tag.getFirst(Mp4FieldKey.RATING));
             assertEquals(String.valueOf(Mp4ContentTypeValue.BOOKLET.getId()), mp4tag.getFirst(Mp4FieldKey.CONTENT_TYPE));
 
-            List coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
+            List<TagField> coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
             //Should be one image
             assertEquals(1, coverart.size());
 
@@ -1044,7 +1042,7 @@ public class M4aWriteTagTest extends TestCase
             assertEquals(String.valueOf(Mp4RatingValue.EXPLICIT.getId()), mp4tag.getFirst(Mp4FieldKey.RATING));
             assertEquals(String.valueOf(Mp4ContentTypeValue.BOOKLET.getId()), mp4tag.getFirst(Mp4FieldKey.CONTENT_TYPE));
 
-            List coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
+            List<TagField> coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
             //Should be one image
             assertEquals(1, coverart.size());
 
@@ -1179,7 +1177,7 @@ public class M4aWriteTagTest extends TestCase
             assertEquals(String.valueOf(Mp4RatingValue.EXPLICIT.getId()), mp4tag.getFirst(Mp4FieldKey.RATING));
             assertEquals(String.valueOf(Mp4ContentTypeValue.BOOKLET.getId()), mp4tag.getFirst(Mp4FieldKey.CONTENT_TYPE));
 
-            List coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
+            List<TagField> coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
             //Should be one image
             assertEquals(1, coverart.size());
 
@@ -1314,7 +1312,7 @@ public class M4aWriteTagTest extends TestCase
             assertEquals(String.valueOf(Mp4RatingValue.EXPLICIT.getId()), mp4tag.getFirst(Mp4FieldKey.RATING));
             assertEquals(String.valueOf(Mp4ContentTypeValue.BOOKLET.getId()), mp4tag.getFirst(Mp4FieldKey.CONTENT_TYPE));
 
-            List coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
+            List<TagField> coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
             //Should be one image
             assertEquals(2, coverart.size());
 
@@ -1450,7 +1448,7 @@ public class M4aWriteTagTest extends TestCase
             assertEquals(String.valueOf(Mp4RatingValue.EXPLICIT.getId()), mp4tag.getFirst(Mp4FieldKey.RATING));
             assertEquals(String.valueOf(Mp4ContentTypeValue.BOOKLET.getId()), mp4tag.getFirst(Mp4FieldKey.CONTENT_TYPE));
 
-            List coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
+            List<TagField> coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
             //Should be one image
             assertEquals(2, coverart.size());
 
@@ -1575,7 +1573,7 @@ public class M4aWriteTagTest extends TestCase
             assertEquals(String.valueOf(Mp4RatingValue.EXPLICIT.getId()), mp4tag.getFirst(Mp4FieldKey.RATING));
             assertEquals(String.valueOf(Mp4ContentTypeValue.BOOKLET.getId()), mp4tag.getFirst(Mp4FieldKey.CONTENT_TYPE));
 
-            List coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
+            List<TagField> coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
             //Should be one image
             assertEquals(1, coverart.size());
 
@@ -1646,7 +1644,7 @@ public class M4aWriteTagTest extends TestCase
             assertEquals("AL", tag.getFirst(FieldKey.ALBUM));
 
             //Should be two images
-            List coverart = tag.getFields(FieldKey.COVER_ART);
+            List<TagField> coverart = tag.getFields(FieldKey.COVER_ART);
             assertEquals(2, coverart.size());
 
             Mp4TagCoverField coverArtField = (Mp4TagCoverField) coverart.get(0);
@@ -1838,7 +1836,7 @@ public class M4aWriteTagTest extends TestCase
             assertEquals(String.valueOf(Mp4RatingValue.EXPLICIT.getId()), mp4tag.getFirst(Mp4FieldKey.RATING));
             assertEquals(String.valueOf(Mp4ContentTypeValue.BOOKLET.getId()), mp4tag.getFirst(Mp4FieldKey.CONTENT_TYPE));
 
-            List coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
+            List<TagField> coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
             //Should be one image
             assertEquals(2, coverart.size());
         }

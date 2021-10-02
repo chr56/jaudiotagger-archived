@@ -75,6 +75,11 @@ public class DefaultMutableTreeNode extends Object implements Cloneable,
 {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7195119412898901913L;
+
+	/**
      * An enumeration that is always empty. This is used when an enumeration
      * of a leaf node's children is requested.
      */

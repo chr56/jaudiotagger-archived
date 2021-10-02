@@ -21,7 +21,7 @@ public class FileClosingTest extends AbstractTestCase
         //Try and Read
         try
         {
-            MP3File mp3File = new MP3File(testFile);
+            new MP3File(testFile);
         }
         catch (Exception e)
         {
@@ -47,7 +47,7 @@ public class FileClosingTest extends AbstractTestCase
         //Try and Read
         try
         {
-            MP3File mp3File = new MP3File(testFile);
+            new MP3File(testFile);
         }
         catch (Exception e)
         {
@@ -76,7 +76,7 @@ public class FileClosingTest extends AbstractTestCase
         //Try and Read
         try
         {
-            MP3File mp3File = new MP3File(testFile);
+            new MP3File(testFile);
         }
         catch (Exception e)
         {

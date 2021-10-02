@@ -12,7 +12,6 @@ public class Issue409Test extends AbstractTestCase
 {
     public void testFindAudioHeaderWhenTagSizeIsTooShortAndHasNullPadding() throws Exception
     {
-        Exception ex=null;
         File orig = new File("testdata", "test111.mp3");
         if (!orig.isFile())
         {

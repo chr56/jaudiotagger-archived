@@ -13,7 +13,6 @@ public class Issue453Test extends AbstractTestCase
 {
     public void testMpeg3layer3_32bit() throws Exception
     {
-        Exception ex=null;
         File orig = new File("testdata", "test113.mp3");
         if (!orig.isFile())
         {

@@ -17,7 +17,6 @@ import java.util.logging.LogRecord;
  */
 public final class LogFormatter extends Formatter
 {
-    private boolean isObsfucated = false;
     public static final String ACTION_PERFORMED = "actionPerformed";
 
     // Line separator string.  This is the value of the line.separator

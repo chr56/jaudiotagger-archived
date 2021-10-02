@@ -22,8 +22,6 @@ import org.jaudiotagger.tag.*;
 import org.jaudiotagger.tag.datatype.DataTypes;
 import org.jaudiotagger.tag.datatype.Pair;
 import org.jaudiotagger.tag.id3.framebody.*;
-import org.jaudiotagger.tag.id3.valuepair.MusicianCredits;
-import org.jaudiotagger.tag.id3.valuepair.StandardIPLSKey;
 import org.jaudiotagger.tag.images.Artwork;
 import org.jaudiotagger.tag.images.ArtworkFactory;
 import org.jaudiotagger.tag.lyrics3.AbstractLyrics3;
@@ -857,7 +855,6 @@ public class ID3v24Tag extends AbstractID3v2Tag
     public void read(ByteBuffer byteBuffer) throws TagException
     {
         int size;
-        byte[] buffer;
         if (!seek(byteBuffer))
         {
             throw new TagNotFoundException(getLoggingFilename() + ":" + getIdentifier() + " tag not found");
@@ -1289,7 +1286,7 @@ public class ID3v24Tag extends AbstractID3v2Tag
      * @return comparator used to order frames in preferred order for writing to file
      *         so that most important frames are written first.
      */
-    public Comparator getPreferredFrameOrderComparator()
+    public Comparator<String> getPreferredFrameOrderComparator()
     {
         return ID3v24PreferredFrameOrderComparator.getInstanceof();
     }

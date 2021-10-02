@@ -93,8 +93,7 @@ public class BaseChunk
 
         if (skip > 0)
         {
-            ByteBuffer audioData = Utils.readFileDataIntoBufferLE(fc, skip.intValue());
-            //System.out.println("New postion: "+fc.position());
+            Utils.readFileDataIntoBufferLE(fc, skip.intValue());
         }
     }
 

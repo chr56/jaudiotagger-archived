@@ -28,8 +28,6 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.logging.Level;
 
-import static org.jaudiotagger.tag.id3.ID3v24Frames.*;
-
 /**
  * This abstract class is each frame header inside a ID3v2 tag.
  *

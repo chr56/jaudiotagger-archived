@@ -3,11 +3,7 @@ package org.jaudiotagger.audio.wav;
 import org.jaudiotagger.AbstractTestCase;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.audio.AudioHeader;
-import org.jaudiotagger.audio.aiff.AiffAudioHeader;
-import org.jaudiotagger.audio.generic.GenericTag;
 import org.jaudiotagger.logging.Hex;
-import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.wav.WavTag;
 
 import java.io.File;

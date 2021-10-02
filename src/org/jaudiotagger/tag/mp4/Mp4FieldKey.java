@@ -4,8 +4,6 @@ import org.jaudiotagger.tag.mp4.field.Mp4FieldType;
 import org.jaudiotagger.tag.mp4.field.Mp4TagReverseDnsField;
 import org.jaudiotagger.tag.reference.Tagger;
 
-import java.util.EnumSet;
-
 import static org.jaudiotagger.tag.mp4.field.Mp4FieldType.*;
 
 /**

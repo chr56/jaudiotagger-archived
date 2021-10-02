@@ -83,7 +83,7 @@ public class ItunesTest extends AbstractTestCase
 
         ID3v24Frame v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE);
         assertNotNull(v24frame);
-        FrameBodyAPIC fb = (FrameBodyAPIC) v24frame.getBody();
+        v24frame.getBody();
     }
 
     /**

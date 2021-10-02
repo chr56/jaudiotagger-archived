@@ -29,12 +29,10 @@ public enum Tagger
     MINIMSERVER(18,"MinimServer"),
     ;
 
-    private int compatability;
     private String desc;
 
     Tagger(int compatability,String desc)
     {
-        this.compatability=compatability;
         this.desc=desc;
     }
 

@@ -2,6 +2,7 @@ package org.jaudiotagger.tag.id3;
 
 import org.jaudiotagger.AbstractTestCase;
 import org.jaudiotagger.audio.mp3.MP3File;
+import org.jaudiotagger.tag.TagField;
 import org.jaudiotagger.tag.id3.framebody.FrameBodyTMOO;
 import org.jaudiotagger.tag.id3.framebody.FrameBodyTMOOTest;
 import org.jaudiotagger.tag.id3.framebody.FrameBodyTXXX;
@@ -174,7 +175,7 @@ public void testCreateID3v22Frame()
         assertEquals(2, v23Tag.getFields("TXXX").size());
         mp3File.setID3v2TagOnly(v23Tag);
 
-        Iterator i = v23Tag.getFields();
+        Iterator<TagField> i = v23Tag.getFields();
         while (i.hasNext())
         {
             System.out.println(((ID3v23Frame) i.next()).getIdentifier());
@@ -183,12 +184,12 @@ public void testCreateID3v22Frame()
 
         //Reload
         mp3File = new MP3File(testFile);
-        ID3v23Frame frame = (ID3v23Frame) ((List) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_USER_DEFINED_INFO)).get(0);
+        ID3v23Frame frame = (ID3v23Frame) ((List<?>) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_USER_DEFINED_INFO)).get(0);
         FrameBodyTXXX body = (FrameBodyTXXX) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
         assertEquals(FrameBodyTXXXTest.TXXX_TEST_DESC, body.getText());
 
-        frame = (ID3v23Frame) ((List) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_USER_DEFINED_INFO)).get(1);
+        frame = (ID3v23Frame) ((List<?>) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_USER_DEFINED_INFO)).get(1);
         body = (FrameBodyTXXX) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
         assertEquals(FrameBodyTMOOTest.MOOD, body.getText());
@@ -219,7 +220,7 @@ public void testCreateID3v22Frame()
         //Reload and convertMetadata to v23 and save
         mp3File = new MP3File(testFile);
         ID3v24Tag v24Tag = new ID3v24Tag(mp3File.getID3v2Tag());
-        Iterator i = v24Tag.getFields();
+        Iterator<TagField> i = v24Tag.getFields();
         while (i.hasNext())
         {
             System.out.println("kkk" + ((ID3v24Frame) i.next()).getIdentifier());
@@ -238,7 +239,7 @@ public void testCreateID3v22Frame()
 
         //Create and Save
         ID3v23Tag tag = new ID3v23Tag();
-        ArrayList frames= new ArrayList();
+        List<TagField> frames= new ArrayList<>();
         {
             FrameBodyTXXX frameBody = new FrameBodyTXXX();
             frameBody.setDescription(FrameBodyTXXX.MOOD);
@@ -262,7 +263,7 @@ public void testCreateID3v22Frame()
         //Reload and convertMetadata to v23 and save
         mp3File = new MP3File(testFile);
         ID3v24Tag v24Tag = new ID3v24Tag(mp3File.getID3v2Tag());
-        Iterator i = v24Tag.getFields();
+        Iterator<TagField> i = v24Tag.getFields();
         while (i.hasNext())
         {
             System.out.println("kkk" + ((ID3v24Frame) i.next()).getIdentifier());

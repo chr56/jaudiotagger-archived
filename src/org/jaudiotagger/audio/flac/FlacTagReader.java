@@ -116,7 +116,7 @@ public class FlacTagReader
                             try
                             {
                                 long pos = fc.position();
-                                MetadataBlockDataSeekTable mbdp = new MetadataBlockDataSeekTable(mbh, fc);
+                                new MetadataBlockDataSeekTable(mbh, fc);
                                 fc.position(pos + mbh.getDataLength());
                             }
                             catch (IOException ioe)

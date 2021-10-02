@@ -4,9 +4,6 @@ import org.jaudiotagger.AbstractTestCase;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.tag.FieldKey;
-import org.jaudiotagger.tag.id3.ID3v22Tag;
-import org.jaudiotagger.tag.id3.ID3v24Tag;
-
 import java.io.File;
 
 import static org.jaudiotagger.tag.FieldKey.ALBUM;
@@ -21,8 +18,6 @@ public class Issue303Test extends AbstractTestCase
      */
     public void testReadMp3()
     {
-        ID3v24Tag v24tag = null;
-        ID3v22Tag v22tag = null;
         File orig = new File("testdata", "test303.mp3");
         if (!orig.isFile())
         {

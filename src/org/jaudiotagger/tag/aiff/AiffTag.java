@@ -62,12 +62,12 @@ public class AiffTag implements Tag, Id3SupportingTag
 
     private AbstractID3v2Tag id3Tag;
 
-    private String loggingFilename="";
+//    private String loggingFilename="";
 
-    public AiffTag(String loggingFilename)
-    {
-        this.loggingFilename = loggingFilename;
-    }
+//    public AiffTag(String loggingFilename)
+//    {
+//        this.loggingFilename = loggingFilename;
+//    }
 
     public AiffTag()
     {

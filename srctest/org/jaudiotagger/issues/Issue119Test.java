@@ -10,11 +10,6 @@ import org.jaudiotagger.audio.wav.WavSaveOptions;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagOptionSingleton;
-import org.jaudiotagger.tag.id3.AbstractID3v2Tag;
-import org.jaudiotagger.tag.id3.ID3v23Tag;
-import org.jaudiotagger.tag.wav.WavInfoTag;
-import org.jaudiotagger.tag.wav.WavTag;
-
 import java.io.File;
 
 /**
