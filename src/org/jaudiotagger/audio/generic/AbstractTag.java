@@ -222,7 +222,7 @@ public abstract class AbstractTag implements Tag
     @Override
     public int getFieldCount()
     {
-        Iterator it = getFields();
+        Iterator<TagField> it = getFields();
         int count = 0;
         while (it.hasNext())
         {
@@ -363,7 +363,7 @@ public abstract class AbstractTag implements Tag
             return false;
         }
 
-        Iterator it = getFields();
+        Iterator<TagField> it = getFields();
         while (it.hasNext())
         {
             TagField field = (TagField) it.next();
@@ -385,7 +385,7 @@ public abstract class AbstractTag implements Tag
     {
         StringBuffer out = new StringBuffer();
         out.append("Tag content:\n");
-        Iterator it = getFields();
+        Iterator<TagField> it = getFields();
         while (it.hasNext())
         {
             TagField field = (TagField) it.next();

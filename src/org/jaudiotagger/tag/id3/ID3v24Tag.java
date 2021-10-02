@@ -308,8 +308,8 @@ public class ID3v24Tag extends AbstractID3v2Tag
      */
     public ID3v24Tag()
     {
-        frameMap = new LinkedHashMap();
-        encryptedFrameMap = new LinkedHashMap();
+        frameMap = new LinkedHashMap<>();
+        encryptedFrameMap = new LinkedHashMap<>();
                 
     }
 
@@ -495,8 +495,8 @@ public class ID3v24Tag extends AbstractID3v2Tag
     public ID3v24Tag(AbstractTag mp3tag)
     {
         logger.config(getLoggingFilename() +":Creating tag from a tag of a different version");
-        frameMap = new LinkedHashMap();
-        encryptedFrameMap = new LinkedHashMap();
+        frameMap = new LinkedHashMap<>();
+        encryptedFrameMap = new LinkedHashMap<>();
 
         if (mp3tag != null)
         {
@@ -621,8 +621,8 @@ public class ID3v24Tag extends AbstractID3v2Tag
      */
     public ID3v24Tag(ByteBuffer buffer, String loggingFilename) throws TagException
     {
-        frameMap = new LinkedHashMap();
-        encryptedFrameMap = new LinkedHashMap();
+        frameMap = new LinkedHashMap<>();
+        encryptedFrameMap = new LinkedHashMap<>();
 
         setLoggingFilename(loggingFilename);
         this.read(buffer);
@@ -885,8 +885,8 @@ public class ID3v24Tag extends AbstractID3v2Tag
         logger.finest(getLoggingFilename() + ":" + "Start of frame body at" + byteBuffer.position());
         //Now start looking for frames
         ID3v24Frame next;
-        frameMap = new LinkedHashMap();
-        encryptedFrameMap = new LinkedHashMap();
+        frameMap = new LinkedHashMap<>();
+        encryptedFrameMap = new LinkedHashMap<>();
 
         //Read the size from the Tag Header
         this.fileReadSize = size;

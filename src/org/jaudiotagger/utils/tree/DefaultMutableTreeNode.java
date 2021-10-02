@@ -70,7 +70,7 @@ import java.util.*;
  * @version 1.25 03/23/10
  * @author Rob Davis
  */
-public class DefaultMutableTreeNode extends Object implements Cloneable,
+public class DefaultMutableTreeNode implements Cloneable,
        MutableTreeNode, Serializable
 {
 

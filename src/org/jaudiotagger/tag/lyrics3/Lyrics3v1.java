@@ -161,7 +161,7 @@ public class Lyrics3v1 extends AbstractLyrics3
      * @throws java.lang.UnsupportedOperationException
      *
      */
-    public Iterator<?> iterator()
+    public Iterator<Object> iterator()
     {
         /**
          * @todo Implement this org.jaudiotagger.tag.AbstractMP3Tag abstract method
