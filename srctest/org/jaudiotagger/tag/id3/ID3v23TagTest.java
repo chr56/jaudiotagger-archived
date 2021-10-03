@@ -220,13 +220,13 @@ public class ID3v23TagTest extends TestCase
         ID3v23Tag v2Tag = new ID3v23Tag(v11Tag);
         assertNotNull(v11Tag);
         assertNotNull(v2Tag);
-        assertEquals(ID3v11TagTest.ARTIST, ((FrameBodyTPE1) ((ID3v23Frame) v2Tag.getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST)).getBody()).getText());
-        assertEquals(ID3v11TagTest.ALBUM, ((FrameBodyTALB) ((ID3v23Frame) v2Tag.getFrame(ID3v23Frames.FRAME_ID_V3_ALBUM)).getBody()).getText());
-        assertEquals(ID3v11TagTest.COMMENT, ((FrameBodyCOMM) ((ID3v23Frame) v2Tag.getFrame(ID3v23Frames.FRAME_ID_V3_COMMENT)).getBody()).getText());
-        assertEquals(ID3v11TagTest.TITLE, ((FrameBodyTIT2) ((ID3v23Frame) v2Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TITLE)).getBody()).getText());
-        assertEquals(ID3v11TagTest.TRACK_VALUE, String.valueOf(((FrameBodyTRCK) ((ID3v23Frame) v2Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TRACK)).getBody()).getTrackNo()));
-        assertTrue(((FrameBodyTCON) ((ID3v23Frame) v2Tag.getFrame(ID3v23Frames.FRAME_ID_V3_GENRE)).getBody()).getText().endsWith(ID3v11TagTest.GENRE_VAL));
-        assertEquals(ID3v11TagTest.YEAR, ((FrameBodyTYER) ((ID3v23Frame) v2Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TYER)).getBody()).getText());
+        assertEquals(ID3v11TagTest.ARTIST, ((FrameBodyTPE1) ((ID3v23Frame) v2Tag.getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST).get(0)).getBody()).getText());
+        assertEquals(ID3v11TagTest.ALBUM, ((FrameBodyTALB) ((ID3v23Frame) v2Tag.getFrame(ID3v23Frames.FRAME_ID_V3_ALBUM).get(0)).getBody()).getText());
+        assertEquals(ID3v11TagTest.COMMENT, ((FrameBodyCOMM) ((ID3v23Frame) v2Tag.getFrame(ID3v23Frames.FRAME_ID_V3_COMMENT).get(0)).getBody()).getText());
+        assertEquals(ID3v11TagTest.TITLE, ((FrameBodyTIT2) ((ID3v23Frame) v2Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TITLE).get(0)).getBody()).getText());
+        assertEquals(ID3v11TagTest.TRACK_VALUE, String.valueOf(((FrameBodyTRCK) ((ID3v23Frame) v2Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TRACK).get(0)).getBody()).getTrackNo()));
+        assertTrue(((FrameBodyTCON) ((ID3v23Frame) v2Tag.getFrame(ID3v23Frames.FRAME_ID_V3_GENRE).get(0)).getBody()).getText().endsWith(ID3v11TagTest.GENRE_VAL));
+        assertEquals(ID3v11TagTest.YEAR, ((FrameBodyTYER) ((ID3v23Frame) v2Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TYER).get(0)).getBody()).getText());
 
         assertEquals((byte) 2, v2Tag.getRelease());
         assertEquals((byte) 3, v2Tag.getMajorVersion());
@@ -262,7 +262,7 @@ public class ID3v23TagTest extends TestCase
 
         //Convert to v23 ,frame converted and marked as unsupported
         ID3v23Tag v23tag = new ID3v23Tag(mp3File.getID3v2TagAsv24());
-        ID3v23Frame v23frame = (ID3v23Frame) v23tag.getFrame("TIT2");
+        ID3v23Frame v23frame = (ID3v23Frame) v23tag.getFrame("TIT2").get(0);
         assertNotNull(v23frame);
         assertTrue(v23frame.getBody() instanceof FrameBodyTIT2);
 
@@ -275,7 +275,7 @@ public class ID3v23TagTest extends TestCase
 
         //Convert to v23 ,frame should still exist
         v23tag = (ID3v23Tag) mp3File.getID3v2Tag();
-        v23frame = (ID3v23Frame) v23tag.getFrame("TIT2");
+        v23frame = (ID3v23Frame) v23tag.getFrame("TIT2").get(0);
         assertNotNull(v23frame);
         assertTrue(v23frame.getBody() instanceof FrameBodyTIT2);
 
@@ -284,7 +284,7 @@ public class ID3v23TagTest extends TestCase
         mp3File.save();
 
         //Check when converted to v24 has value been maintained
-        assertEquals("title", ((FrameBodyTIT2) ((ID3v24Frame) mp3File.getID3v2TagAsv24().getFrame("TIT2")).getBody()).getText());
+        assertEquals("title", ((FrameBodyTIT2) ((ID3v24Frame) mp3File.getID3v2TagAsv24().getFrame("TIT2").get(0)).getBody()).getText());
     }
 
     /**
@@ -315,7 +315,7 @@ public class ID3v23TagTest extends TestCase
 
         //Convert to v23 ,frame converted and marked as unsupported
         ID3v23Tag v23tag = new ID3v23Tag(mp3File.getID3v2TagAsv24());
-        ID3v23Frame v23frame = (ID3v23Frame) v23tag.getFrame("TDRL");
+        ID3v23Frame v23frame = (ID3v23Frame) v23tag.getFrame("TDRL").get(0);
         assertNotNull(v23frame);
         assertTrue(v23frame.getBody() instanceof FrameBodyUnsupported);
 
@@ -328,7 +328,7 @@ public class ID3v23TagTest extends TestCase
 
         //Convert to v23 ,frame should still exist
         v23tag = (ID3v23Tag) mp3File.getID3v2Tag();
-        v23frame = (ID3v23Frame) v23tag.getFrame("TDRL");
+        v23frame = (ID3v23Frame) v23tag.getFrame("TDRL").get(0);
         assertNotNull(v23frame);
         assertTrue(v23frame.getBody() instanceof FrameBodyUnsupported);
 
@@ -346,7 +346,7 @@ public class ID3v23TagTest extends TestCase
         //Reread from File
         mp3File = new MP3File(testFile);
         v23tag = (ID3v23Tag) mp3File.getID3v2Tag();
-        v23frame = (ID3v23Frame) v23tag.getFrame("TDRL");
+        v23frame = (ID3v23Frame) v23tag.getFrame("TDRL").get(0);
         assertNotNull(v23frame);
         assertTrue(v23frame.getBody() instanceof FrameBodyUnsupported);
 
@@ -366,7 +366,7 @@ public class ID3v23TagTest extends TestCase
         //Reread from File
         mp3File = new MP3File(testFile);
         v23tag = (ID3v23Tag) mp3File.getID3v2Tag();
-        v23frame = (ID3v23Frame) v23tag.getFrame("TDRL");
+        v23frame = (ID3v23Frame) v23tag.getFrame("TDRL").get(0);
         assertNotNull(v23frame);
         assertTrue(v23frame.getBody() instanceof FrameBodyUnsupported);
 

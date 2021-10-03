@@ -57,7 +57,7 @@ public class FrameIPLSTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        ID3v23Frame frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_INVOLVED_PEOPLE);
+        ID3v23Frame frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_INVOLVED_PEOPLE).get(0);
         FrameBodyIPLS body = (FrameBodyIPLS) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
     }

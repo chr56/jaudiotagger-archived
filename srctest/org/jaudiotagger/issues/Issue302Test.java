@@ -36,7 +36,7 @@ public class Issue302Test extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_USER_DEFINED_INFO);
+        frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_USER_DEFINED_INFO).get(0);
         FrameBodyTXXX body = (FrameBodyTXXX) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
 

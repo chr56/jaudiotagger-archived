@@ -138,7 +138,7 @@ public class FramePICAndAPICTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE);
+        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE).get(0);
         assertTrue(frame != null);
         FrameBodyAPIC body = (FrameBodyAPIC) frame.getBody();
         assertTrue(body instanceof FrameBodyAPIC);
@@ -166,7 +166,7 @@ public class FramePICAndAPICTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        ID3v23Frame frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ATTACHED_PICTURE);
+        ID3v23Frame frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ATTACHED_PICTURE).get(0);
         assertTrue(frame != null);
         FrameBodyAPIC body = (FrameBodyAPIC) frame.getBody();
         assertTrue(body instanceof FrameBodyAPIC);
@@ -192,7 +192,7 @@ public class FramePICAndAPICTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        ID3v22Frame frame = (ID3v22Frame) mp3File.getID3v2Tag().getFrame(ID3v22Frames.FRAME_ID_V2_ATTACHED_PICTURE);
+        ID3v22Frame frame = (ID3v22Frame) mp3File.getID3v2Tag().getFrame(ID3v22Frames.FRAME_ID_V2_ATTACHED_PICTURE).get(0);
         assertTrue(frame != null);
         FrameBodyPIC body = (FrameBodyPIC) frame.getBody();
         assertTrue(body instanceof FrameBodyPIC);
@@ -221,7 +221,7 @@ public class FramePICAndAPICTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE);
+        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE).get(0);
         assertTrue(frame != null);
         FrameBodyAPIC body = (FrameBodyAPIC) frame.getBody();
         assertTrue(body instanceof FrameBodyAPIC);

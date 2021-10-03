@@ -38,7 +38,7 @@ public class Issue435Test extends AbstractTestCase
             af.getTagAndConvertOrCreateAndSetDefault();
             af.commit();
             assertTrue(af.getTag() instanceof ID3v24Tag);
-            assertTrue(((ID3v24Tag)af.getTag()).getFrame("TDRC") instanceof AbstractID3v2Frame);
+            assertTrue(((ID3v24Tag)af.getTag()).getFrame("TDRC").get(0) instanceof AbstractID3v2Frame);
 
             TagOptionSingleton.getInstance().setToDefault();
         }

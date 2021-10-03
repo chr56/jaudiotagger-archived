@@ -81,7 +81,7 @@ public class FramePCNTTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_PLAY_COUNTER);
+        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_PLAY_COUNTER).get(0);
         FrameBodyPCNT body = (FrameBodyPCNT) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
         assertEquals(FrameBodyPCNTTest.PCNT_COUNTER, body.getCounter());
@@ -103,7 +103,7 @@ public class FramePCNTTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_PLAY_COUNTER);
+        frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_PLAY_COUNTER).get(0);
         FrameBodyPCNT body = (FrameBodyPCNT) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
         assertEquals(0, body.getCounter());

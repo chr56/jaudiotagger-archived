@@ -115,7 +115,7 @@ public class Unicode23TagTest extends TestCase
 
         //Reload, should be written as UTF16 because of the text
         mp3File = new MP3File(testFile);
-        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST);
+        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST).get(0);
         FrameBodyTPE1 body = (FrameBodyTPE1) frame.getBody();
         assertEquals(ID3v23Frames.FRAME_ID_V3_ARTIST, body.getIdentifier());
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
@@ -160,7 +160,7 @@ public class Unicode23TagTest extends TestCase
 
         //Reload, should be written as UTF16 because of the text
         mp3File = new MP3File(testFile);
-        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST);
+        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST).get(0);
         FrameBodyTPE1 body = (FrameBodyTPE1) frame.getBody();
         assertEquals(ID3v23Frames.FRAME_ID_V3_ARTIST, body.getIdentifier());
         assertEquals(TextEncoding.UTF_16, body.getTextEncoding());
@@ -206,7 +206,7 @@ public class Unicode23TagTest extends TestCase
 
         //Reload, should be written as UTF16 because of the text
         mp3File = new MP3File(testFile);
-        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST);
+        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST).get(0);
         FrameBodyTPE1 body = (FrameBodyTPE1) frame.getBody();
         assertEquals(ID3v23Frames.FRAME_ID_V3_ARTIST, body.getIdentifier());
         assertEquals(TextEncoding.UTF_16, body.getTextEncoding());
@@ -251,7 +251,7 @@ public class Unicode23TagTest extends TestCase
 
         //Reload, should be written as UTF16 because of the text
         mp3File = new MP3File(testFile);
-        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST);
+        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST).get(0);
         FrameBodyTPE1 body = (FrameBodyTPE1) frame.getBody();
         assertEquals(ID3v23Frames.FRAME_ID_V3_ARTIST, body.getIdentifier());
         assertEquals(TextEncoding.UTF_16, body.getTextEncoding());
@@ -295,7 +295,7 @@ public class Unicode23TagTest extends TestCase
 
         //Reload, should be written as UTF16BE
         mp3File = new MP3File(testFile);
-        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST);
+        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST).get(0);
         FrameBodyTPE1 body = (FrameBodyTPE1) frame.getBody();
         assertEquals(ID3v23Frames.FRAME_ID_V3_ARTIST, body.getIdentifier());
         assertEquals(TextEncoding.UTF_16, body.getTextEncoding());
@@ -339,7 +339,7 @@ public class Unicode23TagTest extends TestCase
 
         //Reload, should be written as UTF8
         mp3File = new MP3File(testFile);
-        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST);
+        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST).get(0);
         FrameBodyTPE1 body = (FrameBodyTPE1) frame.getBody();
         assertEquals(ID3v23Frames.FRAME_ID_V3_ARTIST, body.getIdentifier());
         assertEquals(TextEncoding.UTF_16, body.getTextEncoding());
@@ -356,7 +356,7 @@ public class Unicode23TagTest extends TestCase
         ID3v23Tag v23tag = (ID3v23Tag) mp3File.getID3v2Tag();
 
         //Currently contains tags with invalid textencodings
-        ID3v23Frame artistFrame = (ID3v23Frame) v23tag.getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST);
+        ID3v23Frame artistFrame = (ID3v23Frame) v23tag.getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST).get(0);
         FrameBodyTPE1 body = (FrameBodyTPE1) artistFrame.getBody();
         assertEquals(ID3v23Frames.FRAME_ID_V3_ARTIST, body.getIdentifier());
         assertEquals(TextEncoding.UTF_8, body.getTextEncoding());
@@ -369,7 +369,7 @@ public class Unicode23TagTest extends TestCase
         v23tag = (ID3v23Tag) mp3File.getID3v2Tag();
 
         //Currently contains tags with invalid textencodings
-        artistFrame = (ID3v23Frame) v23tag.getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST);
+        artistFrame = (ID3v23Frame) v23tag.getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST).get(0);
         body = (FrameBodyTPE1) artistFrame.getBody();
         assertEquals(ID3v23Frames.FRAME_ID_V3_ARTIST, body.getIdentifier());
 
@@ -386,7 +386,7 @@ public class Unicode23TagTest extends TestCase
         ID3v23Tag v23tag = (ID3v23Tag) mp3File.getID3v2Tag();
 
         //Currently contains tags with invalid textencodings
-        ID3v23Frame artistFrame = (ID3v23Frame) v23tag.getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST);
+        ID3v23Frame artistFrame = (ID3v23Frame) v23tag.getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST).get(0);
         FrameBodyTPE1 body = (FrameBodyTPE1) artistFrame.getBody();
         assertEquals(ID3v23Frames.FRAME_ID_V3_ARTIST, body.getIdentifier());
         assertEquals(TextEncoding.UTF_8, body.getTextEncoding());
@@ -403,7 +403,7 @@ public class Unicode23TagTest extends TestCase
         v23tag = (ID3v23Tag) mp3File.getID3v2Tag();
 
         //Currently contains tags with invalid textencodings
-        artistFrame = (ID3v23Frame) v23tag.getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST);
+        artistFrame = (ID3v23Frame) v23tag.getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST).get(0);
         body = (FrameBodyTPE1) artistFrame.getBody();
         assertEquals(ID3v23Frames.FRAME_ID_V3_ARTIST, body.getIdentifier());
 
@@ -444,7 +444,7 @@ public class Unicode23TagTest extends TestCase
 
         //Reload, should be written as UTF16 because setField in tag options
         mp3File = new MP3File(testFile);
-        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST);
+        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST).get(0);
         FrameBodyTPE1 body = (FrameBodyTPE1) frame.getBody();
         assertEquals(ID3v23Frames.FRAME_ID_V3_ARTIST, body.getIdentifier());
         assertEquals(TextEncoding.UTF_16, body.getTextEncoding());
@@ -512,7 +512,7 @@ public class Unicode23TagTest extends TestCase
 
         //Reload, should be written as UTF16 because setField in tag options
         mp3File = new MP3File(testFile);
-        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST);
+        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST).get(0);
         FrameBodyTPE1 body = (FrameBodyTPE1) frame.getBody();
         assertEquals(ID3v23Frames.FRAME_ID_V3_ARTIST, body.getIdentifier());
         assertEquals(TextEncoding.UTF_16, body.getTextEncoding());
@@ -582,7 +582,7 @@ public class Unicode23TagTest extends TestCase
 
         //Reload, should be written as UTF16 because setField in tag options
         mp3File = new MP3File(testFile);
-        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST);
+        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST).get(0);
         FrameBodyTPE1 body = (FrameBodyTPE1) frame.getBody();
         assertEquals(ID3v23Frames.FRAME_ID_V3_ARTIST, body.getIdentifier());
         assertEquals(TextEncoding.UTF_16, body.getTextEncoding());
@@ -658,7 +658,7 @@ public class Unicode23TagTest extends TestCase
 
         //Reload, still ISO8859-1
         mp3File = new MP3File(testFile);
-        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST);
+        frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ARTIST).get(0);
         FrameBodyTPE1 body = (FrameBodyTPE1) frame.getBody();
         assertEquals(ID3v23Frames.FRAME_ID_V3_ARTIST, body.getIdentifier());
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());

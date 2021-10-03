@@ -105,15 +105,15 @@ public class ID3v22TagTest extends TestCase
         ID3v22Tag v2Tag = new ID3v22Tag(v11Tag);
         assertNotNull(v11Tag);
         assertNotNull(v2Tag);
-        assertEquals(ID3v11TagTest.ARTIST, ((FrameBodyTPE1) ((ID3v22Frame) v2Tag.getFrame(ID3v22Frames.FRAME_ID_V2_ARTIST)).getBody()).getText());
-        assertEquals(ID3v11TagTest.ALBUM, ((FrameBodyTALB) ((ID3v22Frame) v2Tag.getFrame(ID3v22Frames.FRAME_ID_V2_ALBUM)).getBody()).getText());
-        assertEquals(ID3v11TagTest.COMMENT, ((FrameBodyCOMM) ((ID3v22Frame) v2Tag.getFrame(ID3v22Frames.FRAME_ID_V2_COMMENT)).getBody()).getText());
-        assertEquals(ID3v11TagTest.TITLE, ((FrameBodyTIT2) ((ID3v22Frame) v2Tag.getFrame(ID3v22Frames.FRAME_ID_V2_TITLE)).getBody()).getText());
-        assertEquals(ID3v11TagTest.TRACK_VALUE, String.valueOf(((FrameBodyTRCK) ((ID3v22Frame) v2Tag.getFrame(ID3v22Frames.FRAME_ID_V2_TRACK)).getBody()).getTrackNo()));
-        assertTrue(((FrameBodyTCON) ((ID3v22Frame) v2Tag.getFrame(ID3v22Frames.FRAME_ID_V2_GENRE)).getBody()).getText().endsWith(ID3v11TagTest.GENRE_VAL));
+        assertEquals(ID3v11TagTest.ARTIST, ((FrameBodyTPE1) ((ID3v22Frame) v2Tag.getFrame(ID3v22Frames.FRAME_ID_V2_ARTIST).get(0)).getBody()).getText());
+        assertEquals(ID3v11TagTest.ALBUM, ((FrameBodyTALB) ((ID3v22Frame) v2Tag.getFrame(ID3v22Frames.FRAME_ID_V2_ALBUM).get(0)).getBody()).getText());
+        assertEquals(ID3v11TagTest.COMMENT, ((FrameBodyCOMM) ((ID3v22Frame) v2Tag.getFrame(ID3v22Frames.FRAME_ID_V2_COMMENT).get(0)).getBody()).getText());
+        assertEquals(ID3v11TagTest.TITLE, ((FrameBodyTIT2) ((ID3v22Frame) v2Tag.getFrame(ID3v22Frames.FRAME_ID_V2_TITLE).get(0)).getBody()).getText());
+        assertEquals(ID3v11TagTest.TRACK_VALUE, String.valueOf(((FrameBodyTRCK) ((ID3v22Frame) v2Tag.getFrame(ID3v22Frames.FRAME_ID_V2_TRACK).get(0)).getBody()).getTrackNo()));
+        assertTrue(((FrameBodyTCON) ((ID3v22Frame) v2Tag.getFrame(ID3v22Frames.FRAME_ID_V2_GENRE).get(0)).getBody()).getText().endsWith(ID3v11TagTest.GENRE_VAL));
 
         //TODO:Note confusingly V22 YEAR Frame shave v2 identifier but use TDRC behind the scenes, is confusing
-        assertEquals(ID3v11TagTest.YEAR, ((FrameBodyTDRC) ((ID3v22Frame) v2Tag.getFrame(ID3v22Frames.FRAME_ID_V2_TYER)).getBody()).getText());
+        assertEquals(ID3v11TagTest.YEAR, ((FrameBodyTDRC) ((ID3v22Frame) v2Tag.getFrame(ID3v22Frames.FRAME_ID_V2_TYER).get(0)).getBody()).getText());
 
         assertEquals((byte) 2, v2Tag.getRelease());
         assertEquals((byte) 2, v2Tag.getMajorVersion());
@@ -147,7 +147,7 @@ public class ID3v22TagTest extends TestCase
             //Read using old Interface
             mp3File = new MP3File(testFile);
             v2Tag = (ID3v22Tag) mp3File.getID3v2Tag();
-            ID3v22Frame frame = (ID3v22Frame) v2Tag.getFrame(ID3v22Frames.FRAME_ID_V2_TITLE);
+            ID3v22Frame frame = (ID3v22Frame) v2Tag.getFrame(ID3v22Frames.FRAME_ID_V2_TITLE).get(0);
             assertEquals("fred", ((AbstractFrameBodyTextInfo) frame.getBody()).getText());
 
         }

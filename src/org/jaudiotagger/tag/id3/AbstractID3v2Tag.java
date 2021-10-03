@@ -83,12 +83,12 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
     /**
      * Map of all frames for this tag
      */
-    protected Map<String, Object> frameMap = null;
+    protected Map<String, List<TagField>> frameMap = null;
 
     /**
      * Map of all encrypted frames, these cannot be unencrypted by jaudiotagger
      */
-    protected Map<String, Object> encryptedFrameMap = null;
+    protected Map<String, List<TagField>> encryptedFrameMap = null;
 
     /**
      * Holds the ids of invalid duplicate frames
@@ -241,33 +241,25 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
     //TODO Copy Encrypted frames needs implementing
     protected void copyFrames(AbstractID3v2Tag copyObject)
     {
-        frameMap = new LinkedHashMap<String, Object>();
-        encryptedFrameMap = new LinkedHashMap<String, Object>();
+        frameMap = new LinkedHashMap<>();
+        encryptedFrameMap = new LinkedHashMap<>();
 
         //Copy Frames that are a valid 2.4 type
-        for (Object o1 : copyObject.frameMap.keySet())
+        for (String id : copyObject.frameMap.keySet())
         {
-            String id = (String) o1;
-            Object o = copyObject.frameMap.get(id);
-            //SingleFrames
-            if (o instanceof AbstractID3v2Frame)
-            {
-                addFrame((AbstractID3v2Frame) o);
-            }
-            else if (o instanceof TyerTdatAggregatedFrame)
-            {
-                for (AbstractID3v2Frame next : ((TyerTdatAggregatedFrame) o).getFrames())
-                {
-                    addFrame(next);
-                }
-            }
-            //MultiFrames
-            else if (o instanceof List)
-            {
-                for (Object frame : (List<?>) o)
-                {
-                    addFrame((AbstractID3v2Frame)frame);
-                }
+            List<TagField> fields = copyObject.frameMap.get(id);
+            for(TagField o : fields) {
+	            if (o instanceof AbstractID3v2Frame)
+	            {
+	                addFrame((AbstractID3v2Frame) o);
+	            }
+	            else if (o instanceof TyerTdatAggregatedFrame)
+	            {
+	                for (AbstractID3v2Frame next : ((TyerTdatAggregatedFrame) o).getFrames())
+	                {
+	                    addFrame(next);
+	                }
+	            }
             }
         }
     }
@@ -418,7 +410,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      */
     //TODO:This method is problematic because sometimes it returns a list and sometimes a frame, we need to
     //replace with two separate methods as in the tag interface.
-    public Object getFrame(String identifier)
+    public List<TagField> getFrame(String identifier)
     {
         return frameMap.get(identifier);
     }
@@ -432,7 +424,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      * @param identifier
      * @return
      */
-    public Object getEncryptedFrame(String identifier)
+    public List<TagField> getEncryptedFrame(String identifier)
     {
         return encryptedFrameMap.get(identifier);
     }
@@ -483,19 +475,12 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      */
     public AbstractID3v2Frame getFirstField(String identifier)
     {
-        Object object = getFrame(identifier);
-        if (object == null)
+        List<TagField> fields = getFrame(identifier);
+        if (fields == null || fields.isEmpty() || containsAggregatedFrame(fields))
         {
             return null;
         }
-        if (object instanceof List)
-        {
-            return (AbstractID3v2Frame) ((List<?>) object).get(0);
-        }
-        else
-        {
-            return (AbstractID3v2Frame) object;
-        }
+        return (AbstractID3v2Frame) fields.get(0);
     }
 
     /**
@@ -510,7 +495,16 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
     //TODO what happens if already contains a list with this ID
     public void setFrame(AbstractID3v2Frame frame)
     {
-        frameMap.put(frame.getIdentifier(), frame);
+    	List<TagField> frames = new ArrayList<>();
+    	frames.add(frame);
+        frameMap.put(frame.getIdentifier(), frames);
+    }
+    
+    protected void setTagField(String id, TagField frame)
+    {
+    	List<TagField> frames = new ArrayList<>();
+    	frames.add(frame);
+        frameMap.put(id, frames);
     }
 
     protected abstract ID3Frames getID3Frames();
@@ -558,11 +552,20 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      * @param newFrame
      * @param frames
      */
-    public void mergeDuplicateFrames(AbstractID3v2Frame newFrame, List<AbstractID3v2Frame> frames)
+    public void mergeDuplicateFrames(AbstractID3v2Frame newFrame)
     {
-        for (ListIterator<AbstractID3v2Frame> li = frames.listIterator(); li.hasNext(); )
+    	List<TagField> frames = frameMap.get(newFrame.getId());
+    	if(frames == null) {
+    		frames = new ArrayList<>();
+    	}
+        for (ListIterator<TagField> li = frames.listIterator(); li.hasNext(); )
         {
-            AbstractID3v2Frame nextFrame = li.next();
+        	TagField tagField = li.next();
+        	if(!(tagField instanceof AbstractID3v2Frame)) {
+        		// Skip aggregated frames
+        		continue;
+        	}
+            AbstractID3v2Frame nextFrame = (AbstractID3v2Frame)tagField;
 
             if (newFrame.getBody() instanceof FrameBodyTXXX)
             {
@@ -638,7 +641,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
 
         if (!getID3Frames().isMultipleAllowed(newFrame.getId()))
         {
-            frameMap.put(newFrame.getId(), newFrame);
+        	setFrame(newFrame);
         }
         else
         {
@@ -656,7 +659,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      * @param existingFrame
      * @param frame
      */
-    private void addNewFrameToMap(List<TagField> list, Map<String, Object> frameMap, AbstractID3v2Frame existingFrame, AbstractID3v2Frame frame)
+    private void addNewFrameToMap(List<TagField> list, Map<String, List<TagField>> frameMap, AbstractID3v2Frame existingFrame, AbstractID3v2Frame frame)
     {
         if (list.size() == 0)
         {
@@ -679,9 +682,9 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      * @param existingFrame
      * @param frame
      */
-    private void addNewFrameOrAddField(List<TagField> list, Map<String, Object> frameMap, AbstractID3v2Frame existingFrame, AbstractID3v2Frame frame)
+    private void addNewFrameOrAddField(List<TagField> list, Map<String, List<TagField>> frameMap, AbstractID3v2Frame existingFrame, AbstractID3v2Frame frame)
     {
-        ArrayList<TagField> mergedList = new ArrayList<TagField>();
+        List<TagField> mergedList = new ArrayList<>();
         if (existingFrame != null)
         {
             mergedList.add(existingFrame);
@@ -783,33 +786,12 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
 
         if (field instanceof AbstractID3v2Frame)
         {
-            AbstractID3v2Frame newFrame = (AbstractID3v2Frame) field;
-
-            Object obj = frameMap.get(field.getId());
-
-
-            //If no frame of this type exist or if multiples are not allowed
-            if (obj == null)
-            {
-                frameMap.put(field.getId(), field);
-            }
-            //frame of this type already exists
-            else if (obj instanceof AbstractID3v2Frame)
-            {
-                List<AbstractID3v2Frame> frames = new ArrayList<>();
-                frames.add((AbstractID3v2Frame) obj);
-                mergeDuplicateFrames(newFrame, frames);
-            }
-            //Multiple frames of this type already exist
-            else if (obj instanceof List)
-            {
-                mergeDuplicateFrames(newFrame, (List<AbstractID3v2Frame>) obj);
-            }
+            mergeDuplicateFrames((AbstractID3v2Frame) field);
         }
         else
         //TODO not handling multiple aggregated frames of same type
         {
-            frameMap.put(field.getId(), field);
+        	setTagField(field.getId(), field);
         }
     }
 
@@ -839,30 +821,30 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
         {
             AbstractID3v2Frame frame = (AbstractID3v2Frame) field;
 
-            Object o = frameMap.get(field.getId());
+            List<TagField> fields = frameMap.get(field.getId());
 
             //No frame of this type
-            if (o == null)
+            if (fields == null)
             {
-                frameMap.put(field.getId(), field);
+            	fields = new ArrayList<>();
+            	fields.add(field);
+                frameMap.put(field.getId(), fields);
             }
-            //There are already frames of this type, adding another may need to merge
-            else if (o instanceof List)
-            {
-                List<TagField> list = (List<TagField>) o;
-                addNewFrameOrAddField(list, frameMap, null, frame);
-            }
-            //One frame exists, we are adding another so may need to convert to list
-            else
-            {
-                AbstractID3v2Frame existingFrame = (AbstractID3v2Frame) o;
-                List<TagField> list = new ArrayList<>();
-                addNewFrameOrAddField(list, frameMap, existingFrame, frame);
+            else 
+			{
+				if (fields.size() == 1 && fields.get(0) instanceof AbstractID3v2Frame) 
+				{
+					addNewFrameOrAddField(fields, frameMap, (AbstractID3v2Frame) fields.get(0), frame);
+				} 
+				else 
+				{
+					addNewFrameOrAddField(fields, frameMap, null, frame);
+				}
             }
         }
         else
         {
-            frameMap.put(field.getId(), field);
+        	setTagField(field.getId(), field);
         }
     }
 
@@ -989,7 +971,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      *
      * @return and iterator of the frmaes/list of multi value frames
      */
-    public Iterator<Object> iterator()
+    public Iterator<List<TagField>> iterator()
     {
         return frameMap.values().iterator();
     }
@@ -1010,21 +992,29 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      * remove all frames that are not part of the standard frameSet for
      * this tag
      */
-    public void removeUnsupportedFrames()
-    {
-        for (Iterator<Object> i = iterator(); i.hasNext(); )
-        {
-            Object o = i.next();
-            if (o instanceof AbstractID3v2Frame)
-            {
-                if (((AbstractID3v2Frame) o).getBody() instanceof FrameBodyUnsupported)
-                {
-                    logger.finest("Removing frame" + ((AbstractID3v2Frame) o).getIdentifier());
-                    i.remove();
-                }
-            }
-        }
-    }
+	public void removeUnsupportedFrames() 
+	{
+		for (Iterator<List<TagField>> fieldsIterator = iterator(); fieldsIterator.hasNext();) 
+		{
+			List<TagField> fields = fieldsIterator.next();
+			Iterator<TagField> i = fields.iterator();
+			while (i.hasNext()) 
+			{
+				TagField o = i.next();
+				if (o instanceof AbstractID3v2Frame) 
+				{
+					if (((AbstractID3v2Frame) o).getBody() instanceof FrameBodyUnsupported) 
+					{
+						logger.finest("Removing frame" + ((AbstractID3v2Frame) o).getIdentifier());
+						i.remove();
+					}
+				}
+			}
+			if(fields.isEmpty()) {
+				fieldsIterator.remove();
+			}
+		}
+	}
 
     /**
      * Remove any frames starting with this identifier from tag
@@ -1034,10 +1024,9 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
     public void removeFrameOfType(String identifier)
     {
         //First fine matching keys
-        HashSet<String> result = new HashSet<String>();
-        for (Object match : frameMap.keySet())
+        Set<String> result = new HashSet<>();
+        for (String key : frameMap.keySet())
         {
-            String key = (String) match;
             if (key.startsWith(identifier))
             {
                 result.add(key);
@@ -1342,13 +1331,32 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      * @param newFrame
      * @param existingFrame
      */
-    protected void processDuplicateFrame(AbstractID3v2Frame newFrame, AbstractID3v2Frame existingFrame)
-    {
-        List<AbstractID3v2Frame> list = new ArrayList<AbstractID3v2Frame>();
-        list.add(existingFrame);
-        list.add(newFrame);
-        frameMap.put(newFrame.getIdentifier(), list);
-    }
+//    protected void processDuplicateFrame(AbstractID3v2Frame newFrame, AbstractID3v2Frame existingFrame)
+//    {
+//        List<TagField> list = new ArrayList<>();
+//        list.add(existingFrame);
+//        list.add(newFrame);
+//        frameMap.put(newFrame.getIdentifier(), list);
+//    }
+    
+	private boolean containsAggregatedFrame(Collection<TagField> fields)
+	{
+		boolean result = false;
+	
+		if (fields != null)
+		{
+			for (TagField field : fields)
+			{
+				if (field instanceof AggregatedFrame)
+				{
+					result = true;
+					break;
+				}
+			}
+		}
+	
+		return result;
+	}
 
     /**
      * Copy frame into map, whilst accounting for multiple frame of same type which can occur even if there were
@@ -1359,31 +1367,23 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      */
     protected final void copyFrameIntoMap(String id, AbstractID3v2Frame newFrame)
     {
-        if (frameMap.containsKey(newFrame.getIdentifier()))
-        {
-            Object o = frameMap.get(newFrame.getIdentifier());
-            if (o instanceof AbstractID3v2Frame)
-            {
-                processDuplicateFrame(newFrame, (AbstractID3v2Frame)o);
-            }
-            else if (o instanceof AggregatedFrame)
-            {
-                logger.severe("Duplicated Aggregate Frame, ignoring:" + id);
-            }
-            else if (o instanceof List)
-            {
-                List<TagField> list = (List<TagField>) o;
-                list.add(newFrame);
-            }
-            else
-            {
-                logger.severe("Unknown frame class:discarding:" + o.getClass());
-            }
-        }
-        else
-        {
-            frameMap.put(newFrame.getIdentifier(), newFrame);
-        }
+    	List<TagField> tagFields = frameMap.get(newFrame.getIdentifier());
+    	if(tagFields == null) {
+    		tagFields = new ArrayList<>();
+    		tagFields.add(newFrame);
+    		frameMap.put(newFrame.getIdentifier(), tagFields);
+    	} else if(containsAggregatedFrame(tagFields)) 
+    	{
+    		logger.severe("Duplicated Aggregate Frame, ignoring:" + id);
+    	} else 
+    	{
+    		combineFrames(newFrame, tagFields);
+    	}
+    }
+    
+    protected void combineFrames(AbstractID3v2Frame newFrame, List<TagField> existing) 
+    {
+    	existing.add(newFrame);
     }
 
     /**
@@ -1415,7 +1415,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      * @param frameId
      * @param next
      */
-    protected void loadFrameIntoSpecifiedMap(Map<String, Object> map, String frameId, AbstractID3v2Frame next)
+    protected void loadFrameIntoSpecifiedMap(Map<String, List<TagField>> map, String frameId, AbstractID3v2Frame next)
     {
         if ((ID3v24Frames.getInstanceOf().isMultipleAllowed(frameId)) ||
                 (ID3v23Frames.getInstanceOf().isMultipleAllowed(frameId)) ||
@@ -1424,30 +1424,19 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
             //If a frame already exists of this type
             if (map.containsKey(frameId))
             {
-                Object o = map.get(frameId);
-                if (o instanceof List)
-                {
-                	List<AbstractID3v2Frame> multiValues = (List<AbstractID3v2Frame>) o;
-                    multiValues.add(next);
-                    logger.finer("Adding Multi Frame(1)" + frameId);
-                }
-                else
-                {
-                	List<AbstractID3v2Frame> multiValues = new ArrayList<>();
-                    multiValues.add((AbstractID3v2Frame) o);
-                    multiValues.add(next);
-                    map.put(frameId, multiValues);
-                    logger.finer("Adding Multi Frame(2)" + frameId);
-                }
+            	List<TagField> multiValues = map.get(frameId);
+                multiValues.add(next);
             }
             else
             {
                 logger.finer("Adding Multi FrameList(3)" + frameId);
-                map.put(frameId, next);
+            	List<TagField> fields = new ArrayList<>();
+            	fields.add(next);
+                map.put(frameId, fields);
             }
         }
         //If duplicate frame just stores the name of the frame and the number of bytes the frame contains
-        else if (map.containsKey(frameId))
+        else if (map.containsKey(frameId) && !map.get(frameId).isEmpty())
         {
             logger.warning("Ignoring Duplicate Frame:" + frameId);
             //If we have multiple duplicate frames in a tag separate them with semicolons
@@ -1456,12 +1445,20 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
                 this.duplicateFrameId += ";";
             }
             this.duplicateFrameId += frameId;
-            this.duplicateBytes += ((AbstractID3v2Frame) frameMap.get(frameId)).getSize();
+			for (TagField tagField : frameMap.get(frameId)) 
+			{
+				if (tagField instanceof AbstractID3v2Frame) 
+				{
+					this.duplicateBytes += ((AbstractID3v2Frame) tagField).getSize();
+				}
+			}          
         }
         else
         {
             logger.finer("Adding Frame" + frameId);
-            map.put(frameId, next);
+        	List<TagField> fields = new ArrayList<>();
+        	fields.add(next);
+            map.put(frameId, fields);
         }
     }
 
@@ -1475,33 +1472,30 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
     public int getSize()
     {
         int size = 0;
-        Iterator<Object> iterator = frameMap.values().iterator();
+        Iterator<List<TagField>> iterator = frameMap.values().iterator();
         AbstractID3v2Frame frame;
         while (iterator.hasNext())
         {
-            Object o = iterator.next();
-            if (o instanceof AbstractID3v2Frame)
-            {
-                frame = (AbstractID3v2Frame) o;
-                size += frame.getSize();
-            }
-            else if (o instanceof AggregatedFrame)
-            {
-                AggregatedFrame af = (AggregatedFrame) o;
-                for (AbstractID3v2Frame next : af.frames)
-                {
-                    size += next.getSize();
-                }
-            }
-            else if (o instanceof List)
-            {
-            	List<AbstractID3v2Frame> multiFrames = (List<AbstractID3v2Frame>) o;
-                for (ListIterator<AbstractID3v2Frame> li = multiFrames.listIterator(); li.hasNext(); )
-                {
-                    frame = li.next();
-                    size += frame.getSize();
-                }
-            }
+			List<TagField> fields = iterator.next();
+			if (fields != null) 
+			{
+				for (TagField field : fields) 
+				{
+					if (field instanceof AggregatedFrame) 
+					{
+						AggregatedFrame af = (AggregatedFrame) field;
+						for (AbstractID3v2Frame next : af.frames) 
+						{
+							size += next.getSize();
+						}
+					} 
+					else if (field instanceof AbstractID3v2Frame) 
+					{
+						frame = (AbstractID3v2Frame) field;
+						size += frame.getSize();
+					}
+				}
+			}
         }
         return size;
     }
@@ -1530,40 +1524,33 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      * @param bodyBuffer
      * @throws IOException
      */
-    private void writeFramesToBufferStream(Map<String, Object> map, ByteArrayOutputStream bodyBuffer) throws IOException
+    private void writeFramesToBufferStream(Map<String, List<TagField>> map, ByteArrayOutputStream bodyBuffer) throws IOException
     {
         //Sort keys into Preferred Order
         TreeSet<String> sortedWriteOrder = new TreeSet<String>(getPreferredFrameOrderComparator());
         sortedWriteOrder.addAll(map.keySet());
 
-        AbstractID3v2Frame frame;
         for (String id : sortedWriteOrder)
         {
-            Object o = map.get(id);
-            if (o instanceof AbstractID3v2Frame)
-            {
-                frame = (AbstractID3v2Frame) o;
-                frame.setLoggingFilename(getLoggingFilename());
-                frame.write(bodyBuffer);
-            }
-            else if (o instanceof AggregatedFrame)
-            {
-                AggregatedFrame ag = (AggregatedFrame) o;
-                for (AbstractID3v2Frame next : ag.getFrames())
-                {
-                    next.setLoggingFilename(getLoggingFilename());
-                    next.write(bodyBuffer);
-                }
-            }
-            else
-            {
-                List<AbstractID3v2Frame> multiFrames = (List<AbstractID3v2Frame>) o;
-                for (AbstractID3v2Frame nextFrame : multiFrames)
-                {
-                    nextFrame.setLoggingFilename(getLoggingFilename());
-                    nextFrame.write(bodyBuffer);
-                }
-            }
+            List<TagField> fields = map.get(id);
+			for (TagField field : fields) 
+			{
+				if (field instanceof AbstractID3v2Frame) 
+				{
+					AbstractID3v2Frame frame = (AbstractID3v2Frame) field;
+					frame.setLoggingFilename(getLoggingFilename());
+					frame.write(bodyBuffer);
+				} 
+				else if (field instanceof AggregatedFrame) 
+				{
+					AggregatedFrame aggreagatedFrame = (AggregatedFrame) field;
+					for (AbstractID3v2Frame next : aggreagatedFrame.getFrames()) 
+					{
+						next.setLoggingFilename(getLoggingFilename());
+						next.write(bodyBuffer);
+					}
+				}
+			}
         }
     }
 
@@ -1593,22 +1580,15 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
         MP3File.getStructureFormatter().openHeadingElement(TYPE_BODY, "");
 
         AbstractID3v2Frame frame;
-        for (Object o : frameMap.values())
+        for (List<TagField> fields : frameMap.values())
         {
-            if (o instanceof AbstractID3v2Frame)
-            {
-                frame = (AbstractID3v2Frame) o;
-                frame.createStructure();
-            }
-            else
-            {
-            	List<AbstractID3v2Frame> multiFrames = (List<AbstractID3v2Frame>) o;
-                for (ListIterator<AbstractID3v2Frame> li = multiFrames.listIterator(); li.hasNext(); )
-                {
-                    frame = li.next();
-                    frame.createStructure();
-                }
-            }
+        	for(TagField o : fields) {
+	            if (o instanceof AbstractID3v2Frame)
+	            {
+	                frame = (AbstractID3v2Frame) o;
+	                frame.createStructure();
+	            }
+        	}
         }
         MP3File.getStructureFormatter().closeHeadingElement(TYPE_BODY);
     }
@@ -1665,7 +1645,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      */
     public List<TagField> getFields(String id) throws KeyNotFoundException
     {
-        Object o = getFrame(id);
+    	List<TagField> o = getFrame(id);
         if (o == null)
         {
             return new ArrayList<TagField>();
@@ -1754,107 +1734,13 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
     public Iterator<TagField> getFields()
     {
         //Iterator of each different frameId in this tag
-        final Iterator<Map.Entry<String, Object>> it = this.frameMap.entrySet().iterator();
+    	List<TagField> allTagFields = new ArrayList<>();
+		for (List<TagField> value : this.frameMap.values()) 
+		{
+			allTagFields.addAll(value);
+		}
 
-        //Iterator used by hasNext() so doesn't effect next()
-        final Iterator<Map.Entry<String, Object>> itHasNext = this.frameMap.entrySet().iterator();
-
-
-        return new Iterator<TagField>()
-        {
-            //this iterates through frames through for a particular frameId
-            private Iterator<TagField> fieldsIt;
-
-            private void changeIt()
-            {
-                if (!it.hasNext())
-                {
-                    return;
-                }
-
-                while (it.hasNext())
-                {
-                    Map.Entry<String, Object> e = it.next();
-                    itHasNext.next();
-                    if (e.getValue() instanceof List)
-                    {
-                        List<TagField> l = (List<TagField>) e.getValue();
-                        //If list is empty (which it shouldn't be) we skip over this entry
-                        if (l.size() == 0)
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            fieldsIt = l.iterator();
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        //TODO must be a better way
-                        List<TagField> l = new ArrayList<TagField>();
-                        l.add((TagField) e.getValue());
-                        fieldsIt = l.iterator();
-                        break;
-                    }
-                }
-            }
-
-            //TODO assumes if have entry its valid, but what if empty list but very different to check this
-            //without causing a side effect on next() so leaving for now
-            public boolean hasNext()
-            {
-                //Check Current frameId, does it contain more values
-                if (fieldsIt != null)
-                {
-                    if (fieldsIt.hasNext())
-                    {
-                        return true;
-                    }
-                }
-
-                //No remaining entries return false
-                if (!itHasNext.hasNext())
-                {
-                    return false;
-                }
-
-                //Issue #236
-                //TODO assumes if have entry its valid, but what if empty list but very different to check this
-                //without causing a side effect on next() so leaving for now
-                return itHasNext.hasNext();
-            }
-
-            public TagField next()
-            {
-                //Hasn't been initialized yet
-                if (fieldsIt == null)
-                {
-                    changeIt();
-                }
-
-                if (fieldsIt != null)
-                {
-                    //Go to the end of the run
-                    if (!fieldsIt.hasNext())
-                    {
-                        changeIt();
-                    }
-                }
-
-                if (fieldsIt == null)
-                {
-                    throw new NoSuchElementException();
-                }
-                return fieldsIt.next();
-            }
-
-            public void remove()
-            {
-                fieldsIt.remove();
-            }
-        };
+        return allTagFields.iterator();
     }
 
     /**
@@ -2397,15 +2283,19 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
             }
             else
             {
-                AbstractID3v2Frame frame = (AbstractID3v2Frame) this.getFrame(formatKey.getFrameId());
-                AbstractFrameBodyNumberTotal frameBody = (AbstractFrameBodyNumberTotal) frame.getBody();
-                if(frameBody.getNumber()==0)
-                {
-                    doDeleteTagField(formatKey);
-                    return;
-                }
-                frameBody.setTotal(0);
-                return;
+				for (TagField field : this.getFrame(formatKey.getFrameId())) 
+				{
+					if (field instanceof AbstractID3v2Frame) 
+					{
+						AbstractID3v2Frame frame = (AbstractID3v2Frame) field;
+						AbstractFrameBodyNumberTotal frameBody = (AbstractFrameBodyNumberTotal) frame.getBody();
+						if (frameBody.getNumber() == 0) 
+						{
+							doDeleteTagField(formatKey);
+						}
+						frameBody.setTotal(0);
+					}
+				}
             }
         }
     }

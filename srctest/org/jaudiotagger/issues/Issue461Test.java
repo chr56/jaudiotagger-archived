@@ -25,7 +25,7 @@ public class Issue461Test extends AbstractTestCase
         v2Tag.setField(FieldKey.YEAR,"2004-01-30");
         assertEquals("2004-01-30", v2Tag.getFirst(ID3v23FieldKey.YEAR));
 
-        TyerTdatAggregatedFrame frame = ((TyerTdatAggregatedFrame)v2Tag.getFrame("TYERTDAT"));
+        TyerTdatAggregatedFrame frame = ((TyerTdatAggregatedFrame)v2Tag.getFrame("TYERTDAT").get(0));
         assertNotNull(frame);
         Set<AbstractID3v2Frame> frames =  frame.getFrames();
         Iterator<AbstractID3v2Frame> i = frames.iterator();
@@ -42,7 +42,7 @@ public class Issue461Test extends AbstractTestCase
         assertEquals("2004-01-30", v2Tag.getFirst(FieldKey.YEAR));
         assertEquals("2004-01-30", v2Tag.getFirst(ID3v23FieldKey.YEAR));
 
-        frame = ((TyerTdatAggregatedFrame)v2Tag.getFrame("TYERTDAT"));
+        frame = ((TyerTdatAggregatedFrame)v2Tag.getFrame("TYERTDAT").get(0));
         assertNotNull(frame);
         frames =  frame.getFrames();
         i = frames.iterator();
@@ -68,7 +68,7 @@ public class Issue461Test extends AbstractTestCase
         v2Tag = (ID3v23Tag)mp3File.getID3v2Tag();
         assertEquals("2004-01-30", v2Tag.getFirst(ID3v23FieldKey.YEAR));
 
-        TyerTdatAggregatedFrame frame = ((TyerTdatAggregatedFrame)v2Tag.getFrame("TYERTDAT"));
+        TyerTdatAggregatedFrame frame = ((TyerTdatAggregatedFrame)v2Tag.getFrame("TYERTDAT").get(0));
         assertNotNull(frame);
         Set<AbstractID3v2Frame> frames =  frame.getFrames();
         Iterator<AbstractID3v2Frame>   i = frames.iterator();
@@ -85,7 +85,7 @@ public class Issue461Test extends AbstractTestCase
         assertEquals("2004-01-30", v2Tag.getFirst(FieldKey.YEAR));
         assertEquals("2004-01-30", v2Tag.getFirst(ID3v23FieldKey.YEAR));
 
-        frame = ((TyerTdatAggregatedFrame)v2Tag.getFrame("TYERTDAT"));
+        frame = ((TyerTdatAggregatedFrame)v2Tag.getFrame("TYERTDAT").get(0));
         assertNotNull(frame);
         frames =  frame.getFrames();
         i = frames.iterator();
@@ -102,7 +102,7 @@ public class Issue461Test extends AbstractTestCase
         MP3File mp3File = new MP3File(testFile);
         ID3v24Tag v24Tag = new ID3v24Tag();
         v24Tag.setField(FieldKey.YEAR,"2004");
-        AbstractID3v2Frame v24Frame = (AbstractID3v2Frame)v24Tag.getFrame("TDRC");
+        AbstractID3v2Frame v24Frame = (AbstractID3v2Frame)v24Tag.getFrame("TDRC").get(0);
         FrameBodyTDRC fbTdrc    = (FrameBodyTDRC)v24Frame.getBody();
         assertEquals("2004", fbTdrc.getText());
         assertEquals("2004", v24Tag.getFirst(ID3v24FieldKey.YEAR));
@@ -115,7 +115,7 @@ public class Issue461Test extends AbstractTestCase
         v2Tag = (ID3v23Tag)mp3File.getID3v2Tag();
         assertEquals("2004", v2Tag.getFirst(ID3v23FieldKey.YEAR));
 
-        AbstractID3v2Frame frame = ((AbstractID3v2Frame)v2Tag.getFrame("TYER"));
+        AbstractID3v2Frame frame = ((AbstractID3v2Frame)v2Tag.getFrame("TYER").get(0));
         assertNotNull(frame);
         FrameBodyTYER fbTyer    = ((FrameBodyTYER)frame.getBody());
         assertEquals("2004", fbTyer.getText());
@@ -130,7 +130,7 @@ public class Issue461Test extends AbstractTestCase
         FrameBodyTDRC fbTdrc = new FrameBodyTDRC((byte)1,"2004");
         v24Frame.setBody(fbTdrc);
         v24Tag.addFrame(v24Frame);
-        v24Frame = (ID3v24Frame)v24Tag.getFrame("TDRC");
+        v24Frame = (ID3v24Frame)v24Tag.getFrame("TDRC").get(0);
         fbTdrc    = (FrameBodyTDRC)v24Frame.getBody();
         assertEquals("2004", fbTdrc.getText());
         assertEquals("2004", v24Tag.getFirst(ID3v24FieldKey.YEAR));
@@ -150,7 +150,7 @@ public class Issue461Test extends AbstractTestCase
         MP3File mp3File = new MP3File(testFile);
         ID3v24Tag v24Tag = new ID3v24Tag();
         v24Tag.setField(FieldKey.YEAR,"2004-06-30");
-        AbstractID3v2Frame v24Frame = (AbstractID3v2Frame)v24Tag.getFrame("TDRC");
+        AbstractID3v2Frame v24Frame = (AbstractID3v2Frame)v24Tag.getFrame("TDRC").get(0);
         FrameBodyTDRC      fbTdrc    = (FrameBodyTDRC)v24Frame.getBody();
         assertEquals("2004-06-30", fbTdrc.getText());
         assertEquals("2004-06-30", v24Tag.getFirst(ID3v24FieldKey.YEAR));
@@ -168,7 +168,7 @@ public class Issue461Test extends AbstractTestCase
         Iterator<AbstractID3v2Frame> i;
 
         assertEquals("2004-06-30", v24Tag.getFirst(FieldKey.YEAR));
-        TyerTdatAggregatedFrame frame = ((TyerTdatAggregatedFrame)v2Tag.getFrame("TYERTDAT"));
+        TyerTdatAggregatedFrame frame = ((TyerTdatAggregatedFrame)v2Tag.getFrame("TYERTDAT").get(0));
         assertNotNull(frame);
         i = frame.getFrames().iterator();
         FrameBodyTYER      fbTyer    = ((FrameBodyTYER)i.next().getBody());
@@ -185,7 +185,7 @@ public class Issue461Test extends AbstractTestCase
         MP3File mp3File = new MP3File(testFile);
         ID3v24Tag v24Tag = new ID3v24Tag();
         v24Tag.setField(FieldKey.YEAR,"2004-06");
-        AbstractID3v2Frame v24Frame = (AbstractID3v2Frame)v24Tag.getFrame("TDRC");
+        AbstractID3v2Frame v24Frame = (AbstractID3v2Frame)v24Tag.getFrame("TDRC").get(0);
         FrameBodyTDRC      fbTdrc    = (FrameBodyTDRC)v24Frame.getBody();
         assertEquals("2004-06", fbTdrc.getText());
         assertEquals("2004-06", v24Tag.getFirst(ID3v24FieldKey.YEAR));
@@ -200,7 +200,7 @@ public class Issue461Test extends AbstractTestCase
         v2Tag = (ID3v23Tag)mp3File.getID3v2Tag();
         assertEquals("2004-06-01", v2Tag.getFirst(ID3v23FieldKey.YEAR));
 
-        TyerTdatAggregatedFrame frame = ((TyerTdatAggregatedFrame)v2Tag.getFrame("TYERTDAT"));
+        TyerTdatAggregatedFrame frame = ((TyerTdatAggregatedFrame)v2Tag.getFrame("TYERTDAT").get(0));
         assertNotNull(frame);
         Set<AbstractID3v2Frame> frames =  frame.getFrames();
         Iterator<AbstractID3v2Frame>   i = frames.iterator();

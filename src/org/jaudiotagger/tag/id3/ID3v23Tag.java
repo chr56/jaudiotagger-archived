@@ -191,10 +191,20 @@ public class ID3v23Tag extends AbstractID3v2Tag
      * @param existingFrame
      */
     @Override
-    protected void processDuplicateFrame(AbstractID3v2Frame newFrame, AbstractID3v2Frame existingFrame)
+    protected void combineFrames(AbstractID3v2Frame newFrame, List<TagField> existing)
     {
+    	AbstractID3v2Frame existingFrame = null;
+    	for(TagField field : existing) {
+    		if(field instanceof AbstractID3v2Frame) {
+    			AbstractID3v2Frame frame = (AbstractID3v2Frame) field;
+    			if(frame.getIdentifier().equals(newFrame.getIdentifier())) {
+    				existingFrame = frame;
+    			}
+    		}
+    	}
+    	
         //We dont add this new frame we just add the contents to existing frame
-        if(newFrame.getIdentifier().equals(ID3v23Frames.FRAME_ID_V3_INVOLVED_PEOPLE))
+        if(newFrame.getIdentifier().equals(ID3v23Frames.FRAME_ID_V3_INVOLVED_PEOPLE) && existingFrame != null)
         {
             PairedTextEncodedStringNullTerminated.ValuePairs oldVps = ((FrameBodyIPLS)(existingFrame).getBody()).getPairing();
             PairedTextEncodedStringNullTerminated.ValuePairs newVps = ((FrameBodyIPLS)newFrame.getBody()).getPairing();
@@ -205,10 +215,7 @@ public class ID3v23Tag extends AbstractID3v2Tag
         }
         else
         {
-            List<AbstractID3v2Frame> list = new ArrayList<AbstractID3v2Frame>();
-            list.add(existingFrame);
-            list.add(newFrame);
-            frameMap.put(newFrame.getIdentifier(), list);
+            existing.add(newFrame);
         }
     }
 
@@ -1190,8 +1197,9 @@ public class ID3v23Tag extends AbstractID3v2Tag
 
         if(genericKey == FieldKey.YEAR)
         {
-            AggregatedFrame af = (AggregatedFrame)getFrame(TyerTdatAggregatedFrame.ID_TYER_TDAT);
-            if(af!=null)
+        	List<TagField> fields = getFrame(TyerTdatAggregatedFrame.ID_TYER_TDAT);
+			AggregatedFrame af = fields != null && !fields.isEmpty() ? (AggregatedFrame) fields.get(0) : null;
+			if (af != null)
             {
                 return af.getContent();
             }
@@ -1226,7 +1234,7 @@ public class ID3v23Tag extends AbstractID3v2Tag
         super.loadFrameIntoMap(frameId, next);
     }
 
-    protected void loadFrameIntoSpecifiedMap(Map<String, Object> map, String frameId, AbstractID3v2Frame frame)
+    protected void loadFrameIntoSpecifiedMap(Map<String, List<TagField>> map, String frameId, AbstractID3v2Frame frame)
     {
         if(!(frameId.equals(ID3v23Frames.FRAME_ID_V3_TYER)) && !(frameId.equals(ID3v23Frames.FRAME_ID_V3_TDAT)))
         {
@@ -1259,13 +1267,19 @@ public class ID3v23Tag extends AbstractID3v2Tag
             {
                 TyerTdatAggregatedFrame ag = new TyerTdatAggregatedFrame();
                 ag.addFrame(frame);
-                ag.addFrame((AbstractID3v2Frame)map.get(ID3v23Frames.FRAME_ID_V3_TDAT));
+				for (TagField field : map.get(ID3v23Frames.FRAME_ID_V3_TDAT)) 
+				{
+					if (field instanceof AbstractID3v2Frame) 
+					{
+						ag.addFrame((AbstractID3v2Frame) field);
+					}
+				}
                 map.remove(ID3v23Frames.FRAME_ID_V3_TDAT);
-                map.put(TyerTdatAggregatedFrame.ID_TYER_TDAT, ag);
+                putAsList(map, TyerTdatAggregatedFrame.ID_TYER_TDAT, ag);
             }
             else
             {
-                map.put(ID3v23Frames.FRAME_ID_V3_TYER, frame);
+                putAsList(map, ID3v23Frames.FRAME_ID_V3_TYER, frame);
             }
         }
         else if(frameId.equals(ID3v23Frames.FRAME_ID_V3_TDAT))
@@ -1273,17 +1287,28 @@ public class ID3v23Tag extends AbstractID3v2Tag
             if (map.containsKey(ID3v23Frames.FRAME_ID_V3_TYER))
             {
                 TyerTdatAggregatedFrame ag = new TyerTdatAggregatedFrame();
-                ag.addFrame((AbstractID3v2Frame)map.get(ID3v23Frames.FRAME_ID_V3_TYER));
+				for (TagField field : map.get(ID3v23Frames.FRAME_ID_V3_TYER)) 
+				{
+					if (field instanceof AbstractID3v2Frame) 
+					{
+						ag.addFrame((AbstractID3v2Frame) field);
+					}
+				}
                 ag.addFrame(frame);
                 map.remove(ID3v23Frames.FRAME_ID_V3_TYER);
-                map.put(TyerTdatAggregatedFrame.ID_TYER_TDAT, ag);
+                putAsList(map, TyerTdatAggregatedFrame.ID_TYER_TDAT, ag);
             }
             else
             {
-                map.put(ID3v23Frames.FRAME_ID_V3_TDAT, frame);
+                putAsList(map, ID3v23Frames.FRAME_ID_V3_TDAT, frame);
             }
         }
-
+    }
+    
+    private void putAsList(Map<String, List<TagField>> map, String id, TagField tf) {
+    	List<TagField> fields = new ArrayList<>();
+    	fields.add(tf);
+    	map.put(id, fields);
     }
 
     /**
@@ -1352,7 +1377,8 @@ public class ID3v23Tag extends AbstractID3v2Tag
 
         if(genericKey == FieldKey.YEAR)
         {
-            AggregatedFrame af = (AggregatedFrame)getFrame(TyerTdatAggregatedFrame.ID_TYER_TDAT);
+        	List<TagField> fields = getFrame(TyerTdatAggregatedFrame.ID_TYER_TDAT);
+			AggregatedFrame af = fields != null && !fields.isEmpty() ? (AggregatedFrame) fields.get(0) : null;
             if(af!=null)
             {
                 List<TagField> list = new ArrayList<>();

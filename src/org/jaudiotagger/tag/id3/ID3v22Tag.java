@@ -474,14 +474,14 @@ public class ID3v22Tag extends AbstractID3v2Tag
             //Create Year frame (v2.2 id,but uses v2.3 body)
             newFrame = new ID3v22Frame(ID3v22Frames.FRAME_ID_V2_TYER);
             ((AbstractFrameBodyTextInfo) newFrame.getBody()).setText(tmpBody.getYear());
-            frameMap.put(newFrame.getIdentifier(), newFrame);
+            setFrame(newFrame);
         }
         if (tmpBody.getTime().length() != 0)
         {
             //Create Time frame (v2.2 id,but uses v2.3 body)
             newFrame = new ID3v22Frame(ID3v22Frames.FRAME_ID_V2_TIME);
             ((AbstractFrameBodyTextInfo) newFrame.getBody()).setText(tmpBody.getTime());
-            frameMap.put(newFrame.getIdentifier(), newFrame);
+            setFrame(newFrame);
         }
     }
 
