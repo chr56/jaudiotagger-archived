@@ -72,23 +72,23 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
     public static final int FIELD_TAG_FLAG_LENGTH = 1;
     public static final int FIELD_TAG_SIZE_LENGTH = 4;
 
-    protected static final int FIELD_TAGID_POS = 0;
+    public static final int FIELD_TAGID_POS = 0;
     public static final int FIELD_TAG_MAJOR_VERSION_POS = 3;
-    protected static final int FIELD_TAG_MINOR_VERSION_POS = 4;
-    protected static final int FIELD_TAG_FLAG_POS = 5;
-    protected static final int FIELD_TAG_SIZE_POS = 6;
+    public static final int FIELD_TAG_MINOR_VERSION_POS = 4;
+    public static final int FIELD_TAG_FLAG_POS = 5;
+    public static final int FIELD_TAG_SIZE_POS = 6;
 
     protected static final int TAG_SIZE_INCREMENT = 100;
 
     /**
      * Map of all frames for this tag
      */
-    public HashMap<String, Object> frameMap = null;
+    protected Map<String, Object> frameMap = null;
 
     /**
      * Map of all encrypted frames, these cannot be unencrypted by jaudiotagger
      */
-    public HashMap<String, Object> encryptedFrameMap = null;
+    protected Map<String, Object> encryptedFrameMap = null;
 
     /**
      * Holds the ids of invalid duplicate frames
@@ -796,7 +796,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
             //frame of this type already exists
             else if (obj instanceof AbstractID3v2Frame)
             {
-                List<AbstractID3v2Frame> frames = new ArrayList<AbstractID3v2Frame>();
+                List<AbstractID3v2Frame> frames = new ArrayList<>();
                 frames.add((AbstractID3v2Frame) obj);
                 mergeDuplicateFrames(newFrame, frames);
             }
@@ -856,7 +856,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
             else
             {
                 AbstractID3v2Frame existingFrame = (AbstractID3v2Frame) o;
-                List<TagField> list = new ArrayList<TagField>();
+                List<TagField> list = new ArrayList<>();
                 addNewFrameOrAddField(list, frameMap, existingFrame, frame);
             }
         }
@@ -1602,7 +1602,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
             }
             else
             {
-                ArrayList<AbstractID3v2Frame> multiFrames = (ArrayList<AbstractID3v2Frame>) o;
+            	List<AbstractID3v2Frame> multiFrames = (List<AbstractID3v2Frame>) o;
                 for (ListIterator<AbstractID3v2Frame> li = multiFrames.listIterator(); li.hasNext(); )
                 {
                     frame = li.next();

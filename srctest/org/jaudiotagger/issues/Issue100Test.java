@@ -8,7 +8,9 @@ import org.jaudiotagger.tag.datatype.DataTypes;
 import org.jaudiotagger.tag.id3.*;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -18,6 +20,17 @@ import java.util.Set;
  */
 public class Issue100Test extends AbstractTestCase
 {
+	@SuppressWarnings("unchecked")
+	private Map<String, Object> getFrameMap(AbstractID3v2Tag tag) {
+		try {
+			Field field = AbstractID3v2Tag.class.getDeclaredField("frameMap");
+			field.setAccessible(true);
+			return (Map<String, Object>) field.get(tag);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
     public void testID3v24WriteFieldsInPreferredOrder()
     {        
 
@@ -42,7 +55,7 @@ public class Issue100Test extends AbstractTestCase
             mp3File.setID3v2Tag(tag);
 
             //PRIV is listed first because added first
-            Set<String> keys = mp3File.getID3v2Tag().frameMap.keySet();
+            Set<String> keys = getFrameMap(mp3File.getID3v2Tag()).keySet();
             Iterator<String> iter = keys.iterator();
             assertEquals("PRIV",iter.next());
             assertEquals("UFID",iter.next());
@@ -53,7 +66,7 @@ public class Issue100Test extends AbstractTestCase
             assertEquals(2,mp3File.getID3v2Tag().getFieldCount());
 
             //After save UFID first because in order of written and UFID should be first
-            keys = mp3File.getID3v2Tag().frameMap.keySet();
+            keys = getFrameMap(mp3File.getID3v2Tag()).keySet();
             iter = keys.iterator();
             assertEquals("UFID",iter.next());
             assertEquals("PRIV",iter.next());
@@ -89,7 +102,7 @@ public class Issue100Test extends AbstractTestCase
             mp3File.setID3v2Tag(tag);
 
             //PRIV is listed first because added first
-            Set<String> keys = mp3File.getID3v2Tag().frameMap.keySet();
+            Set<String> keys = getFrameMap(mp3File.getID3v2Tag()).keySet();
             Iterator<String> iter = keys.iterator();
             assertEquals("PRIV",iter.next());
             assertEquals("UFID",iter.next());
@@ -100,7 +113,7 @@ public class Issue100Test extends AbstractTestCase
             assertEquals(2,mp3File.getID3v2Tag().getFieldCount());
 
             //After save UFID first because in order of written and UFID should be first
-            keys = mp3File.getID3v2Tag().frameMap.keySet();
+            keys = getFrameMap(mp3File.getID3v2Tag()).keySet();
             iter = keys.iterator();
             assertEquals("UFID",iter.next());
             assertEquals("PRIV",iter.next());
@@ -137,7 +150,7 @@ public class Issue100Test extends AbstractTestCase
             mp3File.setID3v2Tag(tag);
 
             //PRIV is listed first because added first
-            Set<String> keys = mp3File.getID3v2Tag().frameMap.keySet();
+            Set<String> keys = getFrameMap(mp3File.getID3v2Tag()).keySet();
             Iterator<String> iter = keys.iterator();
             assertEquals("PIC",iter.next());
             assertEquals("UFI",iter.next());
@@ -148,7 +161,7 @@ public class Issue100Test extends AbstractTestCase
             assertEquals(2,mp3File.getID3v2Tag().getFieldCount());
 
             //After save UFID first because in order of written and UFID should be first
-            keys = mp3File.getID3v2Tag().frameMap.keySet();
+            keys = getFrameMap(mp3File.getID3v2Tag()).keySet();
             iter = keys.iterator();
             assertEquals("UFI",iter.next());
             assertEquals("PIC",iter.next());
