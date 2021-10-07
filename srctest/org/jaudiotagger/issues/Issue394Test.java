@@ -19,7 +19,7 @@ public class Issue394Test extends AbstractTestCase
             tag.setField(FieldKey.COMMENT,"COMMENT1");
             tag.addField(FieldKey.COMMENT,"COMMENT2");
 
-            Tag v1Tag = new ID3v1Tag((AbstractTag)tag);
+            new ID3v1Tag((AbstractTag)tag);
         }
         catch(Exception e)
         {

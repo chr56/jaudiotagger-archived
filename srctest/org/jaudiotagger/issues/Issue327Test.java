@@ -27,7 +27,8 @@ public class Issue327Test extends AbstractTestCase
         f.getID3v2Tag().addField(FieldKey.ALBUM_ARTIST,"Ϟ");
         f.commit();
         ByteBuffer bb = ByteBuffer.allocate(40);
-        FileChannel fc = new RandomAccessFile(testFile,"r").getChannel();
+        @SuppressWarnings("resource")
+		FileChannel fc = new RandomAccessFile(testFile,"r").getChannel();
         fc.read(bb);
         assertEquals('T',bb.get(10) & 0xFF);
         assertEquals('P',bb.get(11) & 0xFF);

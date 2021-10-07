@@ -352,7 +352,6 @@ public class Mp4TagWriter
             int sizeOfExistingMetaLevelFreeAtom;
             int positionOfTopLevelFreeAtom;
             int sizeOfExistingTopLevelFreeAtom;
-            long endOfMoov = 0;
             //Found top level free atom that comes after moov and before mdat, (also true if no free atom ?)
             boolean topLevelFreeAtomComesBeforeMdatAtomAndAfterMetadata;
             Mp4BoxHeader topLevelFreeHeader;

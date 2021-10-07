@@ -4,9 +4,7 @@ import junit.framework.TestCase;
 import org.jaudiotagger.AbstractTestCase;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.exceptions.CannotReadVideoException;
-import org.jaudiotagger.audio.exceptions.CannotWriteException;
 import org.jaudiotagger.audio.mp4.EncoderType;
 import org.jaudiotagger.audio.mp4.Mp4AtomTree;
 import org.jaudiotagger.audio.mp4.Mp4AudioHeader;
@@ -24,7 +22,6 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -163,7 +160,7 @@ public class M4aReadTagTest extends TestCase
             assertEquals("Genre", mp4tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
             assertEquals(String.valueOf(Mp4RatingValue.EXPLICIT.getId()), mp4tag.getFirst(Mp4FieldKey.RATING));
             assertEquals(String.valueOf(Mp4ContentTypeValue.BOOKLET.getId()), mp4tag.getFirst(Mp4FieldKey.CONTENT_TYPE));
-            List coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
+            List<?> coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
             //Should be one image
             assertEquals(1, coverart.size());
 
@@ -312,7 +309,7 @@ public class M4aReadTagTest extends TestCase
             assertEquals("sortshow", mp4tag.getFirst(Mp4FieldKey.SHOW_SORT));
             assertEquals("show", mp4tag.getFirst(Mp4FieldKey.SHOW));
             assertEquals("genre", mp4tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
-            List coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
+            List<?> coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
             //Should be three image
             assertEquals(3, coverart.size());
 
@@ -536,7 +533,7 @@ public class M4aReadTagTest extends TestCase
             assertEquals(" 000002C0 00000298 00004210 00002FD5 0001CB31 0001CB48 0000750D 00007C4A 000291A8 00029191", mp4tag.getFirst(Mp4FieldKey.ITUNES_NORM));
             assertEquals(" 00000000 00000840 000000E4 0000000000A29EDC 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000", mp4tag.getFirst(Mp4FieldKey.ITUNES_SMPB));
 
-            List coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
+            List<?> coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
             //Should be one image
             assertEquals(3, coverart.size());
 
@@ -717,7 +714,7 @@ public class M4aReadTagTest extends TestCase
             assertEquals("Genre", mp4tag.getFirst(Mp4FieldKey.GENRE_CUSTOM));
             assertEquals(String.valueOf(Mp4RatingValue.EXPLICIT.getId()), mp4tag.getFirst(Mp4FieldKey.RATING));
             assertEquals(String.valueOf(Mp4ContentTypeValue.BOOKLET.getId()), mp4tag.getFirst(Mp4FieldKey.CONTENT_TYPE));
-            List coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
+            List<?> coverart = mp4tag.get(Mp4FieldKey.ARTWORK);
 
             //Should be one image
             assertEquals(1, coverart.size());
@@ -763,7 +760,7 @@ public class M4aReadTagTest extends TestCase
                Mp4AtomTree tree = new Mp4AtomTree(testFile, false);
                tree.printAtomTree();
 
-               AudioFile f = AudioFileIO.read(testFile);
+               AudioFileIO.read(testFile);
 
            }
            catch (Exception e)
@@ -793,7 +790,7 @@ public class M4aReadTagTest extends TestCase
                Mp4AtomTree tree = new Mp4AtomTree(testFile, false);
                tree.printAtomTree();
 
-               AudioFile f = AudioFileIO.read(testFile);
+               AudioFileIO.read(testFile);
 
            }
            catch (Exception e)
@@ -821,7 +818,7 @@ public class M4aReadTagTest extends TestCase
             Mp4AtomTree tree = new Mp4AtomTree(testFile, false);
             tree.printAtomTree();
 
-            AudioFile f = AudioFileIO.read(testFile);
+            AudioFileIO.read(testFile);
 
         }
         catch (Exception e)
@@ -1173,7 +1170,7 @@ public class M4aReadTagTest extends TestCase
             assertEquals("Es Wird Morgen", tag.getFirst(FieldKey.ALBUM));
             assertEquals("2raumwohnung", tag.getFirst(FieldKey.ARTIST));
 
-            List pictures = tag.get(Mp4FieldKey.ARTWORK);
+            List<?> pictures = tag.get(Mp4FieldKey.ARTWORK);
             assertEquals(1, pictures.size());
             Mp4TagCoverField artwork = (Mp4TagCoverField) pictures.get(0);
             assertEquals(Mp4FieldType.COVERART_PNG, artwork.getFieldType());
@@ -1279,7 +1276,6 @@ public class M4aReadTagTest extends TestCase
             return;
         }
 
-        Exception exceptionCaught = null;
         try
         {
             assertTrue(Mp4GenreField.isValidGenre("Rock"));
@@ -1292,7 +1288,6 @@ public class M4aReadTagTest extends TestCase
         catch (IOException e)
         {
             e.printStackTrace();
-            exceptionCaught = e;
         }
     }
 
@@ -1375,17 +1370,15 @@ public class M4aReadTagTest extends TestCase
         }
 
         new Mp4AtomTree(orig, false).printAtomTree();
-        Exception exceptionCaught = null;
         try
         {
             File testFile = AbstractTestCase.copyAudioToTmp("test147.m4a");
             AudioFile f = AudioFileIO.read(testFile);
-            Tag tag = f.getTag();
+            f.getTag();
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            exceptionCaught = e;
         }
         //assertNull(exceptionCaught);
 

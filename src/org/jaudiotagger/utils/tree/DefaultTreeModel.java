@@ -36,7 +36,11 @@ import java.util.Vector;
  * @author Scott Violet
  */
 public class DefaultTreeModel implements Serializable, TreeModel {
-    /** Root of the tree. */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -267197228234880401L;
+	/** Root of the tree. */
     protected TreeNode root;
     /** Listeners. */
     protected EventListenerList listenerList = new EventListenerList();
@@ -634,7 +638,7 @@ public class DefaultTreeModel implements Serializable, TreeModel {
 
     // Serialization support.  
     private void writeObject(ObjectOutputStream s) throws IOException {
-        Vector      values = new Vector();
+        Vector<Object>      values = new Vector<>();
 
         s.defaultWriteObject();
         // Save the root, if its Serializable.
@@ -649,7 +653,7 @@ public class DefaultTreeModel implements Serializable, TreeModel {
         throws IOException, ClassNotFoundException {
         s.defaultReadObject();
 
-        Vector          values = (Vector)s.readObject();
+        Vector<?>          values = (Vector<?>)s.readObject();
         int             indexCounter = 0;
         int             maxCounter = values.size();
 

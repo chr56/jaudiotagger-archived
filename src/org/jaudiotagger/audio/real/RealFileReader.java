@@ -19,7 +19,8 @@ import java.io.RandomAccessFile;
 public class RealFileReader extends AudioFileReader
 {
 
-    @Override
+    @SuppressWarnings("unused")
+	@Override
     protected GenericAudioHeader getEncodingInfo(RandomAccessFile raf) throws CannotReadException, IOException
     {
         final GenericAudioHeader info = new GenericAudioHeader();
@@ -49,15 +50,18 @@ public class RealFileReader extends AudioFileReader
 
     private RealChunk findPropChunk(RandomAccessFile raf) throws IOException, CannotReadException
     {
-        final RealChunk rmf = RealChunk.readChunk(raf);
+    	@SuppressWarnings("unused")
+		final RealChunk rmf = RealChunk.readChunk(raf);
         final RealChunk prop = RealChunk.readChunk(raf);
         return prop;
     }
 
     private RealChunk findContChunk(RandomAccessFile raf) throws IOException, CannotReadException
     {
-        final RealChunk rmf = RealChunk.readChunk(raf);
-        final RealChunk prop = RealChunk.readChunk(raf);
+    	@SuppressWarnings("unused")
+		final RealChunk rmf = RealChunk.readChunk(raf);
+    	@SuppressWarnings("unused")
+		final RealChunk prop = RealChunk.readChunk(raf);
         RealChunk rv = RealChunk.readChunk(raf);
         while (!rv.isCONT()) rv = RealChunk.readChunk(raf);
         return rv;

@@ -6,7 +6,6 @@ import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.mp4.Mp4AtomTree;
 
 import java.io.File;
-import java.io.RandomAccessFile;
 
 /**
  * Test writing mp4

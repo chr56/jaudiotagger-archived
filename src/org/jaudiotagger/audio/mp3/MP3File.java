@@ -230,42 +230,6 @@ public class MP3File extends AudioFile
     }
 
     /**
-     * Read lyrics3 Tag
-     *
-     * TODO:not working
-     *
-     * @param file
-     * @param newFile
-     * @param loadOptions
-     * @throws IOException
-     */
-    private void readLyrics3Tag(File file, RandomAccessFile newFile, int loadOptions) throws IOException
-    {
-        /*if ((loadOptions & LOAD_LYRICS3) != 0)
-        {
-            try
-            {
-                lyrics3tag = new Lyrics3v2(newFile);
-            }
-            catch (TagNotFoundException ex)
-            {
-            }
-            try
-            {
-                if (lyrics3tag == null)
-                {
-                    lyrics3tag = new Lyrics3v1(newFile);
-                }
-            }
-            catch (TagNotFoundException ex)
-            {
-            }
-        }
-        */
-    }
-
-
-    /**
      *
      * @param startByte
      * @param endByte

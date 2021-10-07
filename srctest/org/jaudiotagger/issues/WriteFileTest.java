@@ -8,7 +8,6 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.TagOptionSingleton;
 
 import java.io.File;
-import java.util.List;
 
 /**
  * Test, useful for just reading file info

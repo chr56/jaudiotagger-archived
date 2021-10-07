@@ -45,7 +45,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -321,8 +320,6 @@ public class AudioFileIO
         writers.put(SupportedFileFormat.AIFF.getFilesuffix(), new AiffFileWriter());
         writers.put(SupportedFileFormat.DSF.getFilesuffix(), new DsfFileWriter());
 
-        // Register modificationHandler
-        Iterator<AudioFileWriter> it = writers.values().iterator();
         for (AudioFileWriter curr : writers.values())
         {
             curr.setAudioFileModificationListener(this.modificationHandler);

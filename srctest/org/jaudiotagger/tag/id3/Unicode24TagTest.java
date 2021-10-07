@@ -127,7 +127,7 @@ public class Unicode24TagTest extends TestCase
         //Reload, should be written as UTF16 because of the text
         mp3File = new MP3File(testFile);
         frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ARTIST);
-        FrameBodyTPE1 body = (FrameBodyTPE1) frame.getBody();
+        frame.getBody();
         assertEquals(ID3v24Frames.FRAME_ID_ARTIST, fb.getIdentifier());
         assertEquals(TextEncoding.ISO_8859_1, fb.getTextEncoding());
         assertEquals(FrameBodyTPE1Test.TPE1_TEST_STRING, fb.getText());

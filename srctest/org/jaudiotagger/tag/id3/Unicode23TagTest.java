@@ -450,11 +450,8 @@ public class Unicode23TagTest extends TestCase
         assertEquals(TextEncoding.UTF_16, body.getTextEncoding());
         assertEquals(FrameBodyTPE1Test.TPE1_TEST_STRING, body.getText());
 
-//Check Bytes
-        FileChannel fc = new RandomAccessFile(testFile, "r").getChannel();
-        ByteBuffer buffer = ByteBuffer.allocate(100);
-        int count = fc.read(buffer);
-        fc.close();
+        //Check Bytes
+        ByteBuffer buffer = readBytesFromFile(testFile, 100);
 
         //Frame Header
         assertTrue((buffer.get(10) & 0xff) == 'T');
@@ -522,10 +519,7 @@ public class Unicode23TagTest extends TestCase
         assertEquals(FrameBodyTPE1Test.TPE1_TEST_STRING, body.getText());
 
         //Check Bytes
-        FileChannel fc = new RandomAccessFile(testFile, "r").getChannel();
-        ByteBuffer buffer = ByteBuffer.allocate(100);
-        int count = fc.read(buffer);
-        fc.close();
+        ByteBuffer buffer = readBytesFromFile(testFile, 100);
 
         //Frame Header
         assertTrue((buffer.get(10) & 0xff) == 'T');
@@ -595,10 +589,7 @@ public class Unicode23TagTest extends TestCase
         assertEquals(FrameBodyTPE1Test.TPE1_TEST_STRING, body.getText());
 
         //Check Bytes
-        FileChannel fc = new RandomAccessFile(testFile, "r").getChannel();
-        ByteBuffer buffer = ByteBuffer.allocate(100);
-        int count = fc.read(buffer);
-        fc.close();
+        ByteBuffer buffer = readBytesFromFile(testFile, 100);
 
         //Frame Header
         assertTrue((buffer.get(10) & 0xff) == 'T');
@@ -674,10 +665,7 @@ public class Unicode23TagTest extends TestCase
         assertEquals(FrameBodyTPE1Test.TPE1_TEST_STRING, body.getText());
 
         //Check Bytes
-        FileChannel fc = new RandomAccessFile(testFile, "r").getChannel();
-        ByteBuffer buffer = ByteBuffer.allocate(100);
-        int count = fc.read(buffer);
-        fc.close();
+        ByteBuffer buffer = readBytesFromFile(testFile, 100);
 
         //Frame Header
         assertTrue((buffer.get(10) & 0xff) == 'T');
@@ -695,4 +683,16 @@ public class Unicode23TagTest extends TestCase
         assertTrue((buffer.get(24) & 0xff) == 'k');
     }
 
+    private ByteBuffer readBytesFromFile(File file, int numBytes) {
+    	FileChannel fc;
+		try (RandomAccessFile raFile = new RandomAccessFile(file, "r")) {
+			fc = raFile.getChannel();
+	        ByteBuffer buffer = ByteBuffer.allocate(100);
+	        fc.read(buffer);
+	        fc.close();
+	        return buffer;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+    }
 }

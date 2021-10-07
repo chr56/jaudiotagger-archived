@@ -7,7 +7,6 @@ import org.jaudiotagger.audio.mp4.Mp4AtomTree;
 import org.jaudiotagger.tag.FieldKey;
 
 import java.io.File;
-import java.io.RandomAccessFile;
 
 /**
  * Test
@@ -16,7 +15,6 @@ public class Issue433Test extends AbstractTestCase
 {
     public void testWriteMp4LargeIncreaseExistingUdtaWithDatButNotMetaAddDataLarge() throws Exception
     {
-        Exception ex=null;
         File orig = new File("testdata", "test112.m4a");
         if (!orig.isFile())
         {
@@ -42,7 +40,6 @@ public class Issue433Test extends AbstractTestCase
 
     public void testWriteMp4LargeIncreaseExistingUdtaWithDatButNotMetaAddDataSmall() throws Exception
     {
-        Exception ex=null;
         File orig = new File("testdata", "test112.m4a");
         if (!orig.isFile())
         {
@@ -68,7 +65,6 @@ public class Issue433Test extends AbstractTestCase
 
     public void testWriteMp4LargeIncreaseExistingUdtaWithMetaDataAndUnknownAddDataLarge() throws Exception
     {
-        Exception ex=null;
         File orig = new File("testdata", "test141.m4a");
         if (!orig.isFile())
         {
@@ -94,7 +90,6 @@ public class Issue433Test extends AbstractTestCase
 
     public void testWriteMp4LargeIncreaseExistingUdtaWithMetaDataAndUnknownAddDataSmall() throws Exception
     {
-        Exception ex=null;
         File orig = new File("testdata", "test141.m4a");
         if (!orig.isFile())
         {

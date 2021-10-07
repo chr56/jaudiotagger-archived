@@ -132,13 +132,14 @@ public class Mp4InfoReader
             mvhdBuffer.position(mvhdBuffer.position() + boxHeader.getDataLength());
     
             //Level 2-Searching for "trak" within "moov"
-            boxHeader = Mp4BoxHeader.seekWithinLevel(mvhdBuffer, Mp4AtomIdentifier.TRAK.getFieldName());
-            int endOfFirstTrackInBuffer = mvhdBuffer.position() + boxHeader.getDataLength();
-    
+            boxHeader = Mp4BoxHeader.seekWithinLevel(mvhdBuffer, Mp4AtomIdentifier.TRAK.getFieldName());    
             if (boxHeader == null)
             {
                 throw new CannotReadException(ErrorMessage.MP4_FILE_NOT_AUDIO.getMsg());
             }
+
+            int endOfFirstTrackInBuffer = mvhdBuffer.position() + boxHeader.getDataLength();
+
             //Level 3-Searching for "mdia" within "trak"
             boxHeader = Mp4BoxHeader.seekWithinLevel(mvhdBuffer, Mp4AtomIdentifier.MDIA.getFieldName());
             if (boxHeader == null)

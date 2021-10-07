@@ -22,8 +22,6 @@ import org.jaudiotagger.tag.*;
 import org.jaudiotagger.tag.datatype.DataTypes;
 import org.jaudiotagger.tag.datatype.Pair;
 import org.jaudiotagger.tag.id3.framebody.*;
-import org.jaudiotagger.tag.id3.valuepair.MusicianCredits;
-import org.jaudiotagger.tag.id3.valuepair.StandardIPLSKey;
 import org.jaudiotagger.tag.images.Artwork;
 import org.jaudiotagger.tag.images.ArtworkFactory;
 import org.jaudiotagger.tag.lyrics3.AbstractLyrics3;
@@ -310,8 +308,8 @@ public class ID3v24Tag extends AbstractID3v2Tag
      */
     public ID3v24Tag()
     {
-        frameMap = new LinkedHashMap();
-        encryptedFrameMap = new LinkedHashMap();
+        frameMap = new LinkedHashMap<>();
+        encryptedFrameMap = new LinkedHashMap<>();
                 
     }
 
@@ -497,8 +495,8 @@ public class ID3v24Tag extends AbstractID3v2Tag
     public ID3v24Tag(AbstractTag mp3tag)
     {
         logger.config(getLoggingFilename() +":Creating tag from a tag of a different version");
-        frameMap = new LinkedHashMap();
-        encryptedFrameMap = new LinkedHashMap();
+        frameMap = new LinkedHashMap<>();
+        encryptedFrameMap = new LinkedHashMap<>();
 
         if (mp3tag != null)
         {
@@ -623,8 +621,8 @@ public class ID3v24Tag extends AbstractID3v2Tag
      */
     public ID3v24Tag(ByteBuffer buffer, String loggingFilename) throws TagException
     {
-        frameMap = new LinkedHashMap();
-        encryptedFrameMap = new LinkedHashMap();
+        frameMap = new LinkedHashMap<>();
+        encryptedFrameMap = new LinkedHashMap<>();
 
         setLoggingFilename(loggingFilename);
         this.read(buffer);
@@ -857,7 +855,6 @@ public class ID3v24Tag extends AbstractID3v2Tag
     public void read(ByteBuffer byteBuffer) throws TagException
     {
         int size;
-        byte[] buffer;
         if (!seek(byteBuffer))
         {
             throw new TagNotFoundException(getLoggingFilename() + ":" + getIdentifier() + " tag not found");
@@ -888,8 +885,8 @@ public class ID3v24Tag extends AbstractID3v2Tag
         logger.finest(getLoggingFilename() + ":" + "Start of frame body at" + byteBuffer.position());
         //Now start looking for frames
         ID3v24Frame next;
-        frameMap = new LinkedHashMap();
-        encryptedFrameMap = new LinkedHashMap();
+        frameMap = new LinkedHashMap<>();
+        encryptedFrameMap = new LinkedHashMap<>();
 
         //Read the size from the Tag Header
         this.fileReadSize = size;
@@ -1289,7 +1286,7 @@ public class ID3v24Tag extends AbstractID3v2Tag
      * @return comparator used to order frames in preferred order for writing to file
      *         so that most important frames are written first.
      */
-    public Comparator getPreferredFrameOrderComparator()
+    public Comparator<String> getPreferredFrameOrderComparator()
     {
         return ID3v24PreferredFrameOrderComparator.getInstanceof();
     }

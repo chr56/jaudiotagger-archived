@@ -213,7 +213,7 @@ public class WavInfoReader
             //Carry on reading until not null (TODO check not long)
             int fileRemainder = (int)((fc.size() - fc.position()));
             ByteBuffer restOfFile = ByteBuffer.allocate(fileRemainder);
-            int result = fc.read(restOfFile);
+            fc.read(restOfFile);
             restOfFile.flip();
             while(restOfFile.hasRemaining() && restOfFile.get()==0)
             {

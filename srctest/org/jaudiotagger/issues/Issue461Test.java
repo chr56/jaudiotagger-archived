@@ -165,7 +165,7 @@ public class Issue461Test extends AbstractTestCase
         assertEquals("2004-06-30", v2Tag.getFirst(ID3v23FieldKey.YEAR));
         //v24Tag = (ID3v24Tag)mp3File.getID3v2TagAsv24();
         v24Tag = new ID3v24Tag(v2Tag);
-        Iterator<AbstractID3v2Frame>   i = v24Tag.iterator();
+        Iterator<AbstractID3v2Frame> i;
 
         assertEquals("2004-06-30", v24Tag.getFirst(FieldKey.YEAR));
         TyerTdatAggregatedFrame frame = ((TyerTdatAggregatedFrame)v2Tag.getFrame("TYERTDAT"));

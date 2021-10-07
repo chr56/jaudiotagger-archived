@@ -1,7 +1,6 @@
 package org.jaudiotagger.issues;
 
 import org.jaudiotagger.AbstractTestCase;
-import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.exceptions.CannotReadException;
 
@@ -33,8 +32,7 @@ public class Issue178Test extends AbstractTestCase
         {
             testFile = AbstractTestCase.copyAudioToTmp("test36.ogg");
 
-            //Read File
-            AudioFile af = AudioFileIO.read(testFile);
+            AudioFileIO.read(testFile);
 
             //Print Out Tree
 

@@ -7,7 +7,6 @@ import org.jaudiotagger.audio.mp4.Mp4AtomTree;
 import org.jaudiotagger.tag.id3.valuepair.ImageFormats;
 
 import java.io.File;
-import java.io.RandomAccessFile;
 
 /**
  * Test

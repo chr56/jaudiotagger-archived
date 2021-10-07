@@ -4,7 +4,6 @@ import org.jaudiotagger.AbstractTestCase;
 import org.jaudiotagger.FilePermissionsTest;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.exceptions.CannotWriteException;
 import org.jaudiotagger.audio.wav.WavCleaner;
 import org.jaudiotagger.audio.wav.WavOptions;
@@ -1518,7 +1517,6 @@ public class WavMetadataTwonkyTrckTest extends AbstractTestCase
         TagOptionSingleton.getInstance().setWavOptions(WavOptions.READ_ID3_UNLESS_ONLY_INFO);
         TagOptionSingleton.getInstance().setWavSaveOrder(WavSaveOrder.ID3_THEN_INFO);
 
-        Exception exceptionCaught = null;
         File testFile = AbstractTestCase.copyAudioToTmp("test504.wav", new File("test504clean.wav"));
         try
         {
@@ -1529,7 +1527,6 @@ public class WavMetadataTwonkyTrckTest extends AbstractTestCase
         catch (Exception e)
         {
             e.printStackTrace();
-            exceptionCaught = e;
         }
 
         Exception exceptionCaught2 = null;
@@ -1568,7 +1565,6 @@ public class WavMetadataTwonkyTrckTest extends AbstractTestCase
         TagOptionSingleton.getInstance().setWavSaveOrder(WavSaveOrder.ID3_THEN_INFO);
         TagOptionSingleton.getInstance().setWriteWavForTwonky(true);
 
-        Exception exceptionCaught = null;
         try
         {
             File testFile = AbstractTestCase.copyAudioToTmp("test505.wav");
@@ -1583,7 +1579,6 @@ public class WavMetadataTwonkyTrckTest extends AbstractTestCase
         catch (Exception e)
         {
             e.printStackTrace();
-            exceptionCaught = e;
         }
     }
 
@@ -1651,7 +1646,6 @@ public class WavMetadataTwonkyTrckTest extends AbstractTestCase
         TagOptionSingleton.getInstance().setWavSaveOrder(WavSaveOrder.INFO_THEN_ID3);
         TagOptionSingleton.getInstance().setWriteWavForTwonky(true);
 
-        Exception exceptionCaught = null;
         try
         {
             File testFile = AbstractTestCase.copyAudioToTmp("GreenLight.wav");
@@ -1669,7 +1663,6 @@ public class WavMetadataTwonkyTrckTest extends AbstractTestCase
         catch (Exception e)
         {
             e.printStackTrace();
-            exceptionCaught = e;
         }
     }
 

@@ -3,13 +3,8 @@ package org.jaudiotagger.issues;
 import org.jaudiotagger.AbstractTestCase;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.audio.mp3.MP3File;
 import org.jaudiotagger.audio.mp4.Mp4AtomTree;
 import org.jaudiotagger.tag.FieldKey;
-import org.jaudiotagger.tag.id3.*;
-import org.jaudiotagger.tag.id3.framebody.FrameBodyIPLS;
-import org.jaudiotagger.tag.id3.framebody.FrameBodyTIPL;
-
 import java.io.File;
 
 /**
@@ -22,8 +17,6 @@ public class Issue247Test extends AbstractTestCase
      */
     public void testWriteMp4()
     {
-        ID3v24Tag v24tag = null;
-        ID3v22Tag v22tag = null;
         File orig = new File("testdata", "test247.m4a");
         if (!orig.isFile())
         {

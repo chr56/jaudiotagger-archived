@@ -8,7 +8,6 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.images.ArtworkFactory;
 
 import java.io.File;
-import java.io.RandomAccessFile;
 
 /**
  * FIles with extra tag atom

@@ -114,7 +114,8 @@ public class VorbisImageTest extends AbstractTestCase
     /**
      * Write Image using new method, read using lowlevel
      */
-    public void testWriteImage2()
+    @SuppressWarnings("deprecation")
+	public void testWriteImage2()
     {
         try
         {

@@ -1,7 +1,6 @@
 package org.jaudiotagger.issues;
 
 import org.jaudiotagger.AbstractTestCase;
-import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 
 import java.io.File;
@@ -25,7 +24,7 @@ public class Issue367Test extends AbstractTestCase
 
             File testFile = AbstractTestCase.copyAudioToTmp("test93.mp3");
             long startTime = System.nanoTime();
-            AudioFile af = AudioFileIO.read(testFile);
+            AudioFileIO.read(testFile);
             long endTime = System.nanoTime();
             double totalTime = (endTime - startTime) / 1000000.0;
             System.out.println("Time:"+totalTime + ":ms");

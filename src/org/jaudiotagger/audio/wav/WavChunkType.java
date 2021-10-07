@@ -25,8 +25,6 @@ public enum WavChunkType
 
     private static final Map<String, WavChunkType> CODE_TYPE_MAP = new HashMap<String, WavChunkType>();
     private String code;
-    private String description;
-
     /**
      * Get {@link WavChunkType} for code (e.g. "SSND").
      *
@@ -48,7 +46,6 @@ public enum WavChunkType
     WavChunkType(final String code, String description)
     {
         this.code=code;
-        this.description=description;
     }
 
     /**

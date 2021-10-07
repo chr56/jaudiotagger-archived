@@ -185,7 +185,7 @@ public class ID3v11Tag extends ID3v1Tag
 
                 if (id3tag.hasFrame(ID3v24Frames.FRAME_ID_COMMENT))
                 {
-                    Iterator iterator = id3tag.getFrameOfType(ID3v24Frames.FRAME_ID_COMMENT);
+                    Iterator<Object> iterator = id3tag.getFrameOfType(ID3v24Frames.FRAME_ID_COMMENT);
                     text = "";
                     while (iterator.hasNext())
                     {

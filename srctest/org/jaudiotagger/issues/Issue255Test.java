@@ -8,7 +8,6 @@ import org.jaudiotagger.audio.mp4.Mp4AtomTree;
 import org.jaudiotagger.tag.FieldKey;
 
 import java.io.File;
-import java.io.RandomAccessFile;
 
 /**
  * Test Writing to new urls with common interface
@@ -33,8 +32,7 @@ public class Issue255Test extends AbstractTestCase
         {
             testFile = AbstractTestCase.copyAudioToTmp("test35.m4a");
 
-            //Read File
-            AudioFile af = AudioFileIO.read(testFile);
+            AudioFileIO.read(testFile);
 
             //Print Out Tree
 
@@ -79,7 +77,7 @@ public class Issue255Test extends AbstractTestCase
         {
             File testFile = AbstractTestCase.copyAudioToTmp("test28.m4p", new File("WriteFileWithInvalidFreeAtom.m4p"));
 
-            AudioFile f = AudioFileIO.read(testFile);
+            AudioFileIO.read(testFile);
         }
         catch (Exception e)
         {

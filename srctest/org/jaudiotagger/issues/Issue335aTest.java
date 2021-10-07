@@ -1,8 +1,6 @@
 package org.jaudiotagger.issues;
 
 import org.jaudiotagger.AbstractTestCase;
-import org.jaudiotagger.audio.AudioFile;
-import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.mp3.MP3File;
 import org.jaudiotagger.tag.id3.FrameIPLSTest;
 import org.jaudiotagger.tag.id3.ID3v23Frame;
@@ -11,8 +9,6 @@ import org.jaudiotagger.tag.id3.ID3v24Tag;
 import org.jaudiotagger.tag.id3.framebody.FrameBodyIPLS;
 
 import java.io.File;
-
-import static org.jaudiotagger.tag.datatype.DataTypes.OBJ_TEXT;
 
 /**
  * Test conversion from v23 to v24 of IPLS frame

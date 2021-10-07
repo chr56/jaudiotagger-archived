@@ -199,27 +199,6 @@ public class AiffTagWriter
     }
 
     /**
-     * The following seems to work on Windows but hangs on OSX!
-     * Bug is filed <a href="https://bugs.openjdk.java.net/browse/JDK-8140241">here</a>.
-     *
-     * @param existingTag existing tag
-     * @param channel channel
-     * @param newLength new length
-     * @throws IOException if something goes wrong
-     */
-    private void deleteTagChunkUsingChannelTransfer(final AiffTag existingTag, final FileChannel channel, final long newLength)
-            throws IOException
-    {
-        long read;
-        //Read from just after the ID3Chunk into the channel at where the ID3 chunk started, should usually only require one transfer
-        //but put into loop in case multiple calls are required
-        for (long position = existingTag.getStartLocationInFileOfId3Chunk();
-             (read = channel.transferFrom(channel, position, newLength - position)) < newLength-position;
-             position += read);//is this problem if loop called more than once do we need to update position of channel to modify
-        //where write to ?
-    }
-
-    /**
      * Use ByteBuffers to copy a chunk, write the chunk and repeat until the rest of the file after the ID3 tag
      * is rewritten
      *
@@ -277,7 +256,6 @@ public class AiffTagWriter
                 fc.truncate(formFileLength);
                 fc.position(currentPos);
             }
-            long existingFileLength = fc.size();
             final AiffTag aiffTag = (AiffTag) tag;
             final ByteBuffer bb = convert(aiffTag, existingTag);
 

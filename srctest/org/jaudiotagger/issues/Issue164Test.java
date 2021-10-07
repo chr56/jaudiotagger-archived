@@ -4,11 +4,9 @@ import org.jaudiotagger.AbstractTestCase;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.mp4.Mp4AtomTree;
-import org.jaudiotagger.audio.mp4.Mp4FileReader;
 import org.jaudiotagger.tag.FieldKey;
 
 import java.io.File;
-import java.io.RandomAccessFile;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 

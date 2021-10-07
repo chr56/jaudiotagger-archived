@@ -51,7 +51,8 @@ public abstract class AbstractDataTypeList<T extends AbstractDataType> extends A
         super(copy);
     }
 
-    public List<T> getValue()
+    @SuppressWarnings("unchecked")
+	public List<T> getValue()
     {
         return (List<T>)super.getValue();
     }

@@ -9,7 +9,6 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 
 import java.io.File;
-import java.io.RandomAccessFile;
 
 /**
  * Write tags  for a file which contains  MDAT before MOOV, (not normal case)

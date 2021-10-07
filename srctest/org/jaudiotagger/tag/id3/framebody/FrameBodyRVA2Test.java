@@ -37,10 +37,9 @@ public class FrameBodyRVA2Test extends AbstractTestCase
     public void testCreateFrameBody()
     {
         Exception exceptionCaught = null;
-        FrameBodyRVA2 fb = null;
         try
         {
-            fb = new FrameBodyRVA2();
+            new FrameBodyRVA2();
         }
         catch (Exception e)
         {

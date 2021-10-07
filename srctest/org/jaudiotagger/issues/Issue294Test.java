@@ -5,6 +5,7 @@ import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.mp3.MP3File;
 import org.jaudiotagger.audio.mp3.MPEGFrameHeader;
 import org.jaudiotagger.logging.Hex;
+import org.jaudiotagger.tag.TagField;
 import org.jaudiotagger.tag.TagOptionSingleton;
 import org.jaudiotagger.tag.id3.valuepair.ImageFormats;
 import org.jaudiotagger.tag.images.Artwork;
@@ -36,8 +37,6 @@ public class Issue294Test extends AbstractTestCase
         File testPix  = AbstractTestCase.copyAudioToTmp("test70.jpg");
 
 
-        File originalFileBackup = null;
-
         Exception exceptionCaught = null;
         try
         {
@@ -58,7 +57,7 @@ public class Issue294Test extends AbstractTestCase
 
             //af.getID3v2TagAsv24().removeFrame("APIC");
 
-            final List multiFrames = new ArrayList();
+            final List<TagField> multiFrames = new ArrayList<>();
             multiFrames.add(af.getID3v2Tag().createField(ArtworkFactory.createArtworkFromFile(testPix)));
             af.getID3v2Tag().setFrame("APIC", multiFrames);
             af.commit();

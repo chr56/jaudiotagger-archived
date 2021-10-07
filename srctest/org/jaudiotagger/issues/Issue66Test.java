@@ -3,7 +3,6 @@ package org.jaudiotagger.issues;
 import org.jaudiotagger.AbstractTestCase;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.audio.AudioHeader;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 
@@ -35,7 +34,7 @@ public class Issue66Test extends AbstractTestCase
             Tag tag = af.getTag();
             if (tag != null)
             {
-                AudioHeader head = af.getAudioHeader();
+                af.getAudioHeader();
             }
         }
         catch(Exception e)

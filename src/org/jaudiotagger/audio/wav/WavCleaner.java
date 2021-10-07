@@ -1,7 +1,6 @@
 package org.jaudiotagger.audio.wav;
 
 import org.jaudiotagger.audio.exceptions.CannotReadException;
-import org.jaudiotagger.audio.iff.Chunk;
 import org.jaudiotagger.audio.iff.ChunkHeader;
 import org.jaudiotagger.audio.iff.IffHeaderChunk;
 import org.jaudiotagger.logging.Hex;
@@ -80,7 +79,6 @@ public class WavCleaner
      */
     private int readChunk(FileChannel fc) throws IOException, CannotReadException
     {
-        Chunk chunk;
         ChunkHeader chunkHeader = new ChunkHeader(ByteOrder.LITTLE_ENDIAN);
         if (!chunkHeader.readHeader(fc))
         {

@@ -28,8 +28,6 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.logging.Level;
 
-import static org.jaudiotagger.tag.id3.ID3v24Frames.*;
-
 /**
  * This abstract class is each frame header inside a ID3v2 tag.
  *
@@ -123,7 +121,8 @@ public abstract class AbstractID3v2Frame extends AbstractTagFrame implements Tag
         // to keep things up to date.
         try
         {
-            Class<AbstractID3v2FrameBody> c = (Class<AbstractID3v2FrameBody>) Class.forName("org.jaudiotagger.tag.id3.framebody.FrameBody" + identifier);
+            @SuppressWarnings("unchecked")
+			Class<AbstractID3v2FrameBody> c = (Class<AbstractID3v2FrameBody>) Class.forName("org.jaudiotagger.tag.id3.framebody.FrameBody" + identifier);
             frameBody = c.newInstance();
         }
         catch (ClassNotFoundException cnfe)
@@ -675,7 +674,7 @@ public abstract class AbstractID3v2Frame extends AbstractTagFrame implements Tag
 
                 //Catch-all incase we have missed any
                 default:
-                    Class<AbstractID3v2FrameBody> c = (Class<AbstractID3v2FrameBody>) Class.forName("org.jaudiotagger.tag.id3.framebody.FrameBody" + identifier);
+                    @SuppressWarnings("unchecked") Class<AbstractID3v2FrameBody> c = (Class<AbstractID3v2FrameBody>) Class.forName("org.jaudiotagger.tag.id3.framebody.FrameBody" + identifier);
                     Class<?>[] constructorParameterTypes = {Class.forName("java.nio.ByteBuffer"), Integer.TYPE};
                     Object[] constructorParameterValues = {byteBuffer, frameSize};
                     Constructor<AbstractID3v2FrameBody> construct = c.getConstructor(constructorParameterTypes);

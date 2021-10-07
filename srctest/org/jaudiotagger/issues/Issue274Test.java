@@ -1,7 +1,6 @@
 package org.jaudiotagger.issues;
 
 import org.jaudiotagger.AbstractTestCase;
-import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 
 import java.io.File;
@@ -30,8 +29,7 @@ public class Issue274Test extends AbstractTestCase
             testFile = AbstractTestCase.copyAudioToTmp("test54.flac");
 
 
-            //Read File okay
-            AudioFile af = AudioFileIO.read(testFile);
+            AudioFileIO.read(testFile);
 
 
         }

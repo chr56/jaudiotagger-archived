@@ -19,10 +19,10 @@ public class OggPageTest extends TestCase
         System.out.println("start:"+new Date());
         Exception exceptionCaught = null;
         int count = 0;
-        try
+        File testFile = AbstractTestCase.copyAudioToTmp("test.ogg", new File("testReadAllOggPages.ogg"));
+        try(RandomAccessFile raf = new RandomAccessFile(testFile, "r"))
         {
-            File testFile = AbstractTestCase.copyAudioToTmp("test.ogg", new File("testReadAllOggPages.ogg"));
-            RandomAccessFile raf = new RandomAccessFile(testFile, "r");
+            
             OggPageHeader lastPageHeader = null;
             ByteBuffer bb = ByteBuffer.allocate((int)(raf.length()));
             raf.getChannel().read(bb);
@@ -152,12 +152,9 @@ public class OggPageTest extends TestCase
     {
         Exception exceptionCaught = null;
         int count = 0;
-        try
+        File testFile = AbstractTestCase.copyAudioToTmp("testlargeimage.ogg", new File("testReadAllOggPagesLargeFile.ogg"));
+        try (RandomAccessFile raf = new RandomAccessFile(testFile, "r"))
         {
-
-            File testFile = AbstractTestCase.copyAudioToTmp("testlargeimage.ogg", new File("testReadAllOggPagesLargeFile.ogg"));
-            RandomAccessFile raf = new RandomAccessFile(testFile, "r");
-            OggPageHeader lastPageHeader = null;
             ByteBuffer bb = ByteBuffer.allocate((int)(raf.length()));
             raf.getChannel().read(bb);
             bb.rewind();

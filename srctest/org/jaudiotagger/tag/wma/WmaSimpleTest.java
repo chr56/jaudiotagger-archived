@@ -38,8 +38,7 @@ public class WmaSimpleTest extends AbstractTestCase
         try
         {
             File testFile = AbstractTestCase.copyAudioToTmp("test2.wma");
-            AudioFile f = AudioFileIO.read(testFile);
-            //Now
+            AudioFileIO.read(testFile);
         }
         catch (Exception e)
         {

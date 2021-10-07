@@ -236,7 +236,7 @@ public class Mp4Tag extends AbstractTag
      * @return
      */
     @SuppressWarnings({"JavaDoc"})
-    private TagField createGenreField(String content)
+    public TagField createGenreField(String content)
     {
         if (content == null)
         {
