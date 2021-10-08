@@ -1,6 +1,6 @@
 Summarise Changes
 
-2.2.6
+3.0.0
 #073:Support for writing DSF files
 #084:Add method to copy metadata from Info tag to ID3 tag within a Wav
 #085:AbstractID3v2Tag.getSize() not handling aggregate frames
