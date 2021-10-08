@@ -7,6 +7,7 @@ package org.jaudiotagger.audio;
 public enum SupportedFileFormat
 {
     OGG("ogg", "Ogg"),
+    OGA("oga", "Oga"),
     MP3("mp3", "Mp3"),
     FLAC("flac", "Flac"),
     MP4("mp4", "Mp4"),
