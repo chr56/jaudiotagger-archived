@@ -5,10 +5,12 @@ import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.mp3.MP3File;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
+import org.jaudiotagger.tag.TagField;
 import org.jaudiotagger.tag.id3.*;
 import org.jaudiotagger.tag.id3.framebody.AbstractFrameBodyTextInfo;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * Test when write multiple strings using UTF16 with BOM that it writes the BOM
@@ -30,7 +32,8 @@ public class Issue335Test extends AbstractTestCase
         File testFile = AbstractTestCase.copyAudioToTmp("test79.mp3");
         MP3File f = (MP3File) AudioFileIO.read(testFile);
         assertEquals("Familial", f.getID3v2Tag().getFirst("TALB"));
-        AbstractID3v2Frame frame = (AbstractID3v2Frame) f.getID3v2Tag().getFrame("TALB");
+        List<TagField> frames = f.getID3v2Tag().getFrame("TALB");
+        AbstractID3v2Frame frame = (AbstractID3v2Frame)frames.get(0);
         AbstractTagFrameBody body = frame.getBody();
         assertEquals(3, body.getTextEncoding());
 
@@ -41,7 +44,8 @@ public class Issue335Test extends AbstractTestCase
 
         f = (MP3File) AudioFileIO.read(testFile);
         assertEquals("Familial", f.getID3v2Tag().getFirst("TALB"));
-        frame = (AbstractID3v2Frame) f.getID3v2Tag().getFrame("TALB");
+        List<TagField> talbframes = f.getID3v2Tag().getFrame("TALB");
+        frame = (AbstractID3v2Frame) talbframes.get(0);
         body = frame.getBody();
         assertEquals(0, body.getTextEncoding());
 
@@ -61,14 +65,16 @@ public class Issue335Test extends AbstractTestCase
         MP3File f = (MP3File) AudioFileIO.read(testFile);
         assertEquals("Familial", f.getID3v2Tag().getFirst("TALB"));
         assertEquals(4, f.getID3v2Tag().getMajorVersion());
-        AbstractID3v2Frame frame = (AbstractID3v2Frame) f.getID3v2Tag().getFrame("TALB");
+        List<TagField> frames =  f.getID3v2Tag().getFrame("TALB");
+        AbstractID3v2Frame frame = (AbstractID3v2Frame)frames.get(0);
         AbstractFrameBodyTextInfo body = (AbstractFrameBodyTextInfo) frame.getBody();
         body.setText("ǿ");
         //It was UTF8
         assertEquals(3, body.getTextEncoding());
 
         ID3v23Tag tag = new ID3v23Tag(f.getID3v2Tag());
-        frame = (AbstractID3v2Frame) tag.getFrame("TALB");
+        frames =  tag.getFrame("TALB");
+        frame = (AbstractID3v2Frame)frames.get(0);
         body = (AbstractFrameBodyTextInfo) frame.getBody();
         //We default to 0
         assertEquals(0, body.getTextEncoding());
@@ -77,7 +83,9 @@ public class Issue335Test extends AbstractTestCase
 
         f = (MP3File) AudioFileIO.read(testFile);
         assertEquals("ǿ", f.getID3v2Tag().getFirst("TALB"));
-        frame = (AbstractID3v2Frame) f.getID3v2Tag().getFrame("TALB");
+
+        frames =  tag.getFrame("TALB");
+        frame = (AbstractID3v2Frame)frames.get(0);
         body = (AbstractFrameBodyTextInfo) frame.getBody();
         //But need UTF16 to store this value
         assertEquals(1, body.getTextEncoding());
@@ -98,14 +106,17 @@ public class Issue335Test extends AbstractTestCase
         MP3File f = (MP3File) AudioFileIO.read(testFile);
         assertEquals("Familial", f.getID3v2Tag().getFirst("TALB"));
         assertEquals(4, f.getID3v2Tag().getMajorVersion());
-        AbstractID3v2Frame frame = (AbstractID3v2Frame) f.getID3v2Tag().getFrame("TALB");
+
+        List<TagField> frames =  f.getID3v2Tag().getFrame("TALB");
+        AbstractID3v2Frame frame = (AbstractID3v2Frame)frames.get(0);
         AbstractFrameBodyTextInfo body = (AbstractFrameBodyTextInfo) frame.getBody();
         body.setText("ǿ");
         //It was UTF8
         assertEquals(3, body.getTextEncoding());
 
         ID3v23Tag tag = new ID3v23Tag(f.getID3v2Tag());
-        frame = (AbstractID3v2Frame) tag.getFrame("TALB");
+        frames =  tag.getFrame("TALB");
+        frame = (AbstractID3v2Frame)frames.get(0);
         body = (AbstractFrameBodyTextInfo) frame.getBody();
         //We default to 0
         assertEquals(0, body.getTextEncoding());
@@ -114,19 +125,25 @@ public class Issue335Test extends AbstractTestCase
 
         f = (MP3File) AudioFileIO.read(testFile);
         tag = (ID3v23Tag) f.getID3v2Tag();
-        frame = (AbstractID3v2Frame) tag.getFrame("TALB");
+
+        frames =  tag.getFrame("TALB");
+        frame = (AbstractID3v2Frame)frames.get(0);
         body = (AbstractFrameBodyTextInfo) frame.getBody();
         //It got converted to UTF16 at previous commit stage in order to store the value
         assertEquals(1, body.getTextEncoding());
 
         ID3v24Tag v24tag = f.getID3v2TagAsv24();
-        frame = (AbstractID3v2Frame) v24tag.getFrame("TALB");
+
+        frames =  tag.getFrame("TALB");
+        frame = (AbstractID3v2Frame)frames.get(0);
         body = (AbstractFrameBodyTextInfo) frame.getBody();
         //And not lost when convertMetadata to v24
         assertEquals(1, body.getTextEncoding());
 
         tag = new ID3v23Tag(v24tag);
-        frame = (AbstractID3v2Frame) tag.getFrame("TALB");
+
+        frames =  tag.getFrame("TALB");
+        frame = (AbstractID3v2Frame)frames.get(0);
         body = (AbstractFrameBodyTextInfo) frame.getBody();
         //or if convertMetadata from v24 view back down to v23 view
         assertEquals(1, body.getTextEncoding());
