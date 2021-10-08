@@ -23,7 +23,7 @@ public class FrameTOPETest extends AbstractTestCase
 
         mp3File = new MP3File(testFile);
         v23Tag = (ID3v23Tag) mp3File.getID3v2Tag();
-        ID3v23Frame v23frame = (ID3v23Frame) v23Tag.getFrame(ID3v23Frames.FRAME_ID_V3_ORIGARTIST);
+        ID3v23Frame v23frame = (ID3v23Frame) v23Tag.getFrame(ID3v23Frames.FRAME_ID_V3_ORIGARTIST).get(0);
         assertTrue(v23frame.getBody() instanceof FrameBodyTOPE);
     }
 }

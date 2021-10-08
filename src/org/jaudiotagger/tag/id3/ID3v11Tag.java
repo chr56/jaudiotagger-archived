@@ -196,7 +196,7 @@ public class ID3v11Tag extends ID3v1Tag
                 }
                 if (id3tag.hasFrame(ID3v24Frames.FRAME_ID_GENRE))
                 {
-                    frame = (ID3v24Frame) id3tag.getFrame(ID3v24Frames.FRAME_ID_GENRE);
+                    frame = (ID3v24Frame) id3tag.getFrame(ID3v24Frames.FRAME_ID_GENRE).get(0);
                     text = ((FrameBodyTCON) frame.getBody()).getText();
                     try
                     {

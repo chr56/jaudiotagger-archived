@@ -145,7 +145,7 @@ public class FrameTSOTTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_TITLE_SORT_ORDER);
+        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_TITLE_SORT_ORDER).get(0);
         FrameBodyTSOT body = (FrameBodyTSOT) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
     }
@@ -166,7 +166,7 @@ public class FrameTSOTTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_TITLE_SORT_ORDER);
+        frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_TITLE_SORT_ORDER).get(0);
         FrameBodyTSOT body = (FrameBodyTSOT) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
     }
@@ -190,7 +190,7 @@ public class FrameTSOTTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        ID3v23Frame frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_TITLE_SORT_ORDER_ITUNES);
+        ID3v23Frame frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_TITLE_SORT_ORDER_ITUNES).get(0);
         FrameBodyTSOT body = (FrameBodyTSOT) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
         assertEquals(FrameBodyTSOTTest.TITLE_SORT, body.getText());
@@ -215,7 +215,7 @@ public class FrameTSOTTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        ID3v22Frame frame = (ID3v22Frame) mp3File.getID3v2Tag().getFrame(ID3v22Frames.FRAME_ID_V2_TITLE_SORT_ORDER_ITUNES);
+        ID3v22Frame frame = (ID3v22Frame) mp3File.getID3v2Tag().getFrame(ID3v22Frames.FRAME_ID_V2_TITLE_SORT_ORDER_ITUNES).get(0);
         FrameBodyTSOT body = (FrameBodyTSOT) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
         assertEquals(FrameBodyTSOTTest.TITLE_SORT, body.getText());
@@ -240,7 +240,7 @@ public class FrameTSOTTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        ID3v22Frame frame = (ID3v22Frame) mp3File.getID3v2Tag().getFrame(ID3v22Frames.FRAME_ID_V2_TITLE_SORT_ORDER_ITUNES);
+        ID3v22Frame frame = (ID3v22Frame) mp3File.getID3v2Tag().getFrame(ID3v22Frames.FRAME_ID_V2_TITLE_SORT_ORDER_ITUNES).get(0);
         FrameBodyTSOT body = (FrameBodyTSOT) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
         assertEquals(FrameBodyTSOTTest.TITLE_SORT, body.getText());
@@ -265,7 +265,7 @@ public class FrameTSOTTest extends AbstractTestCase
 
         //Reload will be converted to same TST version for v22
         mp3File = new MP3File(testFile);
-        ID3v22Frame frame = (ID3v22Frame) mp3File.getID3v2Tag().getFrame(ID3v22Frames.FRAME_ID_V2_TITLE_SORT_ORDER_ITUNES);
+        ID3v22Frame frame = (ID3v22Frame) mp3File.getID3v2Tag().getFrame(ID3v22Frames.FRAME_ID_V2_TITLE_SORT_ORDER_ITUNES).get(0);
         FrameBodyTSOT body = (FrameBodyTSOT) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
         assertEquals(FrameBodyTSOTTest.TITLE_SORT, body.getText());
@@ -294,7 +294,7 @@ public class FrameTSOTTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_TITLE_SORT_ORDER);
+        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_TITLE_SORT_ORDER).get(0);
         FrameBodyTSOT body = (FrameBodyTSOT) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
         assertEquals(FrameBodyTSOTTest.TITLE_SORT, body.getText());

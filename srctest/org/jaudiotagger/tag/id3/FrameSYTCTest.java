@@ -38,7 +38,7 @@ public class FrameSYTCTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_SYNC_TEMPO);
+        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_SYNC_TEMPO).get(0);
         FrameBodySYTC body = (FrameBodySYTC) frame.getBody();
         assertEquals(referenceBody.getTimestampFormat(), body.getTimestampFormat());
 
@@ -71,7 +71,7 @@ public class FrameSYTCTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_SYNC_TEMPO);
+        frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_SYNC_TEMPO).get(0);
         FrameBodySYTC body = (FrameBodySYTC) frame.getBody();
         assertEquals(referenceBody.getTimestampFormat(), body.getTimestampFormat());
         assertEquals(referenceBody.getTempi(), body.getTempi());

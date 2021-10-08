@@ -30,7 +30,7 @@ public class CompressedTest extends AbstractTestCase
 
         assertTrue(v23tag.hasFrame(ID3v23Frames.FRAME_ID_V3_COMMENT));
 
-        ID3v23Frame frame = (ID3v23Frame) v23tag.getFrame(ID3v23Frames.FRAME_ID_V3_COMMENT);
+        ID3v23Frame frame = (ID3v23Frame) v23tag.getFrame(ID3v23Frames.FRAME_ID_V3_COMMENT).get(0);
         assertTrue(((ID3v23Frame.EncodingFlags) frame.getEncodingFlags()).isCompression());
         FrameBodyCOMM frameBody = (FrameBodyCOMM) frame.getBody();
         assertEquals(COMM_TEXT, frameBody.getText());
@@ -56,7 +56,7 @@ public class CompressedTest extends AbstractTestCase
 
         assertTrue(v23tag.hasFrame(ID3v23Frames.FRAME_ID_V3_ATTACHED_PICTURE));
 
-        ID3v23Frame frame = (ID3v23Frame) v23tag.getFrame(ID3v23Frames.FRAME_ID_V3_ATTACHED_PICTURE);
+        ID3v23Frame frame = (ID3v23Frame) v23tag.getFrame(ID3v23Frames.FRAME_ID_V3_ATTACHED_PICTURE).get(0);
         assertTrue(((ID3v23Frame.EncodingFlags) frame.getEncodingFlags()).isCompression());
         FrameBodyAPIC frameBody = (FrameBodyAPIC) frame.getBody();
         assertEquals("", frameBody.getDescription());
@@ -64,7 +64,7 @@ public class CompressedTest extends AbstractTestCase
 
         //Check got to end of frame
         assertTrue(v23tag.hasFrame(ID3v23Frames.FRAME_ID_V3_TITLE));
-        frame = (ID3v23Frame) v23tag.getFrame(ID3v23Frames.FRAME_ID_V3_TITLE);
+        frame = (ID3v23Frame) v23tag.getFrame(ID3v23Frames.FRAME_ID_V3_TITLE).get(0);
         FrameBodyTIT2 frameBodyTitle = (FrameBodyTIT2) frame.getBody();
         assertEquals(TITLE_TEXT, frameBodyTitle.getText());
     }
@@ -81,7 +81,7 @@ public class CompressedTest extends AbstractTestCase
         ID3v24Tag v24tag = (ID3v24Tag) mp3File.getID3v2Tag();
 
         assertTrue(v24tag.hasFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE ));
-        ID3v24Frame frame = (ID3v24Frame) v24tag.getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE);
+        ID3v24Frame frame = (ID3v24Frame) v24tag.getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE).get(0);
         assertTrue(((ID3v24Frame.EncodingFlags) frame.getEncodingFlags()).isCompression());
         assertEquals(27,v24tag.getFieldCount());
     }

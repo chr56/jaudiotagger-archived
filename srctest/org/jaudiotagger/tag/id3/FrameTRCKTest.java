@@ -83,7 +83,7 @@ public class FrameTRCKTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_TRACK);
+        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_TRACK).get(0);
         FrameBodyTRCK body = (FrameBodyTRCK) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
         assertEquals("1/11", ((FrameBodyTRCK) frame.getBody()).getText());
@@ -106,7 +106,7 @@ public class FrameTRCKTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_TRACK);
+        frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_TRACK).get(0);
         FrameBodyTRCK body = (FrameBodyTRCK) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
         assertEquals("", ((FrameBodyTRCK) frame.getBody()).getText());
@@ -119,7 +119,7 @@ public class FrameTRCKTest extends AbstractTestCase
         tag.setField(tag.createField(FieldKey.TRACK_TOTAL,"10"));
         assertEquals("1",tag.getFirst(FieldKey.TRACK));
         assertEquals("10",tag.getFirst(FieldKey.TRACK_TOTAL));
-        assertTrue(tag.getFrame("TRCK") instanceof AbstractID3v2Frame);
+        assertTrue(tag.getFrame("TRCK").get(0) instanceof AbstractID3v2Frame);
     }
 
 }

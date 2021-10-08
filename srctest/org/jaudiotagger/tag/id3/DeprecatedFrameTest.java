@@ -20,7 +20,7 @@ public class DeprecatedFrameTest extends AbstractTestCase
 
         MP3File mp3File = new MP3File(testFile);
 
-        ID3v24Frame v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_TYER);
+        ID3v24Frame v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_TYER).get(0);
         assertNotNull(v24frame);
         assertTrue(v24frame.getBody() instanceof FrameBodyDeprecated);
     }
@@ -32,7 +32,7 @@ public class DeprecatedFrameTest extends AbstractTestCase
         MP3File mp3File = new MP3File(testFile);
 
         ID3v23Tag v23Tag = new ID3v23Tag(mp3File.getID3v2Tag());
-        ID3v23Frame v23frame = (ID3v23Frame) ((List<?>)v23Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TYER)).get(0);
+        ID3v23Frame v23frame = (ID3v23Frame) (v23Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TYER).get(0));
         assertTrue(v23frame.getBody() instanceof FrameBodyTYER);
         v23frame = (ID3v23Frame) ((List<?>)v23Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TYER)).get(1);
         assertTrue(v23frame.getBody() instanceof FrameBodyTYER);
@@ -42,7 +42,7 @@ public class DeprecatedFrameTest extends AbstractTestCase
 
         mp3File = new MP3File(testFile);
         v23Tag = (ID3v23Tag) mp3File.getID3v2Tag();
-        v23frame = (ID3v23Frame) v23Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TYER);
+        v23frame = (ID3v23Frame) v23Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TYER).get(0);
         assertTrue(v23frame.getBody() instanceof FrameBodyTYER);
     }
 
@@ -51,7 +51,7 @@ public class DeprecatedFrameTest extends AbstractTestCase
         File testFile = AbstractTestCase.copyAudioToTmp("Issue122-1.id3", "testV1.mp3");
         MP3File mp3File = new MP3File(testFile);
         ID3v24Tag v24Tag = (ID3v24Tag) mp3File.getID3v2Tag();
-        ID3v24Frame v24frame = (ID3v24Frame) v24Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TIME);
+        ID3v24Frame v24frame = (ID3v24Frame) v24Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TIME).get(0);
         assertNotNull(v24frame);
         assertTrue(v24frame.getBody() instanceof FrameBodyDeprecated);
 
@@ -62,7 +62,7 @@ public class DeprecatedFrameTest extends AbstractTestCase
 
         mp3File = new MP3File(testFile);
         v23Tag = (ID3v23Tag) mp3File.getID3v2Tag();
-        ID3v23Frame v23frame = (ID3v23Frame) v23Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TIME);
+        ID3v23Frame v23frame = (ID3v23Frame) v23Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TIME).get(0);
         assertTrue(v23frame.getBody() instanceof FrameBodyTIME);
     }
 
@@ -71,7 +71,7 @@ public class DeprecatedFrameTest extends AbstractTestCase
         File testFile = AbstractTestCase.copyAudioToTmp("Issue122-2.id3", "testV1.mp3");
         MP3File mp3File = new MP3File(testFile);
         ID3v24Tag v24Tag = (ID3v24Tag) mp3File.getID3v2Tag();
-        ID3v24Frame v24frame = (ID3v24Frame) v24Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TDAT);
+        ID3v24Frame v24frame = (ID3v24Frame) v24Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TDAT).get(0);
         assertNotNull(v24frame);
         assertTrue(v24frame.getBody() instanceof FrameBodyDeprecated);
 
@@ -82,7 +82,7 @@ public class DeprecatedFrameTest extends AbstractTestCase
 
         mp3File = new MP3File(testFile);
         v23Tag = (ID3v23Tag) mp3File.getID3v2Tag();
-        Object v23frame = v23Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TYER);
+        Object v23frame = v23Tag.getFrame(ID3v23Frames.FRAME_ID_V3_TYER).get(0);
         assertNotNull(v23frame);
         assertTrue(((AbstractID3v2Frame)v23frame).getBody() instanceof FrameBodyTYER);
     }

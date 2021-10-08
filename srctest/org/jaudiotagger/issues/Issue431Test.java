@@ -36,7 +36,7 @@ public class Issue431Test extends AbstractTestCase
         assertEquals("1", tag.getFirst(FieldKey.TRACK));
 
         //Check the underlying frame
-        ID3v23Frame frame = (ID3v23Frame)((ID3v23Tag) tag).getFrame("TRCK");
+        ID3v23Frame frame = (ID3v23Frame)((ID3v23Tag) tag).getFrame("TRCK").get(0);
         ID3v23FrameBody frameBody = (ID3v23FrameBody)frame.getBody();
         FrameBodyTRCK frameBodyTrck = (FrameBodyTRCK)frameBody;
         assertEquals(frameBodyTrck.getText(),"1");
@@ -94,7 +94,7 @@ public class Issue431Test extends AbstractTestCase
         assertEquals("1", tag.getFirst(FieldKey.TRACK));
 
         //Check the underlying frame
-        ID3v23Frame frame = (ID3v23Frame)((ID3v23Tag) tag).getFrame("TRCK");
+        ID3v23Frame frame = (ID3v23Frame)((ID3v23Tag) tag).getFrame("TRCK").get(0);
         ID3v23FrameBody frameBody = (ID3v23FrameBody)frame.getBody();
         FrameBodyTRCK frameBodyTrck = (FrameBodyTRCK)frameBody;
         assertEquals(frameBodyTrck.getText(),"1");
@@ -119,7 +119,7 @@ public class Issue431Test extends AbstractTestCase
 
 
         //Check the underlying frame
-        frame = (ID3v23Frame)((ID3v23Tag) tag).getFrame("TRCK");
+        frame = (ID3v23Frame)((ID3v23Tag) tag).getFrame("TRCK").get(0);
         frameBody = (ID3v23FrameBody)frame.getBody();
         frameBodyTrck = (FrameBodyTRCK)frameBody;
         assertEquals(frameBodyTrck.getText(),"01");
@@ -285,7 +285,7 @@ public class Issue431Test extends AbstractTestCase
         assertEquals("1", tag.getFirst(FieldKey.DISC_NO));
 
         //Check the underlying frame
-        ID3v23Frame frame = (ID3v23Frame)((ID3v23Tag) tag).getFrame("TPOS");
+        ID3v23Frame frame = (ID3v23Frame)((ID3v23Tag) tag).getFrame("TPOS").get(0);
         ID3v23FrameBody frameBody = (ID3v23FrameBody)frame.getBody();
         FrameBodyTPOS frameBodyTpos = (FrameBodyTPOS)frameBody;
         assertEquals(frameBodyTpos.getText(),"1");
@@ -343,7 +343,7 @@ public class Issue431Test extends AbstractTestCase
         assertEquals("1", tag.getFirst(FieldKey.DISC_NO));
 
         //Check the underlying frame
-        ID3v23Frame frame = (ID3v23Frame)((ID3v23Tag) tag).getFrame("TPOS");
+        ID3v23Frame frame = (ID3v23Frame)((ID3v23Tag) tag).getFrame("TPOS").get(0);
         ID3v23FrameBody frameBody = (ID3v23FrameBody)frame.getBody();
         FrameBodyTPOS frameBodyTpos = (FrameBodyTPOS)frameBody;
         assertEquals(frameBodyTpos.getText(),"1");
@@ -368,7 +368,7 @@ public class Issue431Test extends AbstractTestCase
 
 
         //Check the underlying frame
-        frame = (ID3v23Frame)((ID3v23Tag) tag).getFrame("TPOS");
+        frame = (ID3v23Frame)((ID3v23Tag) tag).getFrame("TPOS").get(0);
         frameBody = (ID3v23FrameBody)frame.getBody();
         frameBodyTpos = (FrameBodyTPOS)frameBody;
         assertEquals(frameBodyTpos.getText(),"01");

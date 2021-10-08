@@ -132,7 +132,7 @@ public class Issue269Test extends AbstractTestCase
             ID3v23Tag id3v23Tag = (ID3v23Tag)af.getTag();            
             assertEquals(0,id3v23Tag.getPaddingSize());
 
-            AbstractID3v2Frame frame1 = (AbstractID3v2Frame)id3v23Tag.getFrame(ID3v23Frames.FRAME_ID_V3_COPYRIGHTINFO);
+            AbstractID3v2Frame frame1 = (AbstractID3v2Frame)id3v23Tag.getFrame(ID3v23Frames.FRAME_ID_V3_COPYRIGHTINFO).get(0);
             assertNotNull(frame1);
             assertEquals("",((FrameBodyTCOP)frame1.getBody()).getText());
 
@@ -140,7 +140,7 @@ public class Issue269Test extends AbstractTestCase
             //as a special encrypted frame.
             ID3v23Frame frame = (ID3v23Frame)id3v23Tag.getFrame(ID3v23Frames.FRAME_ID_V3_ENCODEDBY);
             assertNull(frame);
-            frame = (ID3v23Frame)id3v23Tag.getEncryptedFrame(ID3v23Frames.FRAME_ID_V3_ENCODEDBY);
+            frame = (ID3v23Frame)id3v23Tag.getEncryptedFrame(ID3v23Frames.FRAME_ID_V3_ENCODEDBY).get(0);
             assertNotNull(frame);
             assertEquals(0x22,frame.getEncryptionMethod());
             assertEquals(0,frame.getGroupIdentifier());
@@ -158,7 +158,7 @@ public class Issue269Test extends AbstractTestCase
             //The frame is preserved and still encrypted
             frame = (ID3v23Frame)id3v23Tag.getFrame(ID3v23Frames.FRAME_ID_V3_ENCODEDBY);
             assertNull(frame);
-            frame = (ID3v23Frame)id3v23Tag.getEncryptedFrame(ID3v23Frames.FRAME_ID_V3_ENCODEDBY);
+            frame = (ID3v23Frame)id3v23Tag.getEncryptedFrame(ID3v23Frames.FRAME_ID_V3_ENCODEDBY).get(0);
             assertNotNull(frame);
             //Encryption Method Preserved
             assertEquals(0x22,frame.getEncryptionMethod());

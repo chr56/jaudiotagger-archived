@@ -75,7 +75,7 @@ public class FrameETCOTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_EVENT_TIMING_CODES);
+        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_EVENT_TIMING_CODES).get(0);
         FrameBodyETCO body = (FrameBodyETCO) frame.getBody();
         assertEquals(referenceBody.getTimestampFormat(), body.getTimestampFormat());
 
@@ -108,7 +108,7 @@ public class FrameETCOTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_EVENT_TIMING_CODES);
+        frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_EVENT_TIMING_CODES).get(0);
         FrameBodyETCO body = (FrameBodyETCO) frame.getBody();
         assertEquals(referenceBody.getTimestampFormat(), body.getTimestampFormat());
         assertEquals(referenceBody.getTimingCodes(), body.getTimingCodes());

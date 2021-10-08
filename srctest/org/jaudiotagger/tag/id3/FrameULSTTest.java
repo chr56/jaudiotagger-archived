@@ -20,7 +20,7 @@ public class FrameULSTTest extends AbstractTestCase
         File testFile = AbstractTestCase.copyAudioToTmp("test23.mp3");
 
         MP3File mp3File = new MP3File(testFile);
-        ID3v24Frame v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_UNSYNC_LYRICS);
+        ID3v24Frame v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_UNSYNC_LYRICS).get(0);
 
         //Old method
         FrameBodyUSLT lyricsBody = (FrameBodyUSLT) v24frame.getBody();
@@ -38,7 +38,7 @@ public class FrameULSTTest extends AbstractTestCase
         File testFile = AbstractTestCase.copyAudioToTmp("test23.mp3");
 
         MP3File mp3File = new MP3File(testFile);
-        ID3v24Frame v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_UNSYNC_LYRICS);
+        ID3v24Frame v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_UNSYNC_LYRICS).get(0);
 
         //Get lyrics frame and modify
         FrameBodyUSLT lyricsBody = (FrameBodyUSLT) v24frame.getBody();
@@ -51,7 +51,7 @@ public class FrameULSTTest extends AbstractTestCase
 
         //Check normal values
         mp3File = new MP3File(testFile);
-        v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_UNSYNC_LYRICS);
+        v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_UNSYNC_LYRICS).get(0);
         lyricsBody = (FrameBodyUSLT) v24frame.getBody();
         assertEquals(Languages.DEFAULT_ID, lyricsBody.getLanguage());
         assertEquals("description", lyricsBody.getDescription());
@@ -62,7 +62,7 @@ public class FrameULSTTest extends AbstractTestCase
         lyricsBody.setLyric("lyric\u111F");
         mp3File.save();
         mp3File = new MP3File(testFile);
-        v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_UNSYNC_LYRICS);
+        v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_UNSYNC_LYRICS).get(0);
         lyricsBody = (FrameBodyUSLT) v24frame.getBody();
         assertEquals(Languages.DEFAULT_ID, lyricsBody.getLanguage());
         assertEquals("description", lyricsBody.getDescription());
@@ -73,7 +73,7 @@ public class FrameULSTTest extends AbstractTestCase
         lyricsBody.setDescription("");
         mp3File.save();
         mp3File = new MP3File(testFile);
-        v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_UNSYNC_LYRICS);
+        v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_UNSYNC_LYRICS).get(0);
         lyricsBody = (FrameBodyUSLT) v24frame.getBody();
         mp3File.save();
         assertEquals("", lyricsBody.getDescription());
@@ -100,7 +100,7 @@ public class FrameULSTTest extends AbstractTestCase
 
         //Check normal values
         mp3File = new MP3File(testFile);
-        v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_UNSYNC_LYRICS);
+        v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_UNSYNC_LYRICS).get(0);
         lyricsBody = (FrameBodyUSLT) v23frame.getBody();
         assertEquals(Languages.DEFAULT_ID, lyricsBody.getLanguage());
         assertEquals("description", lyricsBody.getDescription());
@@ -111,7 +111,7 @@ public class FrameULSTTest extends AbstractTestCase
         lyricsBody.setLyric("lyric");
         mp3File.save();
         mp3File = new MP3File(testFile);
-        v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_UNSYNC_LYRICS);
+        v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_UNSYNC_LYRICS).get(0);
         lyricsBody = (FrameBodyUSLT) v23frame.getBody();
         assertEquals("lyric", lyricsBody.getLyric());
         assertEquals(0, lyricsBody.getTextEncoding());
@@ -120,7 +120,7 @@ public class FrameULSTTest extends AbstractTestCase
         lyricsBody.setLyric("lyric\u111F");
         mp3File.save();
         mp3File = new MP3File(testFile);
-        v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_UNSYNC_LYRICS);
+        v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_UNSYNC_LYRICS).get(0);
         lyricsBody = (FrameBodyUSLT) v23frame.getBody();
         assertEquals(Languages.DEFAULT_ID, lyricsBody.getLanguage());
         assertEquals("description", lyricsBody.getDescription());
@@ -131,7 +131,7 @@ public class FrameULSTTest extends AbstractTestCase
         lyricsBody.setDescription("");
         mp3File.save();
         mp3File = new MP3File(testFile);
-        v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_UNSYNC_LYRICS);
+        v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_UNSYNC_LYRICS).get(0);
         lyricsBody = (FrameBodyUSLT) v23frame.getBody();
         mp3File.save();
         assertEquals("", lyricsBody.getDescription());
@@ -158,7 +158,7 @@ public class FrameULSTTest extends AbstractTestCase
 
         //Check normal values
         mp3File = new MP3File(testFile);
-        v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_UNSYNC_LYRICS);
+        v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_UNSYNC_LYRICS).get(0);
         lyricsBody = (FrameBodyUSLT) v23frame.getBody();
         assertEquals(Languages.DEFAULT_ID, lyricsBody.getLanguage());
         assertEquals("", lyricsBody.getDescription());
@@ -191,7 +191,7 @@ public class FrameULSTTest extends AbstractTestCase
 
         //Check normal values
         mp3File = new MP3File(testFile);
-        ID3v23Frame v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_UNSYNC_LYRICS);
+        ID3v23Frame v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_UNSYNC_LYRICS).get(0);
         lyricsBody = (FrameBodyUSLT) v23frame.getBody();
         assertEquals(Languages.DEFAULT_ID, lyricsBody.getLanguage());
         assertEquals("", lyricsBody.getDescription());
@@ -224,7 +224,7 @@ public class FrameULSTTest extends AbstractTestCase
 
         //Check normal values
         mp3File = new MP3File(testFile);
-        ID3v23Frame v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_UNSYNC_LYRICS);
+        ID3v23Frame v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_UNSYNC_LYRICS).get(0);
         lyricsBody = (FrameBodyUSLT) v23frame.getBody();
         assertEquals(Languages.DEFAULT_ID, lyricsBody.getLanguage());
         assertEquals("", lyricsBody.getDescription());
@@ -236,7 +236,7 @@ public class FrameULSTTest extends AbstractTestCase
         mp3File.save();
 
         mp3File = new MP3File(testFile);
-        v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_UNSYNC_LYRICS);
+        v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_UNSYNC_LYRICS).get(0);
         assertEquals(1, lyricsBody.getTextEncoding());
 
     }

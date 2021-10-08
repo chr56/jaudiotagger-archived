@@ -22,7 +22,7 @@ public class FrameTPOSTest extends AbstractTestCase
         tag.setField(tag.createField(FieldKey.DISC_TOTAL,"10"));
         assertEquals("1",tag.getFirst(FieldKey.DISC_NO));
         assertEquals("10",tag.getFirst(FieldKey.DISC_TOTAL));
-        assertTrue(tag.getFrame("TPOS") instanceof AbstractID3v2Frame);
+        assertTrue(tag.getFrame("TPOS").get(0) instanceof AbstractID3v2Frame);
     }
 
     public void testDiscNo()

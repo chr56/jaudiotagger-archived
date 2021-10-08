@@ -90,7 +90,7 @@ public class FramePOPMTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_POPULARIMETER);
+        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_POPULARIMETER).get(0);
         FrameBodyPOPM body = (FrameBodyPOPM) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
         assertEquals(FrameBodyPOPMTest.POPM_EMAIL, body.getEmailToUser());
@@ -114,7 +114,7 @@ public class FramePOPMTest extends AbstractTestCase
 
         //Reload
         mp3File = new MP3File(testFile);
-        frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_POPULARIMETER);
+        frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_POPULARIMETER).get(0);
         FrameBodyPOPM body = (FrameBodyPOPM) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
         assertEquals("", body.getEmailToUser());
@@ -127,7 +127,7 @@ public class FramePOPMTest extends AbstractTestCase
         File testFile = AbstractTestCase.copyAudioToTmp("Issue72.id3", "testV1.mp3");
 
         MP3File mp3File = new MP3File(testFile);
-        ID3v23Frame frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_POPULARIMETER);
+        ID3v23Frame frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_POPULARIMETER).get(0);
         FrameBodyPOPM body = (FrameBodyPOPM) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
         assertEquals(ISSUE_72_TEST_EMAIL, body.getEmailToUser());

@@ -125,7 +125,7 @@ public void testCreateID3v22Frame()
 
         //Reload
         mp3File = new MP3File(testFile);
-        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_MOOD);
+        ID3v24Frame frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_MOOD).get(0);
         FrameBodyTMOO body = (FrameBodyTMOO) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
     }
@@ -146,7 +146,7 @@ public void testCreateID3v22Frame()
 
         //Reload
         mp3File = new MP3File(testFile);
-        frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_MOOD);
+        frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_MOOD).get(0);
         FrameBodyTMOO body = (FrameBodyTMOO) frame.getBody();
         assertEquals(TextEncoding.ISO_8859_1, body.getTextEncoding());
     }
@@ -226,7 +226,7 @@ public void testCreateID3v22Frame()
             System.out.println("kkk" + ((ID3v24Frame) i.next()).getIdentifier());
         }
         assertEquals(1, v24Tag.getFieldCount());
-        ID3v24Frame v24frame = (ID3v24Frame)v24Tag.getFrame("TMOO");
+        ID3v24Frame v24frame = (ID3v24Frame)v24Tag.getFrame("TMOO").get(0);
         assertTrue(v24frame.getBody() instanceof FrameBodyTMOO); 
         FrameBodyTMOO v24framebody = (FrameBodyTMOO)v24frame.getBody();
         assertEquals("Tranquil",v24framebody.getText());
@@ -269,7 +269,7 @@ public void testCreateID3v22Frame()
             System.out.println("kkk" + ((ID3v24Frame) i.next()).getIdentifier());
         }
         assertEquals(2, v24Tag.getFieldCount());
-        ID3v24Frame v24frame = (ID3v24Frame)v24Tag.getFrame("TMOO");
+        ID3v24Frame v24frame = (ID3v24Frame)v24Tag.getFrame("TMOO").get(0);
         assertNotNull(v24frame);
         assertTrue(v24frame.getBody() instanceof FrameBodyTMOO);
         FrameBodyTMOO v24framebody = (FrameBodyTMOO)v24frame.getBody();

@@ -64,7 +64,7 @@ public class FrameCOMMTest extends AbstractTestCase
 
             assertTrue(mp3File.getID3v2Tag().hasFrame("COMM"));
 
-            ID3v24Frame commFrame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame("COMM");
+            ID3v24Frame commFrame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame("COMM").get(0);
             FrameBodyCOMM frameBody = (FrameBodyCOMM) commFrame.getBody();
 
             assertEquals(INVALID_LANG_CODE, frameBody.getLanguage());
@@ -91,14 +91,14 @@ public class FrameCOMMTest extends AbstractTestCase
             //Read tag
             File testFile = AbstractTestCase.copyAudioToTmp("Issue108.id3", "testV1.mp3");
             MP3File mp3File = new MP3File(testFile);
-            ID3v24Frame commFrame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame("COMM");
+            ID3v24Frame commFrame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame("COMM").get(0);
             FrameBodyCOMM frameBody = (FrameBodyCOMM) commFrame.getBody();
 
             //Set language to null, this is common problem for new frames might null lang codes
             frameBody.setLanguage(null);
             mp3File.save();
             mp3File = new MP3File(testFile);
-            commFrame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame("COMM");
+            commFrame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame("COMM").get(0);
             frameBody = (FrameBodyCOMM) commFrame.getBody();
             assertEquals(SAFE_LANG_CODE, frameBody.getLanguage());
 
@@ -106,7 +106,7 @@ public class FrameCOMMTest extends AbstractTestCase
             frameBody.setLanguage("aa");
             mp3File.save();
             mp3File = new MP3File(testFile);
-            commFrame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame("COMM");
+            commFrame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame("COMM").get(0);
             frameBody = (FrameBodyCOMM) commFrame.getBody();
             assertEquals(SAFE_LONGER_LANG_CODE, frameBody.getLanguage());
 
@@ -114,7 +114,7 @@ public class FrameCOMMTest extends AbstractTestCase
             frameBody.setLanguage("aaaaaaa");
             mp3File.save();
             mp3File = new MP3File(testFile);
-            commFrame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame("COMM");
+            commFrame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame("COMM").get(0);
             frameBody = (FrameBodyCOMM) commFrame.getBody();
             assertEquals(SAFE_SHORTER_LANG_CODE, frameBody.getLanguage());
 

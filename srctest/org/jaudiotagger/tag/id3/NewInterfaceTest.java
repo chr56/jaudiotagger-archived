@@ -267,7 +267,7 @@ public class NewInterfaceTest extends TestCase
         assertEquals(1, af.getTag().getFields(FieldKey.ALBUM).size());
 
         //Read back album (old method)
-        AbstractID3v2Frame checkframe = (AbstractID3v2Frame) ((MP3File) af).getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ALBUM);
+        AbstractID3v2Frame checkframe = (AbstractID3v2Frame) ((MP3File) af).getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ALBUM).get(0);
         assertEquals(ALBUM_TEST_STRING, ((FrameBodyTALB) checkframe.getBody()).getText());
 
         //If addField again, the value gets appended using the null char sperator system
@@ -330,7 +330,7 @@ public class NewInterfaceTest extends TestCase
 
         //By default comments are created with empty description because this is what expected
         //by plyers such as iTunes.
-        ID3v24Frame commentFrame = (ID3v24Frame) ((ID3v24Tag) af.getTag()).getFrame("COMM");
+        ID3v24Frame commentFrame = (ID3v24Frame) ((ID3v24Tag) af.getTag()).getFrame("COMM").get(0);
         FrameBodyCOMM fb = (FrameBodyCOMM) commentFrame.getBody();
         assertEquals("", fb.getDescription());
         assertEquals("Comment", fb.getText());
@@ -410,7 +410,7 @@ public class NewInterfaceTest extends TestCase
         af.getTag().setField(af.getTag().createField(FieldKey.MUSICIP_ID, "musicip_id"));
         af.commit();
         af = AudioFileIO.read(testFile);
-        assertEquals(2, ((List<?>) ((ID3v24Tag) af.getTag()).getFrame("TXXX")).size());
+        assertEquals(2, ((ID3v24Tag) af.getTag()).getFrame("TXXX").size());
         assertEquals("musicip_id", af.getTag().getFirst(FieldKey.MUSICIP_ID));
         assertEquals("musicip_id", ((ID3v24Tag) af.getTag()).getFirst(ID3v24FieldKey.MUSICIP_ID));
         assertEquals(1, af.getTag().getFields(FieldKey.MUSICIP_ID).size());
@@ -421,7 +421,7 @@ public class NewInterfaceTest extends TestCase
         af.getTag().setField(af.getTag().createField(FieldKey.MUSICBRAINZ_RELEASEID, "releaseid"));
         af.commit();
         af = AudioFileIO.read(testFile);
-        assertEquals(3, ((List<?>) ((ID3v24Tag) af.getTag()).getFrame("TXXX")).size());
+        assertEquals(3, ((ID3v24Tag) af.getTag()).getFrame("TXXX").size());
         assertEquals("musicip_id", af.getTag().getFirst(FieldKey.MUSICIP_ID));
         assertEquals("releaseid", af.getTag().getFirst(FieldKey.MUSICBRAINZ_RELEASEID));
         assertEquals("releaseid",((TagTextField)af.getTag().getFirstField(FieldKey.MUSICBRAINZ_RELEASEID)).getContent());
@@ -435,7 +435,7 @@ public class NewInterfaceTest extends TestCase
         af.getTag().deleteField(FieldKey.MUSICBRAINZ_RELEASEID);
         af.commit();
         af = AudioFileIO.read(testFile);
-        assertEquals(2, ((List<?>) ((ID3v24Tag) af.getTag()).getFrame("TXXX")).size());
+        assertEquals(2, ((ID3v24Tag) af.getTag()).getFrame("TXXX").size());
         assertEquals(1, af.getTag().getFields(FieldKey.MUSICIP_ID).size());
         assertEquals(1, af.getTag().getFields(FieldKey.AMAZON_ID).size());
         assertEquals(9, af.getTag().getFieldCount());
@@ -595,7 +595,7 @@ public class NewInterfaceTest extends TestCase
         assertEquals(1, af.getTag().getFields(FieldKey.ALBUM).size());
 
         //Read back album (old method)
-        AbstractID3v2Frame checkframe = (AbstractID3v2Frame) ((MP3File) af).getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ALBUM);
+        AbstractID3v2Frame checkframe = (AbstractID3v2Frame) ((MP3File) af).getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_ALBUM).get(0);
         assertEquals(ALBUM_TEST_STRING, ((FrameBodyTALB) checkframe.getBody()).getText());
 
         //If add smae field again appended to existiong frame
@@ -841,7 +841,7 @@ public class NewInterfaceTest extends TestCase
         assertEquals(1, af.getTag().getFields(FieldKey.ALBUM).size());
 
         //Read back album (old method)
-        AbstractID3v2Frame checkframe = (AbstractID3v2Frame) ((MP3File) af).getID3v2Tag().getFrame(ID3v22Frames.FRAME_ID_V2_ALBUM);
+        AbstractID3v2Frame checkframe = (AbstractID3v2Frame) ((MP3File) af).getID3v2Tag().getFrame(ID3v22Frames.FRAME_ID_V2_ALBUM).get(0);
         assertEquals(ALBUM_TEST_STRING, ((FrameBodyTALB) checkframe.getBody()).getText());
 
         //If add extra text field its appended to existing frame
@@ -1037,7 +1037,7 @@ public class NewInterfaceTest extends TestCase
 
         //COMM
         {
-            ID3v24Frame commentFrame = (ID3v24Frame) ((ID3v24Tag) af.getTag()).getFrame("COMM");
+            ID3v24Frame commentFrame = (ID3v24Frame) ((ID3v24Tag) af.getTag()).getFrame("COMM").get(0);
             FrameBodyCOMM fb = (FrameBodyCOMM) commentFrame.getBody();
             assertEquals("", fb.getDescription());
             assertEquals("Comment", fb.getText());
@@ -1081,7 +1081,7 @@ public class NewInterfaceTest extends TestCase
             frame = new ID3v24Frame(ID3v24Frames.FRAME_ID_USER_DEFINED_INFO);
             ((FrameBodyTXXX) frame.getBody()).setText("UserDefined");
             tag.setFrame(frame);
-            ID3v24Frame txxxFrame = (ID3v24Frame) tag.getFrame("TXXX");
+            ID3v24Frame txxxFrame = (ID3v24Frame) tag.getFrame("TXXX").get(0);
             FrameBodyTXXX fb = (FrameBodyTXXX) txxxFrame.getBody();
             assertEquals("", fb.getDescription());
             assertEquals("UserDefined", fb.getText());
@@ -1110,16 +1110,16 @@ public class NewInterfaceTest extends TestCase
             frame = new ID3v24Frame(ID3v24Frames.FRAME_ID_UNIQUE_FILE_ID);
             ((FrameBodyUFID) frame.getBody()).setOwner("owner");
             tag.setFrame(frame);
-            ID3v24Frame ufidFrame = (ID3v24Frame) tag.getFrame("UFID");
+            ID3v24Frame ufidFrame = (ID3v24Frame) tag.getFrame("UFID").get(0);
             FrameBodyUFID fb = (FrameBodyUFID) ufidFrame.getBody();
             assertEquals("owner", fb.getOwner());
 
             //Because has different owner the following setField will addField another ufid rather than overwriting the first one
             af.getTag().setField(af.getTag().createField(FieldKey.MUSICBRAINZ_TRACK_ID, "abcdef-ghijklmn"));
-            assertEquals(2, ((List<?>) tag.getFrame("UFID")).size());
+            assertEquals(2, tag.getFrame("UFID").size());
             //Now adding UFID with same owner so gets overwritten
             af.getTag().setField(af.getTag().createField(FieldKey.MUSICBRAINZ_TRACK_ID, "abcfffff"));
-            assertEquals(2, ((List<?>) tag.getFrame("UFID")).size());
+            assertEquals(2, tag.getFrame("UFID").size());
 
             //Try deleting some of these
             tag.removeFrame("UFID");
@@ -1132,19 +1132,19 @@ public class NewInterfaceTest extends TestCase
             frame = new ID3v24Frame(ID3v24Frames.FRAME_ID_UNSYNC_LYRICS);
             ((FrameBodyUSLT) frame.getBody()).setDescription("lyrics1");
             tag.setFrame(frame);
-            ID3v24Frame usltFrame = (ID3v24Frame) tag.getFrame("USLT");
+            ID3v24Frame usltFrame = (ID3v24Frame) tag.getFrame("USLT").get(0);
             FrameBodyUSLT fb = (FrameBodyUSLT) usltFrame.getBody();
             assertEquals("lyrics1", fb.getDescription());
 
             //Because has different desc the following setField will addField another uslt rather than overwriting the first one
             af.getTag().setField(af.getTag().createField(FieldKey.LYRICS, "abcdef-ghijklmn"));
-            assertEquals(2, ((List<?>) tag.getFrame("USLT")).size());
+            assertEquals(2, tag.getFrame("USLT").size());
             assertEquals(2, af.getTag().getFields(FieldKey.LYRICS).size());
-            frame = (ID3v24Frame) ((List<?>) tag.getFrame("USLT")).get(1);
+            frame = (ID3v24Frame) tag.getFrame("USLT").get(1);
             assertEquals("", ((FrameBodyUSLT) frame.getBody()).getDescription());
             //Now adding USLT with same description so gets overwritten
             af.getTag().setField(af.getTag().createField(FieldKey.LYRICS, "abcfffff"));
-            assertEquals(2, ((List<?>) tag.getFrame("USLT")).size());
+            assertEquals(2, tag.getFrame("USLT").size());
             assertEquals(2, af.getTag().getFields(FieldKey.LYRICS).size());
 
         }
@@ -1155,7 +1155,7 @@ public class NewInterfaceTest extends TestCase
             frame = new ID3v24Frame(ID3v24Frames.FRAME_ID_POPULARIMETER);
             ((FrameBodyPOPM) frame.getBody()).setEmailToUser("paultaylor@jthink.net");
             tag.setFrame(frame);
-            ID3v24Frame popmFrame = (ID3v24Frame) tag.getFrame("POPM");
+            ID3v24Frame popmFrame = (ID3v24Frame) tag.getFrame("POPM").get(0);
             FrameBodyPOPM fb = (FrameBodyPOPM) popmFrame.getBody();
             assertEquals("paultaylor@jthink.net", fb.getEmailToUser());
         }

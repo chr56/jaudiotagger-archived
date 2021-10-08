@@ -33,11 +33,11 @@ public class UnsynchronizationTest extends AbstractTestCase
         ID3v24Tag v24tag = (ID3v24Tag) mp3File.getID3v2Tag();
         assertFalse(v24tag.isUnsynchronization());
 
-        ID3v24Frame v24TitleFrame = (ID3v24Frame) v24tag.getFrame(ID3v24Frames.FRAME_ID_TITLE);
+        ID3v24Frame v24TitleFrame = (ID3v24Frame) v24tag.getFrame(ID3v24Frames.FRAME_ID_TITLE).get(0);
         assertNotNull(v24TitleFrame);
         assertFalse(((ID3v24Frame.EncodingFlags) v24TitleFrame.getEncodingFlags()).isUnsynchronised());
 
-        ID3v24Frame v24Imageframe = (ID3v24Frame) v24tag.getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE);
+        ID3v24Frame v24Imageframe = (ID3v24Frame) v24tag.getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE).get(0);
         assertNotNull(v24Imageframe);
         assertTrue(((ID3v24Frame.EncodingFlags) v24Imageframe.getEncodingFlags()).isUnsynchronised());
         v24Imageframe.getBody();
@@ -51,12 +51,12 @@ public class UnsynchronizationTest extends AbstractTestCase
         assertEquals(AbstractID3v2Tag.getV2TagSizeIfExists(testFile), mp3File.getMP3AudioHeader().getMp3StartByte());
 
 
-        v24TitleFrame = (ID3v24Frame) v24tag.getFrame(ID3v24Frames.FRAME_ID_TITLE);
+        v24TitleFrame = (ID3v24Frame) v24tag.getFrame(ID3v24Frames.FRAME_ID_TITLE).get(0);
         assertNotNull(v24TitleFrame);
         assertFalse(((ID3v24Frame.EncodingFlags) v24TitleFrame.getEncodingFlags()).isUnsynchronised());
 
 
-        v24Imageframe = (ID3v24Frame) v24tag.getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE);
+        v24Imageframe = (ID3v24Frame) v24tag.getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE).get(0);
         assertNotNull(v24Imageframe);
         v24Imageframe.getBody();
         assertFalse(((ID3v24Frame.EncodingFlags) v24Imageframe.getEncodingFlags()).isUnsynchronised());
@@ -70,11 +70,11 @@ public class UnsynchronizationTest extends AbstractTestCase
         assertEquals(AbstractID3v2Tag.getV2TagSizeIfExists(testFile), mp3File.getMP3AudioHeader().getMp3StartByte());
 
         //this does not need unsynchronizing, even though now enabled
-        v24TitleFrame = (ID3v24Frame) v24tag.getFrame(ID3v24Frames.FRAME_ID_TITLE);
+        v24TitleFrame = (ID3v24Frame) v24tag.getFrame(ID3v24Frames.FRAME_ID_TITLE).get(0);
         assertNotNull(v24TitleFrame);
         assertFalse(((ID3v24Frame.EncodingFlags) v24TitleFrame.getEncodingFlags()).isUnsynchronised());
 
-        v24Imageframe = (ID3v24Frame) v24tag.getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE);
+        v24Imageframe = (ID3v24Frame) v24tag.getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE).get(0);
         assertNotNull(v24Imageframe);
         v24Imageframe.getBody();
         assertTrue(((ID3v24Frame.EncodingFlags) v24Imageframe.getEncodingFlags()).isUnsynchronised());

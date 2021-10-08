@@ -44,7 +44,7 @@ public class ItunesTest extends AbstractTestCase
 
         MP3File mp3File = new MP3File(testFile);
 
-        ID3v24Frame v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE);
+        ID3v24Frame v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE).get(0);
         assertNotNull(v24frame);
         FrameBodyAPIC fb = (FrameBodyAPIC) v24frame.getBody();
         assertEquals(FRAME_SIZE, fb.getSize());
@@ -62,7 +62,7 @@ public class ItunesTest extends AbstractTestCase
 
         MP3File mp3File = new MP3File(testFile);
 
-        ID3v24Frame v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE);
+        ID3v24Frame v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE).get(0);
         assertNotNull(v24frame);
         FrameBodyAPIC fb = (FrameBodyAPIC) v24frame.getBody();
         assertEquals(FRAME_SIZE2, fb.getSize());
@@ -81,7 +81,7 @@ public class ItunesTest extends AbstractTestCase
 
         MP3File mp3File = new MP3File(testFile);
 
-        ID3v24Frame v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE);
+        ID3v24Frame v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE).get(0);
         assertNotNull(v24frame);
         v24frame.getBody();
     }
@@ -98,7 +98,7 @@ public class ItunesTest extends AbstractTestCase
 
         MP3File mp3File = new MP3File(testFile);
 
-        ID3v24Frame v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE);
+        ID3v24Frame v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ATTACHED_PICTURE).get(0);
         assertNotNull(v24frame);
         FrameBodyAPIC fb = (FrameBodyAPIC) v24frame.getBody();
         assertEquals(FRAME_SIZE, fb.getSize());
@@ -116,7 +116,7 @@ public class ItunesTest extends AbstractTestCase
 
         MP3File mp3File = new MP3File(testFile);
 
-        ID3v24Frame v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ARTIST);
+        ID3v24Frame v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ARTIST).get(0);
         assertNotNull(v24frame);
         FrameBodyTPE1 fb = (FrameBodyTPE1) v24frame.getBody();
         assertEquals(STRING_LENGTH_WITH_NULL, fb.getText().length());
@@ -126,7 +126,7 @@ public class ItunesTest extends AbstractTestCase
         TagOptionSingleton.getInstance().setRemoveTrailingTerminatorOnWrite(false);
         mp3File.save();
         mp3File = new MP3File(testFile);
-        v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ARTIST);
+        v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ARTIST).get(0);
         fb = (FrameBodyTPE1) v24frame.getBody();
         assertEquals(STRING_LENGTH_WITH_NULL, fb.getText().length());
         assertEquals(STRING_LENGTH_WITHOUT_NULL, fb.getFirstTextValue().length());
@@ -135,7 +135,7 @@ public class ItunesTest extends AbstractTestCase
         TagOptionSingleton.getInstance().setRemoveTrailingTerminatorOnWrite(true);
         mp3File.save();
         mp3File = new MP3File(testFile);
-        v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ARTIST);
+        v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ARTIST).get(0);
         fb = (FrameBodyTPE1) v24frame.getBody();
         assertEquals(STRING_LENGTH_WITHOUT_NULL, fb.getText().length());
         assertEquals(STRING_LENGTH_WITHOUT_NULL, fb.getFirstTextValue().length());
@@ -148,7 +148,7 @@ public class ItunesTest extends AbstractTestCase
         mp3File.save();
 
         mp3File = new MP3File(testFile);
-        v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ARTIST);
+        v24frame = (ID3v24Frame) mp3File.getID3v2Tag().getFrame(ID3v24Frames.FRAME_ID_ARTIST).get(0);
         fb = (FrameBodyTPE1) v24frame.getBody();
         assertEquals(2, fb.getNumberOfValues());
         assertEquals(STRING_LENGTH_WITHOUT_NULL + TERMINATOR_LENGTH + SECOND_VALUE.length(), fb.getText().length());
@@ -165,7 +165,7 @@ public class ItunesTest extends AbstractTestCase
         MP3File mp3File = new MP3File(testFile);
 
 
-        ID3v23Frame v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_COMMENT);
+        ID3v23Frame v23frame = (ID3v23Frame) mp3File.getID3v2Tag().getFrame(ID3v23Frames.FRAME_ID_V3_COMMENT).get(0);
         assertNotNull(v23frame);
         FrameBodyCOMM fb = (FrameBodyCOMM) v23frame.getBody();
         assertEquals(EMPTY_VALUE, fb.getText());
