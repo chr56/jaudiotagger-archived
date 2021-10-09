@@ -79,22 +79,3 @@ http://www.jthink.net/jaudiotagger/maven/cobertura/index.html
 Jaudiotagger uses http://drone.io for continuous integration, the latest artifacts can be downloaded from
 
 https://drone.io/bitbucket.org/ijabz/jaudiotagger/files
-
-To use in your own project starting with Jaudiotagger 2.2.3 as final versions are
-released they are now available in a maven repository on bintray.
-
-I.e update your `pom.xml` as follows to use release 2.2.3:
-
-    <repositories>
-        <repository>
-            <id>jaudiotagger-repository</id>
-            <url>https://dl.bintray.com/ijabz/maven</url>
-        </repository>
-    </repositories>
-    <dependencies>
-        <dependency>
-            <groupId>net.jthink</groupId>
-            <artifactId>jaudiotagger</artifactId>
-            <version>2.2.3</version>
-        </dependency>
-    </dependencies>
