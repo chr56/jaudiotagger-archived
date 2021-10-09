@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6ab1c14-6cd1-42fd-af1f-7ac1a83b7f78" name="Default" comment="#333:For ID3 rename PRODUCER, ARRANGER, ENGINEER, DJMIXER and MIXER to PRODUCER_INVOLVEDPEOPLE etc that will continue to write to TIPL/IPLS">
-      <change afterPath="$PROJECT_DIR$/srctest/org/jaudiotagger/issues/Issue335aTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/srctest/org/jaudiotagger/tag/id3/FrameIPLSTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CHANGES.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGES.txt" afterDir="false" />
+    <list default="true" id="c6ab1c14-6cd1-42fd-af1f-7ac1a83b7f78" name="Default" comment="Added sonatype plugin as described at">
+      <change beforePath="$PROJECT_DIR$/jaudiotagger.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaudiotagger.iws" beforeDir="false" afterPath="$PROJECT_DIR$/jaudiotagger.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/jaudiotagger/tag/id3/ID3v24Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/jaudiotagger/tag/id3/ID3v24Tag.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +145,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/jaudiotagger.ipr" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -174,7 +171,7 @@
       <recent name="C:\Code\jthink\opensrc\jaudiotagger\testdata" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.FrameTIPLTest">
+  <component name="RunManager" selected="JUnit.Issue390Test">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -284,44 +281,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FrameIPLSTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="jaudiotagger" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.jaudiotagger.tag.id3.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.jaudiotagger.tag.id3" />
-      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.tag.id3.FrameIPLSTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FrameTIPLTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="jaudiotagger" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.jaudiotagger.tag.id3.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.jaudiotagger.tag.id3" />
-      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.tag.id3.FrameTIPLTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Issue164Test.testReadWriteMp4With64BitMDatLength" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="jaudiotagger" />
       <option name="PACKAGE_NAME" value="org.jaudiotagger.issues" />
@@ -354,6 +313,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Issue335Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jaudiotagger" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.jaudiotagger.issues.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.jaudiotagger.issues" />
+      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.issues.Issue335Test" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Issue335aTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="jaudiotagger" />
       <extension name="coverage">
@@ -373,7 +351,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Issue335aTest.testConvertV23v24_v1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Issue390Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="jaudiotagger" />
       <extension name="coverage">
         <pattern>
@@ -382,8 +360,27 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.jaudiotagger.issues" />
-      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.issues.Issue335aTest" />
-      <option name="METHOD_NAME" value="testConvertV23v24_v1" />
+      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.issues.Issue390Test" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Issue390Test.testIssue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jaudiotagger" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.jaudiotagger.issues.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.jaudiotagger.issues" />
+      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.issues.Issue390Test" />
+      <option name="METHOD_NAME" value="testIssue" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
@@ -393,7 +390,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Issue335aTest.testConvertV23v24_v2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Issue450Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="jaudiotagger" />
       <extension name="coverage">
         <pattern>
@@ -402,9 +399,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.jaudiotagger.issues" />
-      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.issues.Issue335aTest" />
-      <option name="METHOD_NAME" value="testConvertV23v24_v2" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="org.jaudiotagger.issues.Issue450Test" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
@@ -449,19 +445,19 @@
       <item itemvalue="JUnit.Issue180Test.testWriteIDv22AifForITunes12_6" />
       <item itemvalue="JUnit.AiffAudioTagTest.testReadAiff3" />
       <item itemvalue="JUnit.AiffAudioTagTest" />
-      <item itemvalue="JUnit.FrameIPLSTest" />
-      <item itemvalue="JUnit.Issue335aTest.testConvertV23v24_v1" />
-      <item itemvalue="JUnit.Issue335aTest.testConvertV23v24_v2" />
       <item itemvalue="JUnit.Issue335aTest" />
-      <item itemvalue="JUnit.FrameTIPLTest" />
+      <item itemvalue="JUnit.Issue335Test" />
+      <item itemvalue="JUnit.Issue450Test" />
+      <item itemvalue="JUnit.Issue390Test" />
+      <item itemvalue="JUnit.Issue390Test.testIssue" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.FrameTIPLTest" />
+        <item itemvalue="JUnit.Issue390Test" />
+        <item itemvalue="JUnit.Issue390Test.testIssue" />
+        <item itemvalue="JUnit.Issue450Test" />
+        <item itemvalue="JUnit.Issue335Test" />
         <item itemvalue="JUnit.Issue335aTest" />
-        <item itemvalue="JUnit.FrameIPLSTest" />
-        <item itemvalue="JUnit.Issue335aTest.testConvertV23v24_v2" />
-        <item itemvalue="JUnit.Issue335aTest.testConvertV23v24_v1" />
       </list>
     </recent_temporary>
   </component>
@@ -480,146 +476,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1410537432863</updated>
-    </task>
-    <task id="LOCAL-00193" summary="testdata">
-      <created>1569595481256</created>
-      <option name="number" value="00193" />
-      <option name="presentableId" value="LOCAL-00193" />
-      <option name="project" value="LOCAL" />
-      <updated>1569595481256</updated>
-    </task>
-    <task id="LOCAL-00194" summary="Test  file for Issue299">
-      <created>1569596365256</created>
-      <option name="number" value="00194" />
-      <option name="presentableId" value="LOCAL-00194" />
-      <option name="project" value="LOCAL" />
-      <updated>1569596365256</updated>
-    </task>
-    <task id="LOCAL-00195" summary="#300:BufferUnderFlow reading odd sized comment chunk but missing extra byte">
-      <created>1575832901384</created>
-      <option name="number" value="00195" />
-      <option name="presentableId" value="LOCAL-00195" />
-      <option name="project" value="LOCAL" />
-      <updated>1575832901384</updated>
-    </task>
-    <task id="LOCAL-00196" summary="#71:Mp4 Rewrite AudioFIleWriter so doesn't use temporary files.">
-      <created>1584775184429</created>
-      <option name="number" value="00196" />
-      <option name="presentableId" value="LOCAL-00196" />
-      <option name="project" value="LOCAL" />
-      <updated>1584775184429</updated>
-    </task>
-    <task id="LOCAL-00197" summary="If Mp4 data needs moving now writes in chunks so large files continute to work with low memory systems.">
-      <created>1585132974414</created>
-      <option name="number" value="00197" />
-      <option name="presentableId" value="LOCAL-00197" />
-      <option name="project" value="LOCAL" />
-      <updated>1585132974414</updated>
-    </task>
-    <task id="LOCAL-00198" summary="#071:Rewrite Mp4TagWriter to not use tmp files">
-      <created>1585148606272</created>
-      <option name="number" value="00198" />
-      <option name="presentableId" value="LOCAL-00198" />
-      <option name="project" value="LOCAL" />
-      <updated>1585148606272</updated>
-    </task>
-    <task id="LOCAL-00199" summary="#71:Mp4 tag Writer, no need for tmp files">
-      <created>1585154117422</created>
-      <option name="number" value="00199" />
-      <option name="presentableId" value="LOCAL-00199" />
-      <option name="project" value="LOCAL" />
-      <updated>1585154117422</updated>
-    </task>
-    <task id="LOCAL-00200" summary="#247:Now able to save file">
-      <created>1585160044328</created>
-      <option name="number" value="00200" />
-      <option name="presentableId" value="LOCAL-00200" />
-      <option name="project" value="LOCAL" />
-      <updated>1585160044328</updated>
-    </task>
-    <task id="LOCAL-00201" summary="#277:Added test">
-      <created>1585208661697</created>
-      <option name="number" value="00201" />
-      <option name="presentableId" value="LOCAL-00201" />
-      <option name="project" value="LOCAL" />
-      <updated>1585208661697</updated>
-    </task>
-    <task id="LOCAL-00202" summary="#302:java.nio.BufferUnderflowException when reading a corrupted mp3 file">
-      <created>1585221740843</created>
-      <option name="number" value="00202" />
-      <option name="presentableId" value="LOCAL-00202" />
-      <option name="project" value="LOCAL" />
-      <updated>1585221740843</updated>
-    </task>
-    <task id="LOCAL-00203" summary="#303:java.lang.NullPointerException when reading a corrupted audio file">
-      <created>1585222686898</created>
-      <option name="number" value="00203" />
-      <option name="presentableId" value="LOCAL-00203" />
-      <option name="project" value="LOCAL" />
-      <updated>1585222686898</updated>
-    </task>
-    <task id="LOCAL-00204" summary="#259:For Mp3 change adjustPaddingInPlace() so uses FileChannel like FlacTagWriter.insertUsingChunks()">
-      <created>1585227513398</created>
-      <option name="number" value="00204" />
-      <option name="presentableId" value="LOCAL-00204" />
-      <option name="project" value="LOCAL" />
-      <updated>1585227513398</updated>
-    </task>
-    <task id="LOCAL-00205" summary=".">
-      <created>1585227571130</created>
-      <option name="number" value="00205" />
-      <option name="presentableId" value="LOCAL-00205" />
-      <option name="project" value="LOCAL" />
-      <updated>1585227571131</updated>
-    </task>
-    <task id="LOCAL-00206" summary="Remove need to use tmp files for mp3s.&#10;Flac use same chunk method as mp3/mp4 so only need to hold one chunk at a time in memory">
-      <created>1585234504350</created>
-      <option name="number" value="00206" />
-      <option name="presentableId" value="LOCAL-00206" />
-      <option name="project" value="LOCAL" />
-      <updated>1585234504351</updated>
-    </task>
-    <task id="LOCAL-00207" summary="#305:FlacTagWriter should use ShiftData like Mp4 and MP3 so only needs enough memory to store one chunk">
-      <created>1585235802009</created>
-      <option name="number" value="00207" />
-      <option name="presentableId" value="LOCAL-00207" />
-      <option name="project" value="LOCAL" />
-      <updated>1585235802009</updated>
-    </task>
-    <task id="LOCAL-00208" summary="#301:In Mp3 when metadata becomes shorter we dont reclaim the space instead just left as padding">
-      <created>1585241664151</created>
-      <option name="number" value="00208" />
-      <option name="presentableId" value="LOCAL-00208" />
-      <option name="project" value="LOCAL" />
-      <updated>1585241664151</updated>
-    </task>
-    <task id="LOCAL-00209" summary="Remove erronoeous System.out">
-      <created>1587283316770</created>
-      <option name="number" value="00209" />
-      <option name="presentableId" value="LOCAL-00209" />
-      <option name="project" value="LOCAL" />
-      <updated>1587283316770</updated>
-    </task>
-    <task id="LOCAL-00210" summary=".">
-      <created>1587460691541</created>
-      <option name="number" value="00210" />
-      <option name="presentableId" value="LOCAL-00210" />
-      <option name="project" value="LOCAL" />
-      <updated>1587460691541</updated>
-    </task>
-    <task id="LOCAL-00211" summary="Remove Constants no longer required.">
-      <created>1588001940248</created>
-      <option name="number" value="00211" />
-      <option name="presentableId" value="LOCAL-00211" />
-      <option name="project" value="LOCAL" />
-      <updated>1588001940248</updated>
-    </task>
-    <task id="LOCAL-00212" summary="#309:Tag edition fails for m4a file - and corrupts tag">
-      <created>1588002182331</created>
-      <option name="number" value="00212" />
-      <option name="presentableId" value="LOCAL-00212" />
-      <option name="project" value="LOCAL" />
-      <updated>1588002182331</updated>
     </task>
     <task id="LOCAL-00213" summary="Updated some libs to try ans make work with Java 11/14 (for macOS build)">
       <created>1588092430796</created>
@@ -824,7 +680,147 @@
       <option name="project" value="LOCAL" />
       <updated>1611081568769</updated>
     </task>
-    <option name="localTasksCounter" value="242" />
+    <task id="LOCAL-00242" summary="#335:When converting ID3v23 IPLS frame should convert to TIPL and/or TMCL frame but only if have data">
+      <created>1611086143221</created>
+      <option name="number" value="00242" />
+      <option name="presentableId" value="LOCAL-00242" />
+      <option name="project" value="LOCAL" />
+      <updated>1611086143221</updated>
+    </task>
+    <task id="LOCAL-00243" summary=".">
+      <created>1611086229393</created>
+      <option name="number" value="00243" />
+      <option name="presentableId" value="LOCAL-00243" />
+      <option name="project" value="LOCAL" />
+      <updated>1611086229394</updated>
+    </task>
+    <task id="LOCAL-00244" summary="Fixed issue with vorbiscomment assuming vendorstring and underecounting number of comments">
+      <created>1611305698493</created>
+      <option name="number" value="00244" />
+      <option name="presentableId" value="LOCAL-00244" />
+      <option name="project" value="LOCAL" />
+      <updated>1611305698493</updated>
+    </task>
+    <task id="LOCAL-00245" summary="#336:Add support for Roon ROONALBUMTAG and ROONTRACKTAG fields.">
+      <created>1612465503404</created>
+      <option name="number" value="00245" />
+      <option name="presentableId" value="LOCAL-00245" />
+      <option name="project" value="LOCAL" />
+      <updated>1612465503404</updated>
+    </task>
+    <task id="LOCAL-00246" summary="Lowering debug level">
+      <created>1614765991552</created>
+      <option name="number" value="00246" />
+      <option name="presentableId" value="LOCAL-00246" />
+      <option name="project" value="LOCAL" />
+      <updated>1614765991552</updated>
+    </task>
+    <task id="LOCAL-00247" summary=".">
+      <created>1615363941122</created>
+      <option name="number" value="00247" />
+      <option name="presentableId" value="LOCAL-00247" />
+      <option name="project" value="LOCAL" />
+      <updated>1615363941122</updated>
+    </task>
+    <task id="LOCAL-00248" summary="#337:Open MP4 channels in a try-with-resources block">
+      <created>1615549880247</created>
+      <option name="number" value="00248" />
+      <option name="presentableId" value="LOCAL-00248" />
+      <option name="project" value="LOCAL" />
+      <updated>1615549880263</updated>
+    </task>
+    <task id="LOCAL-00249" summary="SONGKONG-2214:jaudiotagger:Wav java.nio.BufferUnderflowException">
+      <created>1616834852116</created>
+      <option name="number" value="00249" />
+      <option name="presentableId" value="LOCAL-00249" />
+      <option name="project" value="LOCAL" />
+      <updated>1616834852116</updated>
+    </task>
+    <task id="LOCAL-00250" summary="SONGKONG-2216:Flac read java.nio.BufferUnderflowException, when file has PictureBlock of size zero">
+      <created>1616858678155</created>
+      <option name="number" value="00250" />
+      <option name="presentableId" value="LOCAL-00250" />
+      <option name="project" value="LOCAL" />
+      <updated>1616858678155</updated>
+    </task>
+    <task id="LOCAL-00251" summary="#340:Flac reader should check StreamInfo block is too small to read header details">
+      <created>1617010557920</created>
+      <option name="number" value="00251" />
+      <option name="presentableId" value="LOCAL-00251" />
+      <option name="project" value="LOCAL" />
+      <updated>1617010557920</updated>
+    </task>
+    <task id="LOCAL-00252" summary="JAIKOZ-1291:Add JAIKOZ_ID field">
+      <created>1619450566375</created>
+      <option name="number" value="00252" />
+      <option name="presentableId" value="LOCAL-00252" />
+      <option name="project" value="LOCAL" />
+      <updated>1619450566376</updated>
+    </task>
+    <task id="LOCAL-00253" summary="#343:Dont split ID3v23 IPLS frame into ID3v23 TIPL or TMCL based on content just convert to TIPL">
+      <created>1620734283026</created>
+      <option name="number" value="00253" />
+      <option name="presentableId" value="LOCAL-00253" />
+      <option name="project" value="LOCAL" />
+      <updated>1620734283026</updated>
+    </task>
+    <task id="LOCAL-00254" summary="Fix tests required as a result of pr69, framemap refactoring.">
+      <created>1633694228721</created>
+      <option name="number" value="00254" />
+      <option name="presentableId" value="LOCAL-00254" />
+      <option name="project" value="LOCAL" />
+      <updated>1633694228722</updated>
+    </task>
+    <task id="LOCAL-00255" summary="SongKong 3.0.0 Release">
+      <created>1633726878477</created>
+      <option name="number" value="00255" />
+      <option name="presentableId" value="LOCAL-00255" />
+      <option name="project" value="LOCAL" />
+      <updated>1633726878477</updated>
+    </task>
+    <task id="LOCAL-00256" summary="Need to use the new s01 sonatype server">
+      <created>1633727785020</created>
+      <option name="number" value="00256" />
+      <option name="presentableId" value="LOCAL-00256" />
+      <option name="project" value="LOCAL" />
+      <updated>1633727785020</updated>
+    </task>
+    <task id="LOCAL-00257" summary="JAIKOZ-1291:Add JAIKOZ_ID field">
+      <created>1633727894981</created>
+      <option name="number" value="00257" />
+      <option name="presentableId" value="LOCAL-00257" />
+      <option name="project" value="LOCAL" />
+      <updated>1633727894981</updated>
+    </task>
+    <task id="LOCAL-00258" summary="Fixes for sonatype">
+      <created>1633764895576</created>
+      <option name="number" value="00258" />
+      <option name="presentableId" value="LOCAL-00258" />
+      <option name="project" value="LOCAL" />
+      <updated>1633764895576</updated>
+    </task>
+    <task id="LOCAL-00259" summary="Remove reference to bintray">
+      <created>1633766462768</created>
+      <option name="number" value="00259" />
+      <option name="presentableId" value="LOCAL-00259" />
+      <option name="project" value="LOCAL" />
+      <updated>1633766462768</updated>
+    </task>
+    <task id="LOCAL-00260" summary="Tidied up README">
+      <created>1633767144303</created>
+      <option name="number" value="00260" />
+      <option name="presentableId" value="LOCAL-00260" />
+      <option name="project" value="LOCAL" />
+      <updated>1633767144303</updated>
+    </task>
+    <task id="LOCAL-00261" summary="Remove invalid link to Cobertura reports">
+      <created>1633767327681</created>
+      <option name="number" value="00261" />
+      <option name="presentableId" value="LOCAL-00261" />
+      <option name="project" value="LOCAL" />
+      <updated>1633767327681</updated>
+    </task>
+    <option name="localTasksCounter" value="262" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -902,24 +898,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixes so works with Java 11 (as well as Java 8)" />
-    <MESSAGE value="Remove unneccessary imports" />
-    <MESSAGE value="#308:corrupt audio files after fix" />
-    <MESSAGE value="When create a framebody from data in file uses reflection, profiling shows to be slow so replace with switch, not so elegant but faster. Maybe able to something cleverer in future, see https://stackoverflow.com/questions/61662231/better-alternative-to-reflection-than-large-switch-statement-using-java-8.&#10;&#10;Note we shoud really rmeove all cases of reflection." />
-    <MESSAGE value="Check loglevel before doing doing logging in some critical often called methods to improve performance." />
-    <MESSAGE value="Remove debugging" />
-    <MESSAGE value="#316:NullPointerException at org.jaudiotagger.tag.mp4.field.Mp4GenreField because contents defined as text not numnber we expect number." />
-    <MESSAGE value="#317:VorbisComment:ArrayIndexOutOfBoundsException: arraycopy" />
-    <MESSAGE value="#318:Flac, handle image pictures where the data length is greater than recorded in header" />
-    <MESSAGE value="#320:Wav code for checking incorrectly aligned 'id3 ' chunks incorrectly assumes the following/precding byte will be null" />
-    <MESSAGE value="Updated CHANGES log." />
-    <MESSAGE value="#321:Updated Changes log" />
-    <MESSAGE value="#322:Problems writing metadata for DSF files larger than 2GB" />
-    <MESSAGE value="Add support for ALBUM_YEAR and ORGINAL_ABLUM_YEAR" />
-    <MESSAGE value="#329:Add support for Roon fields (and also SONGKONG_ID for SongKong)" />
-    <MESSAGE value="#330:Roon:Map PERFORMER to PERFORMER fields for all formats, add INVOLVEDPEOPLE for all formats except for ID3 map to TIPL/IPLS" />
-    <MESSAGE value="#331:Rename ORIGINAL_ALBUM_YEAR to ORIGINALRELEASEDATE so recognized by Roon" />
-    <MESSAGE value="Added VERSION field (ALBUMVERSION) for ROON but doesnt seem to be recognized currently&gt;" />
     <MESSAGE value="Roon version should be VERSION" />
     <MESSAGE value="oops" />
     <MESSAGE value="#332:Add support for Roon LIVE field" />
@@ -927,53 +905,75 @@
     <MESSAGE value="#333:For ID3 rename PRODUCER, ARRANGER, ENGINEER, DJMIXER and MIXER to PRODUCER_INVOLVEDPEOPLE etc that will continue to write to TIPL/IPLS" />
     <MESSAGE value="#334:Remove INVOLVEDPEOPLE mappings such as PRODUCER_INVOLVED PEOPLE and simplify logic" />
     <MESSAGE value="More tests for TMCL/IPLS/TIPL" />
-    <option name="LAST_COMMIT_MESSAGE" value="More tests for TMCL/IPLS/TIPL" />
+    <MESSAGE value="#335:When converting ID3v23 IPLS frame should convert to TIPL and/or TMCL frame but only if have data" />
+    <MESSAGE value="Fixed issue with vorbiscomment assuming vendorstring and underecounting number of comments" />
+    <MESSAGE value="#336:Add support for Roon ROONALBUMTAG and ROONTRACKTAG fields." />
+    <MESSAGE value="Lowering debug level" />
+    <MESSAGE value="." />
+    <MESSAGE value="#337:Open MP4 channels in a try-with-resources block" />
+    <MESSAGE value="SONGKONG-2214:jaudiotagger:Wav java.nio.BufferUnderflowException" />
+    <MESSAGE value="SONGKONG-2216:Flac read java.nio.BufferUnderflowException, when file has PictureBlock of size zero" />
+    <MESSAGE value="#340:Flac reader should check StreamInfo block is too small to read header details" />
+    <MESSAGE value="#343:Dont split ID3v23 IPLS frame into ID3v23 TIPL or TMCL based on content just convert to TIPL" />
+    <MESSAGE value="Fix tests required as a result of pr69, framemap refactoring." />
+    <MESSAGE value="SongKong 3.0.0 Release" />
+    <MESSAGE value="Need to use the new s01 sonatype server" />
+    <MESSAGE value="JAIKOZ-1291:Add JAIKOZ_ID field" />
+    <MESSAGE value="Fixes for sonatype" />
+    <MESSAGE value="Remove reference to bintray" />
+    <MESSAGE value="Tidied up README" />
+    <MESSAGE value="Remove invalid link to Cobertura reports" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove invalid link to Cobertura reports" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1611076697077">
+    <state x="639" y="114" key="CommitChangelistDialog2" timestamp="1633767324331">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1611076697077" />
-    <state x="629" y="114" key="CommitChangelistDialog2" timestamp="1611086113656">
+    <state x="639" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1633767324331" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1633764876318">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="629" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1611086113656" />
-    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1611085214911">
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1633764876318" />
+    <state width="1877" height="411" key="GridCell.Tab.0.bottom" timestamp="1633694253199">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1611085214911" />
-    <state width="1877" height="267" key="GridCell.Tab.0.bottom" timestamp="1611086086887">
+    <state width="1877" height="411" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1633694253199" />
+    <state width="1877" height="411" key="GridCell.Tab.0.center" timestamp="1633694253196">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="267" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1611086086887" />
-    <state width="1877" height="267" key="GridCell.Tab.0.center" timestamp="1611086086886">
+    <state width="1877" height="411" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1633694253196" />
+    <state width="1877" height="411" key="GridCell.Tab.0.left" timestamp="1633694253194">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="267" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1611086086886" />
-    <state width="1877" height="267" key="GridCell.Tab.0.left" timestamp="1611086086886">
+    <state width="1877" height="411" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1633694253194" />
+    <state width="1877" height="411" key="GridCell.Tab.0.right" timestamp="1633694253198">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="267" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1611086086886" />
-    <state width="1877" height="267" key="GridCell.Tab.0.right" timestamp="1611086086887">
+    <state width="1877" height="411" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1633694253198" />
+    <state x="746" y="231" key="RollbackChangesDialog" timestamp="1633728651256">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="267" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1611086086887" />
-    <state x="746" y="231" key="RollbackChangesDialog" timestamp="1610878668606">
+    <state x="746" y="231" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1633728651256" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1633767331675">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="746" y="231" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1610878668606" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1611081571765">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1633767331675" />
+    <state x="656" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1627811079771">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1611081571765" />
-    <state x="656" y="252" width="607" height="536" key="find.popup" timestamp="1610182898218">
+    <state x="656" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1627811079771" />
+    <state x="658" y="311" key="git4idea.merge.GitPullDialog" timestamp="1633695466594">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="656" y="252" width="607" height="536" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1610182898218" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1611086054553">
+    <state x="658" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1633695466594" />
+    <state x="771" y="365" key="git4idea.ui.GitTagDialog" timestamp="1633767713445">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1611086054553" />
+    <state x="771" y="365" key="git4idea.ui.GitTagDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1633767713445" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1625826052375">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1625826052375" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -990,7 +990,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/org/jaudiotagger/tag/id3/AbstractID3v2Tag.java</url>
-          <line>2283</line>
+          <line>2169</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1000,13 +1000,19 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/srctest/org/jaudiotagger/issues/ReadFileTest.java</url>
-          <line>37</line>
+          <line>34</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/srctest/org/jaudiotagger/tag/id3/NewInterfaceTest.java</url>
-          <line>1293</line>
+          <line>1291</line>
           <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/org/jaudiotagger/tag/mp4/Mp4FieldKey.java</url>
+          <line>232</line>
+          <properties field="TITLE_MOVEMENT" class="org.jaudiotagger.tag.mp4.Mp4FieldKey" />
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1014,5 +1020,10 @@
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/jaudiotagger$FlacReadTest_testReadWriteFlac.ic" NAME="FlacReadTest.testReadWriteFlac Coverage Results" MODIFIED="1611303980538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.jaudiotagger.tag.flac.*</FILTER>
+    </SUITE>
   </component>
 </project>
