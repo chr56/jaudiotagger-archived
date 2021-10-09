@@ -27,7 +27,7 @@ If you can't contribute code but would like to support this project please consi
 making a donation—donations can be made at
 [here](http://www.jthink.net/jaudiotagger/donate.jsp).
 
-### Include in your Project
+## Include in your Project
 
 Latest release is 3.0.0 available from Maven central repository, so to use in your project just include
 the following in yor applications pom.xml file
