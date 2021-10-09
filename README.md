@@ -81,5 +81,3 @@ they will be found in `target/site/index.html`.
 
 Your test coverage can be seen at `target/site/cobertura/index.html`.
 
-Periodically we upload latest Code Coverage to:
-http://www.jthink.net/jaudiotagger/maven/cobertura/index.html
