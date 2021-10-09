@@ -1,8 +1,5 @@
 # Jaudiotagger
 
-[![Coverage Status](https://coveralls.io/repos/ijabz/jaudiotagger/badge.svg?branch=master&service=bitbucket)](https://coveralls.io/bitbucket/ijabz/jaudiotagger?branch=master)
-[![Build Status](https://drone.io/bitbucket.org/ijabz/jaudiotagger/status.png)](https://drone.io/bitbucket.org/ijabz/jaudiotagger/latest)
-
 *Jaudiotagger* is a Java API for audio metatagging. Both a common API and format
 specific APIs are available, currently supports reading and writing metadata for:
 
@@ -19,22 +16,30 @@ The main project page is http://www.jthink.net/jaudiotagger/ and you can contact
 
 ## Requirements
 
-*Jaudiotagger* requires Java 1.8 for a full build and install, but the code is Java 1.7 compatible
-(You can run mvn package successfully with Java 1.7)
+*Jaudiotagger* requires Java 1.8
 
 ## Contributing
 
 *Jaudiotagger* welcomes contributors, if you make an improvement or bug fix we are
 very likely to merge it back into the master branch with a minimum of fuss.
+
 If you can't contribute code but would like to support this project please consider
 making a donation—donations can be made at
 [here](http://www.jthink.net/jaudiotagger/donate.jsp).
 
+### Include in your Project
+
+Latest release is 3.0.0 available from Maven central repository, so to use in your project just include
+the following in yor applications pom.xml file
+
+    `<dependency>
+        <groupId>net.jthink</groupId>
+        <artifactId>jaudiotagger</artifactId>
+        <version>3.0.0</version>
+    </dependency>
+    ` 
+
 ## Build
-
-Build is with [Maven](http://maven.apache.org).
-
-- `pom.xml` : Maven build file
 
 Directory structure as follows:
 
@@ -55,8 +60,11 @@ Directory structure as follows:
 
 - `license.txt` : license file
  
- 
-### Build details
+### Local Build details
+
+Build is with [Maven](http://maven.apache.org).
+
+- `pom.xml` : Maven build file
 
 Run
 
@@ -75,7 +83,3 @@ Your test coverage can be seen at `target/site/cobertura/index.html`.
 
 Periodically we upload latest Code Coverage to:
 http://www.jthink.net/jaudiotagger/maven/cobertura/index.html
-
-Jaudiotagger uses http://drone.io for continuous integration, the latest artifacts can be downloaded from
-
-https://drone.io/bitbucket.org/ijabz/jaudiotagger/files
