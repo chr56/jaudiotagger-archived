@@ -29,7 +29,7 @@ making a donation—donations can be made at
 
 ## Include in your Project
 
-Latest release is 3.0.0 available from Maven central repository, so to use in your project just include
+Latest release is 3.0.1 available from Maven central repository, so to use in your project just include
 the following in yor applications pom.xml file
 
     `<dependency>
@@ -81,3 +81,12 @@ they will be found in `target/site/index.html`.
 
 Your test coverage can be seen at `target/site/cobertura/index.html`.
 
+### Notes Maven Central Release instructions
+modify pom to remove SNAPSHOT from version
+commit pom.xml
+Create version tag of the form vx.x.x
+git push origin vx.x.x 
+mvn clean deploy -Prelease
+Login to https://s01.oss.sonatype.org/
+Release the release
+Wait for it on Maven Central
