@@ -362,12 +362,16 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
     {
         if (hasFrame(identifier))
         {
-            Object o = getFrame(identifier);
-            if (o instanceof AbstractID3v2Frame)
+            List<TagField> fields = getFrame(identifier);
+            if(fields.size()>0)
             {
-                return !(((AbstractID3v2Frame) o).getBody() instanceof FrameBodyUnsupported);
+                TagField frame = fields.get(0);
+                if (frame instanceof AbstractID3v2Frame)
+                {
+                    return !(((AbstractID3v2Frame)frame).getBody() instanceof FrameBodyUnsupported);
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }
@@ -399,17 +403,14 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
 
 
     /**
-     * For single frames return the frame in this tag with given identifier if it exists, if multiple frames
-     * exist with the same identifier it will return a list containing all the frames with this identifier
+     * Return a list containing all the frames with this identifier
      * <p/>
      * Warning the match is only done against the identifier so if a tag contains a frame with an unsupported body
      * but happens to have an identifier that is valid for another version of the tag it will be returned.
      *
      * @param identifier is an ID3Frame identifier
-     * @return matching frame, or list of matching frames
+     * @return list of matching frames
      */
-    //TODO:This method is problematic because sometimes it returns a list and sometimes a frame, we need to
-    //replace with two separate methods as in the tag interface.
     public List<TagField> getFrame(String identifier)
     {
         return frameMap.get(identifier);
@@ -550,7 +551,6 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
      * Add frame taking into account existing frames of the same type
      *
      * @param newFrame
-     * @param frames
      */
     public void mergeDuplicateFrames(AbstractID3v2Frame newFrame)
     {
@@ -1324,21 +1324,6 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
         }
     }
 
-    /**
-     * If frame already exists default behaviour is to just add another one, but can be overrridden if
-     * special handling required
-     *
-     * @param newFrame
-     * @param existingFrame
-     */
-//    protected void processDuplicateFrame(AbstractID3v2Frame newFrame, AbstractID3v2Frame existingFrame)
-//    {
-//        List<TagField> list = new ArrayList<>();
-//        list.add(existingFrame);
-//        list.add(newFrame);
-//        frameMap.put(newFrame.getIdentifier(), list);
-//    }
-    
 	private boolean containsAggregatedFrame(Collection<TagField> fields)
 	{
 		boolean result = false;
@@ -1653,13 +1638,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
         else if (o instanceof List)
         {
             //TODO should return copy
-            return (List<TagField>) o;
-        }
-        else if (o instanceof AbstractID3v2Frame)
-        {
-            List<TagField> list = new ArrayList<TagField>();
-            list.add((TagField) o);
-            return list;
+            return o;
         }
         else
         {
@@ -2262,15 +2241,19 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
             }
             else
             {
-                AbstractID3v2Frame frame = (AbstractID3v2Frame) this.getFrame(formatKey.getFrameId());
-                AbstractFrameBodyNumberTotal frameBody = (AbstractFrameBodyNumberTotal) frame.getBody();
-                if(frameBody.getTotal()==0)
+                List<TagField> fields = getFrame(formatKey.getFrameId());
+                if (fields.size() > 0)
                 {
-                    doDeleteTagField(formatKey);
+                    AbstractID3v2Frame frame = (AbstractID3v2Frame) fields.get(0);
+                    AbstractFrameBodyNumberTotal frameBody = (AbstractFrameBodyNumberTotal) frame.getBody();
+                    if (frameBody.getTotal() == 0)
+                    {
+                        doDeleteTagField(formatKey);
+                        return;
+                    }
+                    frameBody.setNumber(0);
                     return;
                 }
-                frameBody.setNumber(0);
-                return;
             }
         }
         else

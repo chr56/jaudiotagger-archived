@@ -1,4 +1,6 @@
 Summarise Changes
+3.0.1
+#039:Fixes required due to PR69 changes to AbstractID3v2Tag.getFrame() so that it now always returns list
 
 3.0.0
 #073:Support for writing DSF files
@@ -132,6 +134,7 @@ Summarise Changes
 #337:Open MP4 channels in a try-with-resources block
 #340:Flac reader should check StreamInfo block is too small to read header details
 #343:Dont split ID3v23 IPLS frame into ID3v23 TIPL or TMCL based on content just convert to TIPL
+#PR69:Modified AbstractID3v2Tag.getFrame() so that it now always returns list
 
 2.2.5
 #033:Added getAudioStartPos() and getAudioEndPos() methods to AudioHeader interface and implemented for most formats
