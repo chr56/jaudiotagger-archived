@@ -30,7 +30,7 @@ making a donation—donations can be made at
 ## Include in your Project
 
 Latest release is 3.0.1 available from Maven central repository, so to use in your project just include
-the following in yor applications pom.xml file
+the following in your applications pom.xml file
 
     `<dependency>
         <groupId>net.jthink</groupId>
@@ -64,19 +64,17 @@ Directory structure as follows:
 
 Build is with [Maven](http://maven.apache.org).
 
-- `pom.xml` : Maven build file
+   `pom.xml` : Maven build file
 
-Run
+To compile, test, build javadocs and install into your local repository run
 
     mvn install
 
-to compile, test, build javadocs and install into your local repository.
 
-Run
+To generate a website for *Jaudiotagger* including code coverage reports run
 
     mvn site
 
-to generate a website for *Jaudiotagger* including code coverage reports,
 they will be found in `target/site/index.html`.
 
 Your test coverage can be seen at `target/site/cobertura/index.html`.
@@ -90,3 +88,4 @@ Your test coverage can be seen at `target/site/cobertura/index.html`.
 - Login to https://s01.oss.sonatype.org/
 - Release the release
 - Wait for it on Maven Central
+- modify pom to increase version number and reinstate SNAPSHOT part
