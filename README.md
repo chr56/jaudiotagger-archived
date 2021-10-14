@@ -35,7 +35,7 @@ the following in yor applications pom.xml file
     `<dependency>
         <groupId>net.jthink</groupId>
         <artifactId>jaudiotagger</artifactId>
-        <version>3.0.0</version>
+        <version>3.0.1</version>
     </dependency>
     ` 
 
@@ -82,11 +82,11 @@ they will be found in `target/site/index.html`.
 Your test coverage can be seen at `target/site/cobertura/index.html`.
 
 ### Notes Maven Central Release instructions
-modify pom to remove SNAPSHOT from version
-commit pom.xml
-Create version tag of the form vx.x.x
-git push origin vx.x.x 
-mvn clean deploy -Prelease
-Login to https://s01.oss.sonatype.org/
-Release the release
-Wait for it on Maven Central
+- modify pom to remove SNAPSHOT from version
+- commit pom.xml
+- Create version tag of the form vx.x.x
+- git push origin vx.x.x 
+- mvn clean deploy -Prelease
+- Login to https://s01.oss.sonatype.org/
+- Release the release
+- Wait for it on Maven Central
