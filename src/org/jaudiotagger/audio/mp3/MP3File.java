@@ -24,7 +24,6 @@ package org.jaudiotagger.audio.mp3;
 
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.exceptions.*;
-import org.jaudiotagger.audio.generic.Permissions;
 import org.jaudiotagger.logging.*;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
@@ -868,7 +867,6 @@ public class MP3File extends AudioFile
 
         if (TagOptionSingleton.getInstance().isCheckIsWritable() && !Files.isWritable(path))
         {
-            logger.severe(Permissions.displayPermissions(path));
             logger.severe(ErrorMessage.GENERAL_WRITE_FAILED.getMsg(file.getName()));
             throw new IOException(ErrorMessage.GENERAL_WRITE_FAILED.getMsg(file.getName()));
         }

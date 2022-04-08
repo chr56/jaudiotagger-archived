@@ -98,7 +98,6 @@ public abstract class AudioFileReader
             }
             else
             {
-                logger.warning(Permissions.displayPermissions(f.toPath()));
                 throw new NoReadPermissionsException(ErrorMessage.GENERAL_READ_FAILED_DO_NOT_HAVE_PERMISSION_TO_READ_FILE.getMsg(f.toPath()));
             }
         }

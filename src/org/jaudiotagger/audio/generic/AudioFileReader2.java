@@ -47,7 +47,6 @@ public abstract class AudioFileReader2 extends AudioFileReader
             }
             else
             {
-                logger.warning(Permissions.displayPermissions(path));
                 throw new NoReadPermissionsException(ErrorMessage.GENERAL_READ_FAILED_DO_NOT_HAVE_PERMISSION_TO_READ_FILE.getMsg(path));
             }
         }
