@@ -1,5 +1,7 @@
 # Jaudiotagger
 
+**This is a fork (as well as mirror) of [ijabz/jaudiotagger](https://bitbucket.org/ijabz/jaudiotagger/src/master/)**
+
 *Jaudiotagger* is a Java API for audio metatagging. Both a common API and format
 specific APIs are available, currently supports reading and writing metadata for:
 
