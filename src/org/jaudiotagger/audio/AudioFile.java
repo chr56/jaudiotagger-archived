@@ -21,9 +21,6 @@ import org.jaudiotagger.tag.wav.WavTag;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.RandomAccessFile;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -224,42 +221,42 @@ public class AudioFile
         }
     }
 
-    /**
-     * Checks the file is accessible with the correct permissions, otherwise exception occurs
-     *
-     * @param file
-     * @param readOnly
-     * @throws ReadOnlyFileException
-     * @throws FileNotFoundException
-     * @return
-     */
-    protected RandomAccessFile checkFilePermissions(File file, boolean readOnly) throws ReadOnlyFileException, FileNotFoundException, CannotReadException
-    {
-        Path path = file.toPath();
-        RandomAccessFile newFile;
-        checkFileExists(file);
-
-        // Unless opened as readonly the file must be writable
-        if (readOnly)
-        {
-            //May not even be readable
-            if(!Files.isReadable(path))
-            {
-                logger.severe("Unable to read file:" + path);
-                throw new NoReadPermissionsException(ErrorMessage.GENERAL_READ_FAILED_DO_NOT_HAVE_PERMISSION_TO_READ_FILE.getMsg(path));
-            }
-            newFile = new RandomAccessFile(file, "r");
-        }
-        else
-        {
-            if (TagOptionSingleton.getInstance().isCheckIsWritable() && !Files.isWritable(path))
-            {
-                throw new ReadOnlyFileException(ErrorMessage.NO_PERMISSIONS_TO_WRITE_TO_FILE.getMsg(path));
-            }
-            newFile = new RandomAccessFile(file, "rw");
-        }
-        return newFile;
-    }
+//    /**
+//     * Checks the file is accessible with the correct permissions, otherwise exception occurs
+//     *
+//     * @param file
+//     * @param readOnly
+//     * @throws ReadOnlyFileException
+//     * @throws FileNotFoundException
+//     * @return
+//     */
+//    protected RandomAccessFile checkFilePermissions(File file, boolean readOnly) throws ReadOnlyFileException, FileNotFoundException, CannotReadException
+//    {
+//        Path path = file.toPath();
+//        RandomAccessFile newFile;
+//        checkFileExists(file);
+//
+//        // Unless opened as readonly the file must be writable
+//        if (readOnly)
+//        {
+//            //May not even be readable
+//            if(!Files.isReadable(path))
+//            {
+//                logger.severe("Unable to read file:" + path);
+//                throw new NoReadPermissionsException(ErrorMessage.GENERAL_READ_FAILED_DO_NOT_HAVE_PERMISSION_TO_READ_FILE.getMsg(path));
+//            }
+//            newFile = new RandomAccessFile(file, "r");
+//        }
+//        else
+//        {
+//            if (TagOptionSingleton.getInstance().isCheckIsWritable() && !Files.isWritable(path))
+//            {
+//                throw new ReadOnlyFileException(ErrorMessage.NO_PERMISSIONS_TO_WRITE_TO_FILE.getMsg(path));
+//            }
+//            newFile = new RandomAccessFile(file, "rw");
+//        }
+//        return newFile;
+//    }
 
     /**
      * Optional debugging method. Must override to do anything interesting.
