@@ -81,17 +81,13 @@ public class TextEncodedStringSizeTerminated extends AbstractString
     {
         //Decode sliced inBuffer
         ByteBuffer inBuffer;
-        if(TagOptionSingleton.getInstance().isAndroid())
         {
            //#302 [dallen] truncating array manually since the decoder.decode() does not honor the offset in the in buffer
            byte[] truncArr = new byte[arr.length - offset];
            System.arraycopy(arr, offset, truncArr, 0, truncArr.length);
            inBuffer = ByteBuffer.wrap(truncArr);
         }
-        else
-        {
-           inBuffer = ByteBuffer.wrap(arr, offset, arr.length - offset).slice();
-        }
+
 
         CharBuffer outBuffer = CharBuffer.allocate(arr.length - offset);
 

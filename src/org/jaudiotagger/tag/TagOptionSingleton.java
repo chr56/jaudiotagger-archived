@@ -337,11 +337,6 @@ public class TagOptionSingleton
      */
     private PadNumberOption padNumberTotalLength = PadNumberOption.PAD_ONE_ZERO;
 
-    /**
-     * There are a couple of problems with the Java implementation on Google Android, enabling this value
-     * switches on Google workarounds
-     */
-    private boolean isAndroid = false;
 
     private boolean isAPICDescriptionITunesCompatible = false;
 
@@ -949,7 +944,6 @@ public class TagOptionSingleton
         truncateTextWithoutErrors = false;
         padNumbers = false;
         isAPICDescriptionITunesCompatible=false;
-        isAndroid = false;
         isEncodeUTF16BomAsLittleEndian = true;
         writeChunkSize=5000000;
         isWriteMp4GenresAsText=false;
@@ -1260,16 +1254,6 @@ public class TagOptionSingleton
     public void setPadNumbers(boolean padNumbers)
     {
         this.padNumbers = padNumbers;
-    }
-
-    public boolean isAndroid()
-    {
-        return isAndroid;
-    }
-
-    public void setAndroid(boolean android)
-    {
-        isAndroid = android;
     }
 
     /**
