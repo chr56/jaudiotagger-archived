@@ -30,7 +30,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CharsetEncoder;
-import java.nio.charset.StandardCharsets;
+import org.jaudiotagger.compat.StandardCharsets;
 
 /**
  * A partial implementation for String based ID3 fields

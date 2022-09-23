@@ -25,7 +25,7 @@ import org.jaudiotagger.tag.reference.PictureTypes;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
+import org.jaudiotagger.compat.StandardCharsets;
 
 /**
  * Attached picture frame.

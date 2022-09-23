@@ -5,7 +5,7 @@ import org.jaudiotagger.audio.iff.IffHeaderChunk;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.nio.charset.StandardCharsets;
+import org.jaudiotagger.compat.StandardCharsets;
 
 /**
  * DSD Chunk

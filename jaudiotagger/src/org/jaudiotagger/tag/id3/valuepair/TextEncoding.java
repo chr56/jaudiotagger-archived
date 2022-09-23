@@ -25,7 +25,7 @@ package org.jaudiotagger.tag.id3.valuepair;
 import org.jaudiotagger.tag.datatype.AbstractIntStringValuePair;
 
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
+import org.jaudiotagger.compat.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 

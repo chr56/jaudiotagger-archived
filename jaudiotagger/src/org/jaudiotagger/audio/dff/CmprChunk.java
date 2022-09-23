@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
-import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static org.jaudiotagger.compat.StandardCharsets.ISO_8859_1;
 
 /**
  * CMPR Chunk. Retrieve compression.

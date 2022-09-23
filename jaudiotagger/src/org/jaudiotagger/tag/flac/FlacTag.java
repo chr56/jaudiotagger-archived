@@ -10,7 +10,7 @@ import org.jaudiotagger.tag.vorbiscomment.VorbisCommentFieldKey;
 import org.jaudiotagger.tag.vorbiscomment.VorbisCommentTag;
 
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
+import org.jaudiotagger.compat.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

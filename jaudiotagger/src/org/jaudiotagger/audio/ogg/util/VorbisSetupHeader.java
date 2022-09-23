@@ -1,6 +1,6 @@
 package org.jaudiotagger.audio.ogg.util;
 
-import java.nio.charset.StandardCharsets;
+import org.jaudiotagger.compat.StandardCharsets;
 import java.util.logging.Logger;
 
 /**

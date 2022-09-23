@@ -5,7 +5,7 @@ import org.jaudiotagger.tag.TagTextField;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
+import org.jaudiotagger.compat.StandardCharsets;
 
 /**
  * This class encapsulates the name and content of a tag entry in id3 fields

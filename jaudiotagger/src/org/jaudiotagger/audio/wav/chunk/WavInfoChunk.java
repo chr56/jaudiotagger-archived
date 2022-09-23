@@ -8,7 +8,7 @@ import org.jaudiotagger.tag.wav.WavTag;
 
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
+import org.jaudiotagger.compat.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

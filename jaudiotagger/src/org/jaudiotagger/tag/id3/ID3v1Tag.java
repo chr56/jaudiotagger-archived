@@ -34,14 +34,14 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
+import org.jaudiotagger.compat.StandardCharsets;
 import java.util.*;
 import java.util.regex.Matcher;
 
 /**
  * Represents an ID3v1 tag.
  *
- * @author : Eric Farng
+ * @author : Eric Farngr
  * @author : Paul Taylor
  */
 public class ID3v1Tag extends AbstractID3v1Tag implements Tag

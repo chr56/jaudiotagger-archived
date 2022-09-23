@@ -29,8 +29,8 @@ import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static java.nio.charset.StandardCharsets.US_ASCII;
+import static org.jaudiotagger.compat.StandardCharsets.ISO_8859_1;
+import static org.jaudiotagger.compat.StandardCharsets.US_ASCII;
 
 /**
  * Contains various frequently used static functions in the different tag formats.

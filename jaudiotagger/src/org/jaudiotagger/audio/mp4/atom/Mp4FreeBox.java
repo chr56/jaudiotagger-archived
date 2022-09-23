@@ -6,7 +6,7 @@ import org.jaudiotagger.audio.mp4.Mp4AtomIdentifier;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
+import org.jaudiotagger.compat.StandardCharsets;
 
 /**
  * FreeBox ( padding)
