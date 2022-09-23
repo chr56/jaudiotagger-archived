@@ -7,11 +7,9 @@ import org.jaudiotagger.logging.Hex;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.logging.Logger;
 
 /**
@@ -23,13 +21,13 @@ public class WavCleaner
     // Logger Object
     public static Logger logger = Logger.getLogger("org.jaudiotagger.audio.wav");
 
-    private Path path;
+    private File file;
     private String loggingName;
 
-    public WavCleaner(Path path)
+    public WavCleaner(File file)
     {
-        this.path=path;
-        this.loggingName=path.getFileName().toString();
+        this.file =file;
+        this.loggingName= file.getName();
     }
 
     /**
@@ -51,7 +49,7 @@ public class WavCleaner
      */
     private int findEndOfDataChunk() throws Exception
     {
-        try(FileChannel fc = FileChannel.open(path, StandardOpenOption.WRITE, StandardOpenOption.READ))
+        try(FileChannel fc = new RandomAccessFile(file,"rw").getChannel())
         {
             if(WavRIFFHeader.isValidHeader(loggingName, fc))
             {
@@ -126,25 +124,24 @@ public class WavCleaner
         return 0;
     }
 
-    public static void main(final String[] args) throws Exception
+    private static void recursiveDelete(File path) throws Exception
     {
-        Path path = Paths.get("E:\\MQ\\Schubert, F\\The Last Six Years, vol 4-Imogen Cooper");
-        recursiveDelete(path);
-    }
-
-    private static void recursiveDelete(Path path) throws Exception
-    {
-        for(File next:path.toFile().listFiles())
+        File[] files = path.listFiles();
+        if (files != null)
         {
-            if(next.isFile() && (next.getName().endsWith(".WAV") || next.getName().endsWith(".wav")))
+            for(File next:files)
             {
-                WavCleaner wc = new WavCleaner(next.toPath());
-                wc.clean();
-            }
-            else if (next.isDirectory())
-            {
-                recursiveDelete(next.toPath());
+                if(next.isFile() && (next.getName().endsWith(".WAV") || next.getName().endsWith(".wav")))
+                {
+                    WavCleaner wc = new WavCleaner(next);
+                    wc.clean();
+                }
+                else if (next.isDirectory())
+                {
+                    recursiveDelete(next);
+                }
             }
         }
+
     }
 }

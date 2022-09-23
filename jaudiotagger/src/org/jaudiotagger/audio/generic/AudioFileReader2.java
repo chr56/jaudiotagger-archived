@@ -13,8 +13,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.logging.Level;
 
 /**
@@ -33,62 +31,43 @@ public abstract class AudioFileReader2 extends AudioFileReader
    */
     public AudioFile read(File f) throws CannotReadException, IOException, TagException, ReadOnlyFileException, InvalidAudioFrameException
     {
-        Path path = f.toPath();
         if(logger.isLoggable(Level.CONFIG))
         {
-            logger.config(ErrorMessage.GENERAL_READ.getMsg(path));
+            logger.config(ErrorMessage.GENERAL_READ.getMsg(f.getAbsolutePath()));
         }
 
-        if (!Files.isReadable(path))
+        if (!f.canRead())
         {
-            if(!Files.exists(path))
+            if(!f.exists())
             {
-                throw new FileNotFoundException(ErrorMessage.UNABLE_TO_FIND_FILE.getMsg(path));
+                throw new FileNotFoundException(ErrorMessage.UNABLE_TO_FIND_FILE.getMsg(f.getAbsolutePath()));
             }
             else
             {
-                throw new NoReadPermissionsException(ErrorMessage.GENERAL_READ_FAILED_DO_NOT_HAVE_PERMISSION_TO_READ_FILE.getMsg(path));
+                throw new NoReadPermissionsException(ErrorMessage.GENERAL_READ_FAILED_DO_NOT_HAVE_PERMISSION_TO_READ_FILE.getMsg(f.getAbsolutePath()));
             }
         }
 
         if (f.length() <= MINIMUM_SIZE_FOR_VALID_AUDIO_FILE)
         {
-            throw new CannotReadException(ErrorMessage.GENERAL_READ_FAILED_FILE_TOO_SMALL.getMsg(path));
+            throw new CannotReadException(ErrorMessage.GENERAL_READ_FAILED_FILE_TOO_SMALL.getMsg(f.getAbsolutePath()));
         }
 
-        GenericAudioHeader info = getEncodingInfo(path);
-        Tag tag = getTag(path);
+        RandomAccessFile raf = new RandomAccessFile(f,"rw");
+        GenericAudioHeader info = getEncodingInfo(raf);
+        Tag tag = getTag(raf);
         return new AudioFile(f, info, tag);
     }
 
-    /**
-     *
-     * Read Encoding Information
-     *
-     * @param path
-     * @return
-     * @throws CannotReadException
-     * @throws IOException
-     */
-    protected abstract GenericAudioHeader getEncodingInfo(Path path) throws CannotReadException, IOException;
-
-    protected GenericAudioHeader getEncodingInfo(RandomAccessFile raf) throws CannotReadException, IOException
-    {
-        throw new UnsupportedOperationException("Old method not used in version 2");
-    }
+    protected abstract GenericAudioHeader getEncodingInfo(RandomAccessFile raf) throws CannotReadException, IOException;
 
     /**
      * Read tag Information
      *
-     * @param path
+     * @param file
      * @return
      * @throws CannotReadException
      * @throws IOException
      */
-    protected abstract Tag getTag(Path path) throws CannotReadException, IOException;
-
-    protected Tag getTag(RandomAccessFile file) throws CannotReadException, IOException
-    {
-        throw new UnsupportedOperationException("Old method not used in version 2");
-    }
+    protected abstract Tag getTag(RandomAccessFile file) throws CannotReadException, IOException;
 }

@@ -17,9 +17,9 @@ import org.jaudiotagger.tag.id3.ID3v23Tag;
 import org.jaudiotagger.tag.id3.ID3v24Tag;
 
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.file.Path;
 import java.util.logging.Level;
 
 import static org.jaudiotagger.audio.dsf.DsdChunk.CHUNKSIZE_LENGTH;
@@ -34,9 +34,9 @@ import static org.jaudiotagger.audio.dsf.DsdChunk.CHUNKSIZE_LENGTH;
 public class DsfFileReader extends AudioFileReader2
 {
     @Override
-    protected GenericAudioHeader getEncodingInfo(Path file) throws CannotReadException, IOException
+    protected GenericAudioHeader getEncodingInfo(RandomAccessFile file) throws CannotReadException, IOException
     {
-        try(FileChannel fc = FileChannel.open(file))
+        try(FileChannel fc = file.getChannel())
         {
             DsdChunk dsd = DsdChunk.readChunk(Utils.readFileDataIntoBufferLE(fc, DsdChunk.DSD_HEADER_LENGTH));
             if (dsd != null)
@@ -60,9 +60,9 @@ public class DsfFileReader extends AudioFileReader2
     }
 
     @Override
-    protected Tag getTag(Path file) throws CannotReadException, IOException
+    protected Tag getTag(RandomAccessFile file) throws CannotReadException, IOException
     {
-        try(FileChannel fc = FileChannel.open(file))
+        try(FileChannel fc = file.getChannel())
         {
             DsdChunk dsd = DsdChunk.readChunk(Utils.readFileDataIntoBufferLE(fc, DsdChunk.DSD_HEADER_LENGTH));
             if (dsd != null)

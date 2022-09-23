@@ -31,10 +31,10 @@ import org.jaudiotagger.audio.wav.chunk.WavFormatChunk;
 import org.jaudiotagger.logging.Hex;
 
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
-import java.nio.file.Path;
 import java.util.logging.Logger;
 
 /**
@@ -54,10 +54,10 @@ public class WavInfoReader
         this.loggingName = loggingName;
     }
 
-    public GenericAudioHeader read(Path path) throws CannotReadException, IOException
+    public GenericAudioHeader read(RandomAccessFile file) throws CannotReadException, IOException
     {
         GenericAudioHeader info = new GenericAudioHeader();
-        try(FileChannel fc = FileChannel.open(path))
+        try(FileChannel fc = file.getChannel())
         {
             if(WavRIFFHeader.isValidHeader(loggingName, fc))
             {

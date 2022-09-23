@@ -31,12 +31,11 @@ import org.jaudiotagger.tag.mp4.atom.Mp4DataBox;
 import org.jaudiotagger.tag.mp4.field.*;
 
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
 import org.jaudiotagger.compat.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.logging.Logger;
 
 /**
@@ -84,9 +83,9 @@ public class Mp4TagReader
      * There are gaps between these boxes
 
      */
-    public Mp4Tag read(Path file) throws CannotReadException, IOException
+    public Mp4Tag read(RandomAccessFile file) throws CannotReadException, IOException
     {
-        try(SeekableByteChannel fc = Files.newByteChannel(file)) {
+        try(SeekableByteChannel fc = file.getChannel()) {
             Mp4Tag tag = new Mp4Tag();
     
             //Get to the facts everything we are interested in is within the moov box, so just load data from file

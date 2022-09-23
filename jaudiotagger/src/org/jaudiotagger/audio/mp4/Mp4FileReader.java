@@ -24,7 +24,7 @@ import org.jaudiotagger.audio.generic.GenericAudioHeader;
 import org.jaudiotagger.tag.Tag;
 
 import java.io.IOException;
-import java.nio.file.Path;
+import java.io.RandomAccessFile;
 
 /**
  * Mp4 File Reader
@@ -37,14 +37,14 @@ public class Mp4FileReader extends AudioFileReader2
     private Mp4TagReader tr = new Mp4TagReader();
 
     @Override
-    protected GenericAudioHeader getEncodingInfo(Path path) throws CannotReadException, IOException
+    protected GenericAudioHeader getEncodingInfo(RandomAccessFile randomAccessFile) throws CannotReadException, IOException
     {
-        return ir.read(path);
+        return ir.read(randomAccessFile);
     }
 
     @Override
-    protected Tag getTag(Path path) throws IOException, CannotReadException
+    protected Tag getTag(RandomAccessFile randomAccessFile) throws IOException, CannotReadException
     {
-        return tr.read(path);
+        return tr.read(randomAccessFile);
     }
 }

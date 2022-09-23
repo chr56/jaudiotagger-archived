@@ -24,8 +24,8 @@ import org.jaudiotagger.audio.generic.Utils;
 import org.jaudiotagger.audio.ogg.util.VorbisHeader;
 import org.jaudiotagger.logging.ErrorMessage;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.logging.Logger;
 
 /**
@@ -75,12 +75,11 @@ public class VorbisCommentReader
     /**
      * @param rawdata
      * @param isFramingBit
-     * @param path
      * @return logical representation of VorbisCommentTag
      * @throws IOException
      * @throws CannotReadException
      */
-    public VorbisCommentTag read(byte[] rawdata, boolean isFramingBit, Path path) throws IOException, CannotReadException
+    public VorbisCommentTag read(byte[] rawdata, boolean isFramingBit) throws IOException, CannotReadException
     {
 
         VorbisCommentTag tag = new VorbisCommentTag();
@@ -114,11 +113,6 @@ public class VorbisCommentReader
 
             if(commentLength> JAUDIOTAGGER_MAX_COMMENT_LENGTH)
             {
-                if(path!=null)
-                {
-                    logger.warning(path.toString() + ":" + ErrorMessage.VORBIS_COMMENT_LENGTH_TOO_LARGE.getMsg(commentLength));
-                }
-                else
                 {
                     logger.warning(ErrorMessage.VORBIS_COMMENT_LENGTH_TOO_LARGE.getMsg(commentLength));
                 }
@@ -126,11 +120,6 @@ public class VorbisCommentReader
             }
             else if(commentLength>rawdata.length - pos)
             {
-                if(path!=null)
-                {
-                    logger.warning(path.toString() + ":" + ErrorMessage.VORBIS_COMMENT_LENGTH_LARGE_THAN_HEADER.getMsg(commentLength, rawdata.length - pos));
-                }
-                else
                 {
                     logger.warning(ErrorMessage.VORBIS_COMMENT_LENGTH_LARGE_THAN_HEADER.getMsg(commentLength, rawdata.length));
                 }

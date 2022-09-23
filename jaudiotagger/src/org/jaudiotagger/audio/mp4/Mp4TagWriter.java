@@ -29,12 +29,11 @@ import org.jaudiotagger.tag.mp4.Mp4TagCreator;
 import org.jaudiotagger.utils.ShiftData;
 import org.jaudiotagger.utils.tree.DefaultMutableTreeNode;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -340,10 +339,10 @@ public class Mp4TagWriter
      * @throws CannotWriteException
      * @throws IOException
      */
-    public void write(Tag tag, Path file) throws CannotWriteException
+    public void write(Tag tag, File file) throws CannotWriteException
     {
         logger.config("Started writing tag data");
-        try(SeekableByteChannel fc = Files.newByteChannel(file, StandardOpenOption.READ, StandardOpenOption.WRITE))
+        try(SeekableByteChannel fc = new RandomAccessFile(file,"rw").getChannel())
         {
             int sizeOfExistingIlstAtom = 0;
             int sizeRequiredByNewIlstAtom;
@@ -763,7 +762,7 @@ public class Mp4TagWriter
      * @param file
      * @throws IOException
      */
-    public void delete(Tag tag, Path file) throws CannotWriteException
+    public void delete(Tag tag, File file) throws CannotWriteException
     {
         tag = new Mp4Tag();
         write(tag, file);

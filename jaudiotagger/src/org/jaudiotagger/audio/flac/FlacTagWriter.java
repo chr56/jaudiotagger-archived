@@ -26,13 +26,12 @@ import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.flac.FlacTag;
 import org.jaudiotagger.utils.ShiftData;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.file.AccessDeniedException;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -67,7 +66,7 @@ public class FlacTagWriter
      * @throws IOException
      * @throws CannotWriteException
      */
-    public void delete(Tag tag, Path file) throws CannotWriteException
+    public void delete(Tag tag, File file) throws CannotWriteException
     {
         //This will save the file without any Comment or PictureData blocks  
         FlacTag emptyTag = new FlacTag(null, new ArrayList<MetadataBlockDataPicture>());
@@ -187,10 +186,10 @@ public class FlacTagWriter
      * @throws CannotWriteException
      * @throws IOException
      */
-    public void write(Tag tag, Path file) throws CannotWriteException
+    public void write(Tag tag, File file) throws CannotWriteException
     {
         logger.config(file + " Writing tag");
-        try (FileChannel fc = FileChannel.open(file, StandardOpenOption.WRITE, StandardOpenOption.READ))
+        try (FileChannel fc = new RandomAccessFile(file,"rw").getChannel())
         {
             MetadataBlockInfo blockInfo = new MetadataBlockInfo();
 
@@ -301,11 +300,6 @@ public class FlacTagWriter
                 insertUsingChunks(file, tag, fc, blockInfo, flacStream, neededRoom + FlacTagCreator.DEFAULT_PADDING, availableRoom);
             }
         }
-        catch (AccessDeniedException ade)
-        {
-            logger.log(Level.SEVERE, ade.getMessage(), ade);
-            throw new NoWritePermissionsException(file + ":" + ade.getMessage());
-        }
         catch (IOException ioe)
         {
             logger.log(Level.SEVERE, ioe.getMessage(), ioe);
@@ -406,7 +400,7 @@ public class FlacTagWriter
      * @throws IOException
      * @throws UnsupportedEncodingException
      */
-    private void insertUsingChunks(Path file, Tag tag, FileChannel fc, MetadataBlockInfo blockInfo, FlacStreamReader flacStream, int neededRoom, int availableRoom) throws IOException, UnsupportedEncodingException
+    private void insertUsingChunks(File file, Tag tag, FileChannel fc, MetadataBlockInfo blockInfo, FlacStreamReader flacStream, int neededRoom, int availableRoom) throws IOException, UnsupportedEncodingException
     {
         //Find end of metadata blocks (start of Audio), i.e start of Flac + 4 bytes for 'fLaC', 4 bytes for streaminfo header and
         //34 bytes for streaminfo and then size of all the other existing blocks
@@ -418,7 +412,7 @@ public class FlacTagWriter
 
         //Extra Space Required for larger metadata block
         int extraSpaceRequired = neededRoom - availableRoom;
-        logger.config(file + " Audio needs shifting:"+extraSpaceRequired);
+        logger.config(file.getName() + " Audio needs shifting:"+extraSpaceRequired);
 
         fc.position(audioStart);
         ShiftData.shiftDataByOffsetToMakeSpace(fc, extraSpaceRequired);

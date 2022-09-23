@@ -22,7 +22,7 @@ import org.jaudiotagger.audio.exceptions.CannotWriteException;
 import org.jaudiotagger.audio.generic.AudioFileWriter2;
 import org.jaudiotagger.tag.Tag;
 
-import java.nio.file.Path;
+import java.io.File;
 
 /**
  * Mp4 File Writer
@@ -32,13 +32,13 @@ import java.nio.file.Path;
 public class Mp4FileWriter extends AudioFileWriter2
 {
     @Override
-    protected void writeTag(Tag tag, Path file) throws CannotWriteException
+    protected void writeTag(Tag tag, File file) throws CannotWriteException
     {
         new Mp4TagWriter(file.toString()).write(tag, file);
     }
 
     @Override
-    protected void deleteTag(Tag tag, Path file) throws CannotWriteException
+    protected void deleteTag(Tag tag, File file) throws CannotWriteException
     {
         new Mp4TagWriter(file.toString()).delete(tag, file);
     }

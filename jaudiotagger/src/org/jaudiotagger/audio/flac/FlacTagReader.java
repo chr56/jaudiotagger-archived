@@ -28,9 +28,9 @@ import org.jaudiotagger.tag.vorbiscomment.VorbisCommentReader;
 import org.jaudiotagger.tag.vorbiscomment.VorbisCommentTag;
 
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -47,11 +47,11 @@ public class FlacTagReader
     private VorbisCommentReader vorbisCommentReader = new VorbisCommentReader();
 
 
-    public FlacTag read(Path path) throws CannotReadException, IOException
+    public FlacTag read(RandomAccessFile file) throws CannotReadException, IOException
     {
-        try (FileChannel fc = FileChannel.open(path))
+        try (FileChannel fc = file.getChannel())
         {
-            FlacStreamReader flacStream = new FlacStreamReader(fc, path.toString() + " ");
+            FlacStreamReader flacStream = new FlacStreamReader(fc, file.toString() + " ");
             flacStream.findStream();
 
             //Hold the metadata
@@ -64,7 +64,7 @@ public class FlacTagReader
             {
                 if (logger.isLoggable(Level.CONFIG))
                 {
-                    logger.config(path + " Looking for MetaBlockHeader at:" + fc.position());
+                    logger.config(file + " Looking for MetaBlockHeader at:" + fc.position());
                 }
 
                 //Read the header
@@ -76,7 +76,7 @@ public class FlacTagReader
 
                 if (logger.isLoggable(Level.CONFIG))
                 {
-                    logger.config(path + " Reading MetadataBlockHeader:" + mbh.toString() + " ending at " + fc.position());
+                    logger.config(file + " Reading MetadataBlockHeader:" + mbh.toString() + " ending at " + fc.position());
                 }
 
                 //Is it one containing some sort of metadata, therefore interested in it?
@@ -90,7 +90,7 @@ public class FlacTagReader
                         case VORBIS_COMMENT:
                             ByteBuffer commentHeaderRawPacket = ByteBuffer.allocate(mbh.getDataLength());
                             fc.read(commentHeaderRawPacket);
-                            tag = vorbisCommentReader.read(commentHeaderRawPacket.array(), false, path);
+                            tag = vorbisCommentReader.read(commentHeaderRawPacket.array(), false);
                             break;
 
                         case PICTURE:
@@ -101,11 +101,11 @@ public class FlacTagReader
                             }
                             catch (IOException ioe)
                             {
-                                logger.warning(path + "Unable to read picture metablock, ignoring:" + ioe.getMessage());
+                                logger.warning(file + "Unable to read picture metablock, ignoring:" + ioe.getMessage());
                             }
                             catch (InvalidFrameException ive)
                             {
-                                logger.warning(path + "Unable to read picture metablock, ignoring" + ive.getMessage());
+                                logger.warning(file + "Unable to read picture metablock, ignoring" + ive.getMessage());
                             }
 
                             break;
@@ -119,7 +119,7 @@ public class FlacTagReader
                             }
                             catch (IOException ioe)
                             {
-                                logger.warning(path + "Unable to readseek metablock, ignoring:" + ioe.getMessage());
+                                logger.warning(file + "Unable to readseek metablock, ignoring:" + ioe.getMessage());
                             }
                             break;
 
@@ -127,7 +127,7 @@ public class FlacTagReader
                         default:
                             if (logger.isLoggable(Level.CONFIG))
                             {
-                                logger.config(path + "Ignoring MetadataBlock:" + mbh.getBlockType());
+                                logger.config(file + "Ignoring MetadataBlock:" + mbh.getBlockType());
                             }
                             fc.position(fc.position() + mbh.getDataLength());
                             break;

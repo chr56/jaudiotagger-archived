@@ -26,11 +26,10 @@ import org.jaudiotagger.audio.mp4.atom.*;
 import org.jaudiotagger.logging.ErrorMessage;
 
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.SeekableByteChannel;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.logging.Logger;
 
 /**
@@ -88,9 +87,9 @@ public class Mp4InfoReader
         return false;
     }
 
-    public GenericAudioHeader read(Path file) throws CannotReadException, IOException
+    public GenericAudioHeader read(RandomAccessFile file) throws CannotReadException, IOException
     {
-        try(SeekableByteChannel fc = Files.newByteChannel(file)) {
+        try(SeekableByteChannel fc = file.getChannel()) {
             Mp4AudioHeader info = new Mp4AudioHeader();
     
             //File Identification

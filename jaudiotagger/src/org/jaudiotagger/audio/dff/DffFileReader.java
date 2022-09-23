@@ -12,16 +12,16 @@ import org.jaudiotagger.audio.generic.Utils;
 import org.jaudiotagger.tag.Tag;
 
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
-import java.nio.file.Path;
 import java.util.logging.Level;
 
 public class DffFileReader extends AudioFileReader2
 {
     @Override
-    protected GenericAudioHeader getEncodingInfo(Path file) throws CannotReadException, IOException
+    protected GenericAudioHeader getEncodingInfo(RandomAccessFile file) throws CannotReadException, IOException
     {
-        try (FileChannel fc = FileChannel.open(file))
+        try (FileChannel fc = file.getChannel())
         {
             Frm8Chunk frm8 = Frm8Chunk.readChunk(Utils.readFileDataIntoBufferLE(fc, Frm8Chunk.FRM8_HEADER_LENGTH));
             if (frm8 != null)
@@ -213,7 +213,7 @@ public class DffFileReader extends AudioFileReader2
     }
 
     @Override
-    protected Tag getTag(Path path) throws CannotReadException, IOException
+    protected Tag getTag(RandomAccessFile randomAccessFile) throws CannotReadException, IOException
     {
         return null;
     }

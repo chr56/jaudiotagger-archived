@@ -12,11 +12,10 @@ import org.jaudiotagger.utils.tree.DefaultTreeModel;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.SeekableByteChannel;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -74,13 +73,13 @@ public class Mp4AtomTree
 
     public Mp4AtomTree(File file) throws IOException, CannotReadException
     {
-        SeekableByteChannel fc = Files.newByteChannel(file.toPath(), StandardOpenOption.READ, StandardOpenOption.WRITE);
+        SeekableByteChannel fc = new RandomAccessFile(file,"rw").getChannel();
         buildTree(fc, true);
     }
 
     public Mp4AtomTree(File file, boolean closeExit) throws IOException, CannotReadException
     {
-        SeekableByteChannel fc = Files.newByteChannel(file.toPath(), StandardOpenOption.READ, StandardOpenOption.WRITE);
+        SeekableByteChannel fc = new RandomAccessFile(file,"rw").getChannel();
         buildTree(fc, closeExit);
     }
     /**

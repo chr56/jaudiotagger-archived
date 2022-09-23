@@ -20,7 +20,6 @@ package org.jaudiotagger.audio.wav;
 
 import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.exceptions.CannotWriteException;
-import org.jaudiotagger.audio.exceptions.NoWritePermissionsException;
 import org.jaudiotagger.audio.generic.Utils;
 import org.jaudiotagger.audio.iff.ChunkHeader;
 import org.jaudiotagger.audio.iff.ChunkSummary;
@@ -33,15 +32,14 @@ import org.jaudiotagger.tag.wav.WavInfoTag;
 import org.jaudiotagger.tag.wav.WavTag;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
 import org.jaudiotagger.compat.StandardCharsets;
-import java.nio.file.AccessDeniedException;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -66,22 +64,22 @@ public class WavTagWriter
     /**
      * Read existing metadata
      *
-     * @param path
+     * @param file
      * @return tags within Tag wrapper
      * @throws IOException
      * @throws CannotWriteException
      */
-    public WavTag getExistingMetadata(Path path) throws IOException, CannotWriteException
+    public WavTag getExistingMetadata(File file) throws IOException, CannotWriteException
     {
         try
         {
             //Find WavTag (if any)
             WavTagReader im = new WavTagReader(loggingName);
-            return im.read(path);
+            return im.read(new RandomAccessFile(file,"r"));
         }
         catch (CannotReadException ex)
         {
-            throw new CannotWriteException("Failed to read file "+path);
+            throw new CannotWriteException("Failed to read file "+file);
         }
     }
 
@@ -180,10 +178,10 @@ public class WavTagWriter
      * @throws IOException
      * @throws CannotWriteException
      */
-    public void delete (Tag tag, Path file) throws CannotWriteException
+    public void delete (Tag tag, File file) throws CannotWriteException
     {
         logger.info(loggingName + ":Deleting metadata from file");
-        try(FileChannel fc = FileChannel.open(file, StandardOpenOption.WRITE, StandardOpenOption.READ))
+        try(FileChannel fc = new RandomAccessFile(file,"rw").getChannel())
         {
             WavTag existingTag = getExistingMetadata(file);
 
@@ -371,7 +369,7 @@ public class WavTagWriter
      * @param file
      * @throws CannotWriteException
      */
-    public void write(final Tag tag, Path file) throws CannotWriteException
+    public void write(final Tag tag, File file) throws CannotWriteException
     {
         logger.config(loggingName + " Writing tag to file:start");
 
@@ -393,7 +391,7 @@ public class WavTagWriter
             throw new CannotWriteException("Unable to make changes to this file because contains bad chunk data");
         }
 
-        try(FileChannel fc = FileChannel.open(file, StandardOpenOption.WRITE, StandardOpenOption.READ))
+        try(FileChannel fc = new RandomAccessFile(file,"rw").getChannel())
         {
             final WavTag wavTag = (WavTag) tag;
             if (wso == WavSaveOptions.SAVE_BOTH)
@@ -456,10 +454,6 @@ public class WavTagWriter
             }
 
             rewriteRiffHeaderSize(fc);
-        }
-        catch(AccessDeniedException ade)
-        {
-            throw new NoWritePermissionsException(file + ":" + ade.getMessage());
         }
         catch(IOException ioe)
         {

@@ -12,9 +12,9 @@ import org.jaudiotagger.audio.iff.IffHeaderChunk;
 import org.jaudiotagger.logging.Hex;
 
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
-import java.nio.file.Path;
 import java.util.logging.Logger;
 
 /**
@@ -30,9 +30,9 @@ public class AiffInfoReader extends AiffChunkReader
         this.loggingName = loggingName;
     }
 
-    protected GenericAudioHeader read(Path file) throws CannotReadException, IOException
+    protected GenericAudioHeader read(RandomAccessFile file) throws CannotReadException, IOException
     {
-        try(FileChannel fc = FileChannel.open(file))
+        try(FileChannel fc = file.getChannel())
         {
             logger.config(loggingName + ":Reading AIFF file size:" + Hex.asDecAndHex(fc.size()));
             AiffAudioHeader info = new AiffAudioHeader();

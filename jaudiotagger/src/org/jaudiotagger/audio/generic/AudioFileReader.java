@@ -1,17 +1,17 @@
 /*
  * Entagged Audio Tag library
  * Copyright (c) 2003-2005 Raphaël Slinckx <raphael@slinckx.net>
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- *  
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
@@ -31,7 +31,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,7 +38,7 @@ import java.util.logging.Logger;
  * This abstract class is the skeleton for tag readers. It handles the creation/closing of
  * the randomaccessfile objects and then call the subclass method getEncodingInfo and getTag.
  * These two method have to be implemented in the subclass.
- * 
+ *
  *@author	Raphael Slinckx
  *@version	$Id$
  *@since	v0.02
@@ -90,9 +89,9 @@ public abstract class AudioFileReader
             logger.config(ErrorMessage.GENERAL_READ.getMsg(f.getAbsolutePath()));
         }
 
-        if (!Files.isReadable(f.toPath()))
+        if (!f.canRead())
         {
-            if(!Files.exists(f.toPath()))
+            if(!f.exists())
             {
                 throw new FileNotFoundException(ErrorMessage.UNABLE_TO_FIND_FILE.getMsg(f.toPath()));
             }

@@ -13,10 +13,10 @@ import org.jaudiotagger.logging.Hex;
 import org.jaudiotagger.tag.aiff.AiffTag;
 
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
-import java.nio.file.Path;
 import java.util.logging.Logger;
 
 /**
@@ -41,9 +41,9 @@ public class AiffTagReader extends AiffChunkReader
      * @throws CannotReadException
      * @throws IOException
      */
-    public AiffTag read(Path file) throws CannotReadException, IOException
+    public AiffTag read(RandomAccessFile file) throws CannotReadException, IOException
     {
-        try(FileChannel fc = FileChannel.open(file))
+        try(FileChannel fc = file.getChannel())
         {
             AiffAudioHeader aiffAudioHeader = new AiffAudioHeader();
             AiffTag aiffTag = new AiffTag();

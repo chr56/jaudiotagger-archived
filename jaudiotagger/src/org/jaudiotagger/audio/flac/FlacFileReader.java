@@ -24,7 +24,7 @@ import org.jaudiotagger.audio.generic.GenericAudioHeader;
 import org.jaudiotagger.tag.Tag;
 
 import java.io.IOException;
-import java.nio.file.Path;
+import java.io.RandomAccessFile;
 
 /**
  * Read encoding and tag info for Flac file (open source lossless encoding)
@@ -35,13 +35,13 @@ public class FlacFileReader extends AudioFileReader2
     private FlacInfoReader ir = new FlacInfoReader();
     private FlacTagReader tr = new FlacTagReader();
 
-    protected GenericAudioHeader  getEncodingInfo(Path path) throws CannotReadException, IOException
+    protected GenericAudioHeader  getEncodingInfo(RandomAccessFile file) throws CannotReadException, IOException
     {
-        return ir.read(path);
+        return ir.read(file);
     }
 
-    protected Tag getTag(Path path) throws CannotReadException, IOException
+    protected Tag getTag(RandomAccessFile file) throws CannotReadException, IOException
     {
-        return tr.read(path);
+        return tr.read(file);
     }
 }

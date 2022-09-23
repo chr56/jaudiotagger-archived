@@ -27,8 +27,8 @@ import org.jaudiotagger.audio.generic.Utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
-import java.nio.file.Path;
 import java.util.logging.Logger;
 
 /**
@@ -41,12 +41,12 @@ public class FlacInfoReader
 
 
 
-    public FlacAudioHeader read(Path path) throws CannotReadException, IOException
+    public FlacAudioHeader read(RandomAccessFile file) throws CannotReadException, IOException
     {
-        logger.config(path + ":start");
-        try(FileChannel fc = FileChannel.open(path))
+        logger.config(file + ":start");
+        try(FileChannel fc = file.getChannel())
         {
-            FlacStreamReader flacStream = new FlacStreamReader(fc, path.toString() + " ");
+            FlacStreamReader flacStream = new FlacStreamReader(fc, file.toString() + " ");
             flacStream.findStream();
 
             MetadataBlockDataStreamInfo mbdsi = null;
@@ -58,19 +58,19 @@ public class FlacInfoReader
             while (isLastBlock==false)
             {
                 MetadataBlockHeader mbh = MetadataBlockHeader.readHeader(fc);
-                logger.info(path.toString() + " "  + mbh.toString());
+                logger.info(file.toString() + " "  + mbh.toString());
                 if (mbh.getBlockType() == BlockType.STREAMINFO)
                 {
                     //See #253:MetadataBlockDataStreamInfo exception when bytes length is 0
                     if(mbh.getDataLength()==0)
                     {
-                        throw new CannotReadException(path + ":FLAC StreamInfo has zeo data length");
+                        throw new CannotReadException(file + ":FLAC StreamInfo has zeo data length");
                     }
 
                     mbdsi = new MetadataBlockDataStreamInfo(mbh, fc);
                     if (!mbdsi.isValid())
                     {
-                        throw new CannotReadException(path + ":FLAC StreamInfo not valid");
+                        throw new CannotReadException(file + ":FLAC StreamInfo not valid");
                     }
                 }
                 else
@@ -85,7 +85,7 @@ public class FlacInfoReader
 
             if (mbdsi == null)
             {
-                throw new CannotReadException(path + ":Unable to find Flac StreamInfo");
+                throw new CannotReadException(file + ":Unable to find Flac StreamInfo");
             }
 
             FlacAudioHeader info = new FlacAudioHeader();
